@@ -1,5 +1,4 @@
 import csv
-import re
 import time
 import scrapy
 from scrapy.selector import Selector
@@ -40,24 +39,25 @@ class Dota2HeroesSpider(scrapy.Spider):
             url = f"https://www.dota2.com{uri}"
             self.driver.get(url)
             time.sleep(2) # Loading JS...
-            self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click() # Expand lore
+
             sel = Selector(text=self.driver.page_source)
-            base_health, health_regen, base_mana, mana_regen = self._get_health_mana(sel, "D6gmc38sczQBtacU66_b4", "_1aQk6qbzk9zHJ78eUNwzw1")
-            print(f"FIND ME")
-            print(float(self._get_html_text(sel, "_29Uub-BkYZWm7hCAL7QRx3")))
+            lore = self._get_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
+
+            # Click to expand lore
+            self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click()
             
-            print(f"{base_health}, {health_regen}, {base_mana}, {mana_regen}")
-            print(f"FOUND ME")
-            
+            base_health, health_regen, base_mana, mana_regen = self._get_health_mana(sel)
+
             hero_info = {
                 "id": uri.split('/')[2],
                 "name": self._get_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ"),
                 "main_attribute": self._get_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_"),
                 "subtitle": self._get_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b"),
-                "lore": self._get_lore(),
+                "lore": lore,
+                "lore_extended": self._get_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o"),
                 "attack_type": self._get_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X"),
-                "complexity": "", #int(self._get_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b"))
-                "portrait_url": self._get_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ"),
+                "complexity": self._get_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja"),
+                "asset_portrait_url": self._get_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ"),
                 "base_health": base_health,
                 "health_regeneration": health_regen,
                 "base_mana": base_mana,
@@ -101,20 +101,54 @@ class Dota2HeroesSpider(scrapy.Spider):
 
     def _get_html_text(self, sel, html_class):
         return sel.xpath(f"//div[contains(@class, '{html_class}')]/text()").get()
+
+
+    def _get_lore(self, sel, container_class):
+        """
+        Text container which may have other tags, like "span".
+        """
+        inner_class = "_1FdISYFSn4ZmiR_wS5YFOM"
+
+        base = f"//div[contains(@class, '{container_class}')]/div[contains(@class, '{inner_class}')]"
+        text_parts = sel.xpath(f"{base}/text() | {base}/span/text()").getall()
+        text = " ".join(t for t in process_text(text_parts))
+
+        return text.replace(" , ", ", ")
     
 
-    def _get_portrait_url(self, sel, html_class):
+    def _get_lore_extended(self, sel, container_class):
+        """
+        Multiple paragraphs in one div.
+        """
+        base = f"//div[contains(@class, '{container_class}')]"
+        text_parts = sel.xpath(f"{base}/div[1]/text()").getall()
+        text = " ".join(t for t in process_text(text_parts))
+
+        return text.replace(" , ", ", ")
+
+
+    def _get_complexity(self, sel, html_class):
+        """
+        This info is showed as rombs (1, 2 or 3), return their count.
+        """
+        return len(sel.xpath(f"//div[contains(@class, '{html_class}')]").getall())
+    
+
+    def _get_asset_portrait_url(self, sel, html_class):
         return sel.xpath(f"//img[contains(@class, '{html_class}')]/@src").get()
     
 
-    def _get_health_mana(self, sel, html_class_health="D6gmc38sczQBtacU66_b4", html_class_mana="_1aQk6qbzk9zHJ78eUNwzw1"):
+    def _get_health_mana(self, sel):
         """
-        Health and Mana info got the same classes for the divs where the numbers are enclosed
+        Health and Mana info got the same classes for the main divs where the numbers are contained.
         """
         def extract(container_class, target_class):
             path = f"//div[contains(@class, '{container_class}')]/div[contains(@class, '{target_class}')]/text()"
             
             return sel.xpath(path).get(default="0").strip()
+        
+        html_class_health="D6gmc38sczQBtacU66_b4"
+        html_class_mana="_1aQk6qbzk9zHJ78eUNwzw1"
 
         html_class_base = "_1KbXKSmm_4JCzoVx_nG7HJ"
         html_class_regen = "_29Uub-BkYZWm7hCAL7QRx3"
@@ -131,15 +165,24 @@ class Dota2HeroesSpider(scrapy.Spider):
         pass
 
 
-    def _get_lore(self):
-        div = self.driver.find_element(By.XPATH, "//div[contains(@class, '_33H8icML8p8oZrGPMaWZ8o')]/div[1]")
-        html = div.get_attribute("innerHTML")
-        html = re.sub(r"<br\s*/?>", "\n", html)
-        lore = re.sub(r"<[^>]+>", "", html).strip()
-
-        return lore
-
-
     def _get_vision():
+        """
+        Two numbers separated by inclined bar.
+        """
         pass
         # return day, night
+
+
+def process_text(text_parts):
+        """
+        Process text divided in parts.
+        """
+        processed = []
+
+        for t in text_parts:
+            # Add line breaks ("<br>"), there should be only one per paragraph
+            new = t.replace("\r\t\t\t\t", "<br>", 1).strip()
+
+            processed.append(new)
+
+        return processed
