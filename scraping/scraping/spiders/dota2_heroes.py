@@ -100,11 +100,13 @@ class Dota2HeroesSpider(scrapy.Spider):
         self.driver.quit()
 
 
-    def _get_html_text(self, sel, html_class):
+    @staticmethod
+    def _extract_html_text(sel, html_class):
         return sel.xpath(f"//div[contains(@class, '{html_class}')]/text()").get()
 
 
-    def _get_lore(self, sel, container_class):
+    @staticmethod
+    def _extract_lore(sel, container_class):
         inner_class = "_1FdISYFSn4ZmiR_wS5YFOM"
 
         base = f"//div[contains(@class, '{container_class}')]/div[contains(@class, '{inner_class}')]"
@@ -113,24 +115,28 @@ class Dota2HeroesSpider(scrapy.Spider):
         return process_text(text_parts)
     
 
-    def _get_lore_extended(self, sel, container_class):
+    @staticmethod
+    def _extract_lore_extended(sel, container_class):
         text_parts = sel.xpath(f"//div[contains(@class, '{container_class}')]/div[1]//text()").getall()
 
         return process_text(text_parts)
 
 
-    def _get_complexity(self, sel, html_class):
+    @staticmethod
+    def _extract_complexity(sel, html_class):
         """
         This info is showed as rombs (1, 2 or 3), return their count.
         """
         return len(sel.xpath(f"//div[contains(@class, '{html_class}')]").getall())
     
 
-    def _get_asset_portrait_url(self, sel, html_class):
+    @staticmethod
+    def _extract_asset_portrait_url(sel, html_class):
         return sel.xpath(f"//img[contains(@class, '{html_class}')]/@src").get()
     
 
-    def _get_health_mana(self, sel):
+    @staticmethod
+    def _extract_health_mana(self, sel):
         """
         Health and Mana info got the same classes for the main divs where the numbers are contained.
         """
@@ -153,11 +159,13 @@ class Dota2HeroesSpider(scrapy.Spider):
         return base_health, health_regen, base_mana, mana_regen
         
     
-    def _get_attributes():
+    @staticmethod
+    def _extract_attributes():
         pass
 
 
-    def _get_vision():
+    @staticmethod
+    def _extract_vision():
         """
         Two numbers separated by inclined bar.
         """
