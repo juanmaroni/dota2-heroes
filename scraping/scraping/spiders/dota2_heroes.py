@@ -46,6 +46,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             # Click to expand lore
             self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click()
             
+            lore_extended = self._get_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
             base_health, health_regen, base_mana, mana_regen = self._get_health_mana(sel)
 
             hero_info = {
@@ -54,7 +55,7 @@ class Dota2HeroesSpider(scrapy.Spider):
                 "main_attribute": self._get_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_"),
                 "subtitle": self._get_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b"),
                 "lore": lore,
-                "lore_extended": self._get_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o"),
+                "lore_extended": lore_extended,
                 "attack_type": self._get_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X"),
                 "complexity": self._get_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja"),
                 "asset_portrait_url": self._get_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ"),
@@ -104,27 +105,18 @@ class Dota2HeroesSpider(scrapy.Spider):
 
 
     def _get_lore(self, sel, container_class):
-        """
-        Text container which may have other tags, like "span".
-        """
         inner_class = "_1FdISYFSn4ZmiR_wS5YFOM"
 
         base = f"//div[contains(@class, '{container_class}')]/div[contains(@class, '{inner_class}')]"
         text_parts = sel.xpath(f"{base}/text() | {base}/span/text()").getall()
-        text = " ".join(t for t in process_text(text_parts))
 
-        return text.replace(" , ", ", ")
+        return process_text(text_parts)
     
 
     def _get_lore_extended(self, sel, container_class):
-        """
-        Multiple paragraphs in one div.
-        """
-        base = f"//div[contains(@class, '{container_class}')]"
-        text_parts = sel.xpath(f"{base}/div[1]/text()").getall()
-        text = " ".join(t for t in process_text(text_parts))
+        text_parts = sel.xpath(f"//div[contains(@class, '{container_class}')]/div[1]//text()").getall()
 
-        return text.replace(" , ", ", ")
+        return process_text(text_parts)
 
 
     def _get_complexity(self, sel, html_class):
@@ -175,14 +167,23 @@ class Dota2HeroesSpider(scrapy.Spider):
 
 def process_text(text_parts):
         """
-        Process text divided in parts.
+        Process extracted text divided in parts.
         """
-        processed = []
+        full_text = " ".join(text_parts)
+        
+        processed_text = (
+            full_text
+                .replace("\t", "")
+                .replace("\r", "<br>")
+                .replace("\n", "<br>")
+                .strip()
+                .replace(" ,", ",")
+                .replace(" .", ".")
+                .replace(" ;", ";")
+                .replace(" !", "!")
+                .replace(" ?", "?")
+                .replace("<br> ", "<br>")
+                .replace("  ", " ")
+        )
 
-        for t in text_parts:
-            # Add line breaks ("<br>"), there should be only one per paragraph
-            new = t.replace("\r\t\t\t\t", "<br>", 1).strip()
-
-            processed.append(new)
-
-        return processed
+        return processed_text
