@@ -32,82 +32,99 @@ class Dota2HeroesSpider(scrapy.Spider):
             time.sleep(2) # Loading JS...
             
             sel = Selector(text=self.driver.page_source)
+            hero_uris_xpath = "//a[contains(@class, '_7szOnSgHiQLEyU0_owKBB')]"
 
-            for hero in sel.xpath("//a[contains(@class, '_7szOnSgHiQLEyU0_owKBB')]"):
+            for hero in sel.xpath(hero_uris_xpath):
                 self.hero_uris.append(hero.xpath("./@href").get())
 
-        for uri in self.hero_uris:
-            url = f"https://www.dota2.com{uri}"
-            self.driver.get(url)
-            time.sleep(2) # Loading JS...
-
-            sel = Selector(text=self.driver.page_source)
-            id = uri.split('/')[2]
-            name = self._extract_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ")
-            main_attribute = self._extract_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_")
-            subtitle = self._extract_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b")
-            lore = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
-
-            # Click to expand lore
-            self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click()
+        with open("test_heroes.csv", "w", newline="") as f:
+            headers = [
+                "id", "name", "main_attribute", "subtitle", "lore",
+                "lore_extended", "attack_type", "complexity",
+                "lore_extended", "attack_type", "complexity",
+                "asset_portrait_url", "base_health", "health_regeneration",
+                "base_mana", "mana_regeneration", "base_strength",
+                "strength_gain", "base_agility", "agility_gain",
+                "base_intelligence", "intelligence_gain", "role_carry",
+                "role_support", "role_nuker", "role_disabler",
+                "role_jungler", "role_durable", "role_escape", "role_pusher",
+                "role_initiator", "attack_damage", "attack_time",
+                "attack_range", "attack_projectile_speed", "defense_armor",
+                "defense_magic_resist", "mobility_movement_speed",
+                "mobility_turn_rate", "mobility_vision_day",
+                "mobility_vision_night",
+            ]
             
-            lore_extended = self._extract_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
-            attack_type = self._extract_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X")
-            complexity = self._extract_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja")
-            asset_portrait_url = self._extract_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ")
-            base_health, health_regen, base_mana, mana_regen = self._extract_health_mana(sel)
-            (
-                strength, agility, intelligence,
-                strength_gain, agility_gain, intelligence_gain
-            ) = self._extract_attributes(sel)
+            w = csv.DictWriter(f, fieldnames=headers, delimiter='|')
+            w.writeheader()
+            
+            for uri in self.hero_uris:
+                url = f"https://www.dota2.com{uri}"
+                self.driver.get(url)
+                time.sleep(2) # Loading JS...
 
-            hero_info = {
-                "id": id,
-                "name": name,
-                "main_attribute": main_attribute,
-                "subtitle": subtitle,
-                "lore": lore,
-                "lore_extended": lore_extended,
-                "attack_type": attack_type,
-                "complexity": complexity,
-                "asset_portrait_url": asset_portrait_url,
-                "base_health": base_health,
-                "health_regeneration": health_regen,
-                "base_mana": base_mana,
-                "mana_regeneration": mana_regen,
-                "base_strength": strength,
-                "strength_gain": strength_gain,
-                "base_agility": agility,
-                "agility_gain": agility_gain,
-                "base_intelligence": intelligence,
-                "intelligence_gain": intelligence_gain,
-                "role_carry": "",
-                "role_support": "",
-                "role_nuker": "",
-                "role_disabler": "",
-                "role_jungler": "",
-                "role_durable": "",
-                "role_escape": "",
-                "role_pusher": "",
-                "role_initiator": "",
-                "attack_damage": "",
-                "attack_time": "",
-                "attack_range": "",
-                "attack_projectile_speed": "",
-                "defense_armor": "",
-                "defense_magic_resist": "",
-                "mobility_movement_speed": "",
-                "mobility_turn_rate": "",
-                "mobility_vision_day": "",
-                "mobility_vision_night": "",
-            }
+                sel = Selector(text=self.driver.page_source)
+                id = uri.split('/')[2]
+                name = self._extract_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ")
+                main_attribute = self._extract_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_")
+                subtitle = self._extract_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b")
+                lore = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
 
-            with open("test_heroes.csv", "w", newline="") as f:
-                w = csv.DictWriter(f, hero_info.keys(), delimiter='|')
-                w.writeheader()
+                # Click to expand lore
+                self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click()
+                
+                lore_extended = self._extract_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
+                attack_type = self._extract_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X")
+                complexity = self._extract_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja")
+                asset_portrait_url = self._extract_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ")
+                base_health, health_regen, base_mana, mana_regen = self._extract_health_mana(sel)
+                (
+                    strength, agility, intelligence,
+                    strength_gain, agility_gain, intelligence_gain
+                ) = self._extract_attributes(sel)
+                
+                hero_info = {
+                    "id": id,
+                    "name": name,
+                    "main_attribute": main_attribute,
+                    "subtitle": subtitle,
+                    "lore": lore,
+                    "lore_extended": lore_extended,
+                    "attack_type": attack_type,
+                    "complexity": complexity,
+                    "asset_portrait_url": asset_portrait_url,
+                    "base_health": base_health,
+                    "health_regeneration": health_regen,
+                    "base_mana": base_mana,
+                    "mana_regeneration": mana_regen,
+                    "base_strength": strength,
+                    "strength_gain": strength_gain,
+                    "base_agility": agility,
+                    "agility_gain": agility_gain,
+                    "base_intelligence": intelligence,
+                    "intelligence_gain": intelligence_gain,
+                    "role_carry": "",
+                    "role_support": "",
+                    "role_nuker": "",
+                    "role_disabler": "",
+                    "role_jungler": "",
+                    "role_durable": "",
+                    "role_escape": "",
+                    "role_pusher": "",
+                    "role_initiator": "",
+                    "attack_damage": "",
+                    "attack_time": "",
+                    "attack_range": "",
+                    "attack_projectile_speed": "",
+                    "defense_armor": "",
+                    "defense_magic_resist": "",
+                    "mobility_movement_speed": "",
+                    "mobility_turn_rate": "",
+                    "mobility_vision_day": "",
+                    "mobility_vision_night": "",
+                }
+
                 w.writerow(hero_info)
-
-            break
 
         self.driver.quit()
 
