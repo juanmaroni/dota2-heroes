@@ -30,6 +30,7 @@ class Dota2HeroesSpider(scrapy.Spider):
         for url in self.start_urls:
             self.driver.get(url)
             time.sleep(2) # Loading JS...
+            
             sel = Selector(text=self.driver.page_source)
 
             for hero in sel.xpath("//a[contains(@class, '_7szOnSgHiQLEyU0_owKBB')]"):
@@ -41,24 +42,24 @@ class Dota2HeroesSpider(scrapy.Spider):
             time.sleep(2) # Loading JS...
 
             sel = Selector(text=self.driver.page_source)
-            lore = self._get_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
+            lore = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
 
             # Click to expand lore
             self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click()
             
-            lore_extended = self._get_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
-            base_health, health_regen, base_mana, mana_regen = self._get_health_mana(sel)
+            lore_extended = self._extract_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
+            base_health, health_regen, base_mana, mana_regen = self._extract_health_mana(sel)
 
             hero_info = {
                 "id": uri.split('/')[2],
-                "name": self._get_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ"),
-                "main_attribute": self._get_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_"),
-                "subtitle": self._get_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b"),
+                "name": self._extract_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ"),
+                "main_attribute": self._extract_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_"),
+                "subtitle": self._extract_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b"),
                 "lore": lore,
                 "lore_extended": lore_extended,
-                "attack_type": self._get_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X"),
-                "complexity": self._get_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja"),
-                "asset_portrait_url": self._get_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ"),
+                "attack_type": self._extract_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X"),
+                "complexity": self._extract_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja"),
+                "asset_portrait_url": self._extract_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ"),
                 "base_health": base_health,
                 "health_regeneration": health_regen,
                 "base_mana": base_mana,
@@ -136,7 +137,7 @@ class Dota2HeroesSpider(scrapy.Spider):
     
 
     @staticmethod
-    def _extract_health_mana(self, sel):
+    def _extract_health_mana(sel):
         """
         Health and Mana info got the same classes for the main divs where the numbers are contained.
         """
