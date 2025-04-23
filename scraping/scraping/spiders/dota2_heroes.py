@@ -42,12 +42,19 @@ class Dota2HeroesSpider(scrapy.Spider):
             time.sleep(2) # Loading JS...
 
             sel = Selector(text=self.driver.page_source)
+            id = uri.split('/')[2]
+            name = self._extract_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ")
+            main_attribute = self._extract_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_")
+            subtitle = self._extract_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b")
             lore = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
 
             # Click to expand lore
             self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click()
             
             lore_extended = self._extract_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
+            attack_type = self._extract_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X")
+            complexity = self._extract_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja")
+            asset_portrait_url = self._extract_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ")
             base_health, health_regen, base_mana, mana_regen = self._extract_health_mana(sel)
             (
                 strength, agility, intelligence,
@@ -55,15 +62,15 @@ class Dota2HeroesSpider(scrapy.Spider):
             ) = self._extract_attributes(sel)
 
             hero_info = {
-                "id": uri.split('/')[2],
-                "name": self._extract_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ"),
-                "main_attribute": self._extract_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_"),
-                "subtitle": self._extract_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b"),
+                "id": id,
+                "name": name,
+                "main_attribute": main_attribute,
+                "subtitle": subtitle,
                 "lore": lore,
                 "lore_extended": lore_extended,
-                "attack_type": self._extract_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X"),
-                "complexity": self._extract_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja"),
-                "asset_portrait_url": self._extract_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ"),
+                "attack_type": attack_type,
+                "complexity": complexity,
+                "asset_portrait_url": asset_portrait_url,
                 "base_health": base_health,
                 "health_regeneration": health_regen,
                 "base_mana": base_mana,
