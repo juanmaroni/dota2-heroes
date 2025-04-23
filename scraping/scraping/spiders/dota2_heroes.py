@@ -106,8 +106,8 @@ class Dota2HeroesSpider(scrapy.Spider):
 
 
     @staticmethod
-    def _extract_html_text(sel, html_class):
-        return sel.xpath(f"//div[contains(@class, '{html_class}')]/text()").get()
+    def _extract_html_text(sel, container_class):
+        return sel.xpath(f"//div[contains(@class, '{container_class}')]/text()").get()
 
 
     @staticmethod
@@ -128,16 +128,16 @@ class Dota2HeroesSpider(scrapy.Spider):
 
 
     @staticmethod
-    def _extract_complexity(sel, html_class):
+    def _extract_complexity(sel, container_class):
         """
         This info is showed as rombs (1, 2 or 3), return their count.
         """
-        return len(sel.xpath(f"//div[contains(@class, '{html_class}')]").getall())
+        return len(sel.xpath(f"//div[contains(@class, '{container_class}')]").getall())
     
 
     @staticmethod
-    def _extract_asset_portrait_url(sel, html_class):
-        return sel.xpath(f"//img[contains(@class, '{html_class}')]/@src").get()
+    def _extract_asset_portrait_url(sel, container_class):
+        return sel.xpath(f"//img[contains(@class, '{container_class}')]/@src").get()
     
 
     @staticmethod
@@ -150,16 +150,16 @@ class Dota2HeroesSpider(scrapy.Spider):
             
             return sel.xpath(path).get(default="0").strip()
         
-        html_class_health="D6gmc38sczQBtacU66_b4"
-        html_class_mana="_1aQk6qbzk9zHJ78eUNwzw1"
+        container_class_health="D6gmc38sczQBtacU66_b4"
+        container_class_mana="_1aQk6qbzk9zHJ78eUNwzw1"
 
-        html_class_base = "_1KbXKSmm_4JCzoVx_nG7HJ"
-        html_class_regen = "_29Uub-BkYZWm7hCAL7QRx3"
+        container_class_base = "_1KbXKSmm_4JCzoVx_nG7HJ"
+        container_class_regen = "_29Uub-BkYZWm7hCAL7QRx3"
 
-        base_health = int(extract(html_class_health, html_class_base))
-        health_regen = float(extract(html_class_health, html_class_regen))
-        base_mana = int(extract(html_class_mana, html_class_base))
-        mana_regen = float(extract(html_class_mana, html_class_regen))
+        base_health = int(extract(container_class_health, container_class_base))
+        health_regen = float(extract(container_class_health, container_class_regen))
+        base_mana = int(extract(container_class_mana, container_class_base))
+        mana_regen = float(extract(container_class_mana, container_class_regen))
 
         return base_health, health_regen, base_mana, mana_regen
         
