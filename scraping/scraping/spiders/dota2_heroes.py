@@ -49,6 +49,10 @@ class Dota2HeroesSpider(scrapy.Spider):
             
             lore_extended = self._extract_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
             base_health, health_regen, base_mana, mana_regen = self._extract_health_mana(sel)
+            (
+                strength, agility, intelligence,
+                strength_gain, agility_gain, intelligence_gain
+            ) = self._extract_attributes(sel)
 
             hero_info = {
                 "id": uri.split('/')[2],
@@ -64,12 +68,12 @@ class Dota2HeroesSpider(scrapy.Spider):
                 "health_regeneration": health_regen,
                 "base_mana": base_mana,
                 "mana_regeneration": mana_regen,
-                "base_strength": "",
-                "strength_gain": "",
-                "base_agility": "",
-                "agility_gain": "",
-                "base_intelligence": "",
-                "intelligence_gain": "",
+                "base_strength": strength,
+                "strength_gain": strength_gain,
+                "base_agility": agility,
+                "agility_gain": agility_gain,
+                "base_intelligence": intelligence,
+                "intelligence_gain": intelligence_gain,
                 "role_carry": "",
                 "role_support": "",
                 "role_nuker": "",
@@ -161,8 +165,33 @@ class Dota2HeroesSpider(scrapy.Spider):
         
     
     @staticmethod
-    def _extract_attributes():
-        pass
+    def _extract_attributes(sel):
+        """
+        Extracting the three main attributes, they share class. As do their gains.
+        Main attributes are integers. Attribute gains are decimals.
+        """
+        def extract(container_class):
+            return sel.xpath(
+                f"//div[contains(@class, '{container_class}')]//text()"
+            ).getall()
+        
+        attributes_class = "_3Gsggcx9qe3qVMxUs_XeOo"
+        attributes_gain_class = "DpX1zhKaVPKBeFg4KrB0B"
+
+        attributes = extract(attributes_class)
+        attributes_gain = extract(attributes_gain_class)
+
+        strength = int(attributes[0])
+        agility = int(attributes[1])
+        intelligence = int(attributes[2])
+        strength_gain = float(attributes_gain[0])
+        agility_gain = float(attributes_gain[1])
+        intelligence_gain = float(attributes_gain[2])
+
+        return (
+            strength, agility, intelligence,
+            strength_gain, agility_gain, intelligence_gain
+        )
 
 
     @staticmethod
