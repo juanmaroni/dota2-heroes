@@ -58,7 +58,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             w = csv.DictWriter(f, fieldnames=headers, delimiter='|')
             w.writeheader()
             
-            for uri in self.hero_uris:
+            for uri in self.hero_uris[:1]: # TODO: change after testing with one record
                 url = f"https://www.dota2.com{uri}"
                 self.driver.get(url)
                 time.sleep(2) # Loading JS...
@@ -82,6 +82,11 @@ class Dota2HeroesSpider(scrapy.Spider):
                     strength, agility, intelligence,
                     strength_gain, agility_gain, intelligence_gain
                 ) = self._extract_attributes(sel)
+                (
+                    role_carry, role_support, role_nuker, role_disabler,
+                    role_jungler, role_durable, role_escape, role_pusher,
+                    role_initiator
+                ) = self._extract_roles(sel)
                 
                 hero_info = {
                     "id": id,
@@ -103,15 +108,15 @@ class Dota2HeroesSpider(scrapy.Spider):
                     "agility_gain": agility_gain,
                     "base_intelligence": intelligence,
                     "intelligence_gain": intelligence_gain,
-                    "role_carry": "",
-                    "role_support": "",
-                    "role_nuker": "",
-                    "role_disabler": "",
-                    "role_jungler": "",
-                    "role_durable": "",
-                    "role_escape": "",
-                    "role_pusher": "",
-                    "role_initiator": "",
+                    "role_carry": role_carry,
+                    "role_support": role_support,
+                    "role_nuker": role_nuker,
+                    "role_disabler": role_disabler,
+                    "role_jungler": role_jungler,
+                    "role_durable": role_durable,
+                    "role_escape": role_escape,
+                    "role_pusher": role_pusher,
+                    "role_initiator": role_initiator,
                     "attack_damage": "",
                     "attack_time": "",
                     "attack_range": "",
@@ -215,6 +220,52 @@ class Dota2HeroesSpider(scrapy.Spider):
         return (
             strength, agility, intelligence,
             strength_gain, agility_gain, intelligence_gain
+        )
+    
+
+    @staticmethod
+    def _extract_roles(sel):
+        """
+        Extracting the nine roles.
+        They are displayed as a bar, using widths: 0%, 33.3%, 66.6% and 100%.
+        Parsing as integers: 0, 1, 2 and 3.
+        """
+        container_class = "_3zWGygZT2aKUiOyokg4h1v"
+        role_name_class = "_3Fbk3tlFp8wcznxtXIx19W"
+        role_bar_class = "_28Sbu0ESGRjIMkyucAEAVz"
+        role_bar_value_class = "f7kjDBQOuPqiwaCTUPzLJ"
+
+        roles = {}
+        match_percentage_value = {
+            0.0: 0,
+            33.3: 1,
+            66.6: 2,
+            100.0: 3,
+        }
+
+        containers = sel.xpath(
+            f"//div[contains(@class, '{container_class}')]"
+        )
+
+        for container in containers:
+            style = container.xpath(
+                f"""
+                .//div[contains(@class, '{role_bar_class}')]
+                /div[contains(@class, '{role_bar_value_class}')]
+                /@style
+                """
+            ).get()
+            percentage = float(style.replace("width: ", "").replace("%;", ""))
+            value = match_percentage_value[percentage]
+            role_name = container.xpath(
+                f".//div[contains(@class, '{role_name_class}')]/text()"
+            ).get()
+            roles[role_name] = value
+
+        return (
+            roles["Carry"], roles["Support"], roles["Nuker"],
+            roles["Disabler"], roles["Jungler"], roles["Durable"],
+            roles["Escape"], roles["Pusher"], roles["Initiator"]
         )
 
 
