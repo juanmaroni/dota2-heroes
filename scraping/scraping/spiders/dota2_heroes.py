@@ -27,15 +27,14 @@ class Dota2HeroesSpider(scrapy.Spider):
         )
 
     def parse(self, response):
-        for url in self.start_urls:
-            self.driver.get(url)
-            time.sleep(2) # Loading JS...
+        self.driver.get(self.start_urls[0])
+        time.sleep(2) # Loading JS...
             
-            sel = Selector(text=self.driver.page_source)
-            hero_uris_xpath = "//a[contains(@class, '_7szOnSgHiQLEyU0_owKBB')]"
+        sel = Selector(text=self.driver.page_source)
+        hero_uris_xpath = "//a[contains(@class, '_7szOnSgHiQLEyU0_owKBB')]"
 
-            for hero in sel.xpath(hero_uris_xpath):
-                self.hero_uris.append(hero.xpath("./@href").get())
+        for hero in sel.xpath(hero_uris_xpath):
+            self.hero_uris.append(hero.xpath("./@href").get())
 
         with open("test_heroes.csv", "w", newline="") as f:
             headers = [
@@ -58,7 +57,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             w = csv.DictWriter(f, fieldnames=headers, delimiter='|')
             w.writeheader()
             
-            for uri in self.hero_uris[:1]: # TODO: change after testing with one record
+            for uri in self.hero_uris[:1]: # TODO: REMOVE LIMIT
                 url = f"https://www.dota2.com{uri}"
                 self.driver.get(url)
                 time.sleep(2) # Loading JS...
@@ -66,18 +65,34 @@ class Dota2HeroesSpider(scrapy.Spider):
                 sel = Selector(text=self.driver.page_source)
                 id = uri.split('/')[2]
                 name = self._extract_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ")
-                main_attribute = self._extract_html_text(sel, "_3HGWJjSyOjmlUGJTIlMHc_")
-                subtitle = self._extract_html_text(sel, "_2r7tdOONJnLw_6bQuNZj5b")
+                main_attribute = self._extract_html_text(
+                    sel, "_3HGWJjSyOjmlUGJTIlMHc_"
+                )
+                subtitle = self._extract_html_text(
+                    sel, "_2r7tdOONJnLw_6bQuNZj5b"
+                )
                 lore = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
 
                 # Click to expand lore
-                self.driver.find_element(By.XPATH, "//div[text()='Read Full History']").click()
+                self.driver.find_element(
+                    By.XPATH, "//div[text()='Read Full History']"
+                ).click()
                 
-                lore_extended = self._extract_lore_extended(sel, "_33H8icML8p8oZrGPMaWZ8o")
-                attack_type = self._extract_html_text(sel, "_3ce-DKDrVB7q5LsGbJdZ3X")
-                complexity = self._extract_complexity(sel, "_2VXnqvXh1TJPueaGkUNqja")
-                asset_portrait_url = self._extract_asset_portrait_url(sel, "CR-BbB851VmrcN5s9HpGZ")
-                base_health, health_regen, base_mana, mana_regen = self._extract_health_mana(sel)
+                lore_extended = self._extract_lore_extended(
+                    sel, "_33H8icML8p8oZrGPMaWZ8o"
+                )
+                attack_type = self._extract_html_text(
+                    sel, "_3ce-DKDrVB7q5LsGbJdZ3X"
+                )
+                complexity = self._extract_complexity(
+                    sel, "_2VXnqvXh1TJPueaGkUNqja"
+                )
+                asset_portrait_url = self._extract_asset_portrait_url(
+                    sel, "CR-BbB851VmrcN5s9HpGZ"
+                )
+                (
+                    base_health, health_regen, base_mana, mana_regen
+                ) = self._extract_health_mana(sel)
                 (
                     strength, agility, intelligence,
                     strength_gain, agility_gain, intelligence_gain
@@ -136,7 +151,9 @@ class Dota2HeroesSpider(scrapy.Spider):
 
     @staticmethod
     def _extract_html_text(sel, container_class):
-        return sel.xpath(f"//div[contains(@class, '{container_class}')]/text()").get()
+        return sel.xpath(
+            f"//div[contains(@class, '{container_class}')]/text()"
+        ).get()
 
 
     @staticmethod
@@ -151,7 +168,9 @@ class Dota2HeroesSpider(scrapy.Spider):
 
     @staticmethod
     def _extract_lore_extended(sel, container_class):
-        text_parts = sel.xpath(f"//div[contains(@class, '{container_class}')]/div[1]//text()").getall()
+        text_parts = sel.xpath(
+            f"//div[contains(@class, '{container_class}')]/div[1]//text()"
+        ).getall()
 
         return process_text(text_parts)
 
@@ -161,12 +180,18 @@ class Dota2HeroesSpider(scrapy.Spider):
         """
         This info is showed as rombs (1, 2 or 3), return their count.
         """
-        return len(sel.xpath(f"//div[contains(@class, '{container_class}')]").getall())
+        return len(
+            sel.xpath(
+                f"//div[contains(@class, '{container_class}')]"
+            ).getall()
+        )
     
 
     @staticmethod
     def _extract_asset_portrait_url(sel, container_class):
-        return sel.xpath(f"//img[contains(@class, '{container_class}')]/@src").get()
+        return sel.xpath(
+            f"//img[contains(@class, '{container_class}')]/@src"
+        ).get()
     
 
     @staticmethod
@@ -175,20 +200,32 @@ class Dota2HeroesSpider(scrapy.Spider):
         Health and Mana info got the same classes for the main divs where the numbers are contained.
         """
         def extract(container_class, target_class):
-            path = f"//div[contains(@class, '{container_class}')]/div[contains(@class, '{target_class}')]/text()"
+            path = f"""
+                //div[contains(@class, '{container_class}')]
+                /div[contains(@class, '{target_class}')]
+                /text()
+                """
             
             return sel.xpath(path).get(default="0").strip()
         
-        container_class_health="D6gmc38sczQBtacU66_b4"
-        container_class_mana="_1aQk6qbzk9zHJ78eUNwzw1"
+        health_container_class="D6gmc38sczQBtacU66_b4"
+        mana_container_class="_1aQk6qbzk9zHJ78eUNwzw1"
 
         container_class_base = "_1KbXKSmm_4JCzoVx_nG7HJ"
         container_class_regen = "_29Uub-BkYZWm7hCAL7QRx3"
 
-        base_health = int(extract(container_class_health, container_class_base))
-        health_regen = float(extract(container_class_health, container_class_regen))
-        base_mana = int(extract(container_class_mana, container_class_base))
-        mana_regen = float(extract(container_class_mana, container_class_regen))
+        base_health = int(
+            extract(health_container_class, container_class_base)
+        )
+        health_regen = float(
+            extract(health_container_class, container_class_regen)
+        )
+        base_mana = int(
+            extract(mana_container_class, container_class_base)
+        )
+        mana_regen = float(
+            extract(mana_container_class, container_class_regen)
+        )
 
         return base_health, health_regen, base_mana, mana_regen
         
