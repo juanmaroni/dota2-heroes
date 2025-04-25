@@ -275,7 +275,7 @@ class Dota2HeroesSpider(scrapy.Spider):
     def _extract_roles(sel):
         """
         Extracting the nine roles.
-        They are displayed as a bar, using widths: 0%, 33.3%, 66.6% and 100%.
+        They are displayed as a bar, using widths: 0%, 33.3%, 66.6% and 99.9%.
         Parsing as integers: 0, 1, 2 and 3.
         """
         container_class = "_3zWGygZT2aKUiOyokg4h1v"
@@ -288,7 +288,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             0.0: 0,
             33.3: 1,
             66.6: 2,
-            100.0: 3,
+            99.9: 3,
         }
 
         containers = sel.xpath(
