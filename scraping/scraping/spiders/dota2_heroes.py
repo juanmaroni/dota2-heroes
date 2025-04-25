@@ -341,11 +341,13 @@ class Dota2HeroesSpider(scrapy.Spider):
         stat_class = "_3783Tb-SbeUvvdBW9iSB_x"
         img_class = "FY7TWJ3yQgg0zRhmd0sjL"
 
-        stats_xpath = f"""
+        stats_xpath = (
+            f"""
             //div[contains(@class, '{container_class}')]
             /div[contains(@class, '{stats_container_class}')]
             /div[contains(@class, '{stat_class}')]
-        """
+            """
+        )
 
         stats = {
             "damage": None,
