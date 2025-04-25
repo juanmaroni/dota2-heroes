@@ -36,7 +36,7 @@ class Dota2HeroesSpider(scrapy.Spider):
         for hero in sel.xpath(hero_uris_xpath):
             self.hero_uris.append(hero.xpath("./@href").get())
 
-        with open("test_heroes.csv", "w", newline="") as f:
+        with open("dota2_heroes_7.38c.csv", "w", newline="") as f:
             headers = [
                 "id", "name", "main_attribute", "subtitle", "lore",
                 "lore_extended", "attack_type", "complexity",
@@ -47,11 +47,12 @@ class Dota2HeroesSpider(scrapy.Spider):
                 "base_intelligence", "intelligence_gain", "role_carry",
                 "role_support", "role_nuker", "role_disabler",
                 "role_jungler", "role_durable", "role_escape", "role_pusher",
-                "role_initiator", "attack_damage", "attack_time",
-                "attack_range", "attack_projectile_speed", "defense_armor",
-                "defense_magic_resist", "mobility_movement_speed",
-                "mobility_turn_rate", "mobility_vision_day",
-                "mobility_vision_night",
+                "role_initiator", "base_attack_damage_min",
+                "base_attack_damage_max", "base_attack_time",
+                "base_attack_range", "base_attack_projectile_speed",
+                "base_defense_armor", "base_defense_magic_resist_perc",
+                "base_mobility_movement_speed", "base_mobility_turn_rate",
+                "base_mobility_vision_day", "base_mobility_vision_night",
             ]
             
             w = csv.DictWriter(f, fieldnames=headers, delimiter='|')
@@ -102,6 +103,14 @@ class Dota2HeroesSpider(scrapy.Spider):
                     role_jungler, role_durable, role_escape, role_pusher,
                     role_initiator
                 ) = self._extract_roles(sel)
+
+                (
+                    base_attack_damage_min, base_attack_damage_max, base_attack_time,
+                    base_attack_range, base_attack_projectile_speed,
+                    base_defense_armor, base_defense_magic_resist_perc,
+                    base_mobility_movement_speed, base_mobility_turn_rate,
+                    base_mobility_vision_day, base_mobility_vision_night
+                ) = self._extract_stats(sel)
                 
                 hero_info = {
                     "id": id,
@@ -132,19 +141,21 @@ class Dota2HeroesSpider(scrapy.Spider):
                     "role_escape": role_escape,
                     "role_pusher": role_pusher,
                     "role_initiator": role_initiator,
-                    "attack_damage": "",
-                    "attack_time": "",
-                    "attack_range": "",
-                    "attack_projectile_speed": "",
-                    "defense_armor": "",
-                    "defense_magic_resist": "",
-                    "mobility_movement_speed": "",
-                    "mobility_turn_rate": "",
-                    "mobility_vision_day": "",
-                    "mobility_vision_night": "",
+                    "base_attack_damage_min": base_attack_damage_min,
+                    "base_attack_damage_max": base_attack_damage_max,
+                    "base_attack_time": base_attack_time,
+                    "base_attack_range": base_attack_range,
+                    "base_attack_projectile_speed": base_attack_projectile_speed,
+                    "base_defense_armor": base_defense_armor,
+                    "base_defense_magic_resist_perc": base_defense_magic_resist_perc,
+                    "base_mobility_movement_speed": base_mobility_movement_speed,
+                    "base_mobility_turn_rate": base_mobility_turn_rate,
+                    "base_mobility_vision_day": base_mobility_vision_day,
+                    "base_mobility_vision_night": base_mobility_vision_night,
                 }
 
                 w.writerow(hero_info)
+                time.sleep(1) # Wait before going next...
 
         self.driver.quit()
 
@@ -307,12 +318,46 @@ class Dota2HeroesSpider(scrapy.Spider):
 
 
     @staticmethod
-    def _extract_vision():
+    def _extract_stats(sel):
         """
-        Two numbers separated by inclined bar.
+        Extracting stats (grouped in Attack, Defense and Mobility).
         """
-        pass
-        # return day, night
+        container_class = "_3z1y6d2ebz2SLSb7zqA1qU"
+        stats_container_class = "_3ulLBWWM4rZynWFlj9MsLe"
+        stat_class = "_3783Tb-SbeUvvdBW9iSB_x"
+
+        stats = sel.xpath(
+            f"""
+            //div[contains(@class, '{container_class}')]
+            /div[contains(@class, '{stats_container_class}')]
+            /div[contains(@class, '{stat_class}')]
+            /text()
+            """
+        ).getall()
+
+        base_attack = stats[0].split('-')
+        (
+            base_attack_damage_min, base_attack_damage_max
+        ) = int(base_attack[0]), int(base_attack[1])
+        base_attack_time = float(stats[1])
+        base_attack_range = int(stats[2])
+        base_attack_projectile_speed = int(stats[3])
+        base_defense_armor = float(stats[4])
+        base_defense_magic_resist_perc = int(stats[5].replace("%", ""))
+        base_mobility_movement_speed = int(stats[6])
+        base_mobility_turn_rate = float(stats[7])
+        vision = stats[8].split(" / ")
+        (
+            base_mobility_vision_day, base_mobility_vision_night
+        ) = int(vision[0]), int(vision[1])
+
+        return (
+            base_attack_damage_min, base_attack_damage_max, base_attack_time,
+            base_attack_range, base_attack_projectile_speed,
+            base_defense_armor, base_defense_magic_resist_perc,
+            base_mobility_movement_speed, base_mobility_turn_rate,
+            base_mobility_vision_day, base_mobility_vision_night
+        )
 
 
 def process_text(text_parts):
