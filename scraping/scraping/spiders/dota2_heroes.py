@@ -321,35 +321,92 @@ class Dota2HeroesSpider(scrapy.Spider):
     def _extract_stats(sel):
         """
         Extracting stats (grouped in Attack, Defense and Mobility).
+        Some heroes may not have all the stats, decided to use a dict.
+        Keys are extracted from images src: damage, attack_time,
+        attack_range, projectile_speed, armor, magic_resist,
+        movement_speed, turn_rate, vision.
         """
+        def extract_key_from_img(img_src):
+            r1 = "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_"
+            r2 = ".png"
+            
+            return (
+                img_src
+                    .replace(r1, "")
+                    .replace(r2, "")
+            )
+
         container_class = "_3z1y6d2ebz2SLSb7zqA1qU"
         stats_container_class = "_3ulLBWWM4rZynWFlj9MsLe"
         stat_class = "_3783Tb-SbeUvvdBW9iSB_x"
+        img_class = "FY7TWJ3yQgg0zRhmd0sjL"
 
-        stats = sel.xpath(
-            f"""
+        stats_xpath = f"""
             //div[contains(@class, '{container_class}')]
             /div[contains(@class, '{stats_container_class}')]
             /div[contains(@class, '{stat_class}')]
-            /text()
-            """
-        ).getall()
+        """
 
-        base_attack = stats[0].split('-')
-        (
-            base_attack_damage_min, base_attack_damage_max
-        ) = int(base_attack[0]), int(base_attack[1])
-        base_attack_time = float(stats[1])
-        base_attack_range = int(stats[2])
-        base_attack_projectile_speed = int(stats[3])
-        base_defense_armor = float(stats[4])
-        base_defense_magic_resist_perc = int(stats[5].replace("%", ""))
-        base_mobility_movement_speed = int(stats[6])
-        base_mobility_turn_rate = float(stats[7])
-        vision = stats[8].split(" / ")
-        (
-            base_mobility_vision_day, base_mobility_vision_night
-        ) = int(vision[0]), int(vision[1])
+        stats = {
+            "damage": None,
+            "attack_time": None,
+            "attack_range": None,
+            "projectile_speed": None,
+            "armor": None,
+            "magic_resist": None,
+            "movement_speed": None,
+            "turn_rate": None,
+            "vision": None,
+        }
+
+        for stat in sel.xpath(stats_xpath):
+            k = extract_key_from_img(
+                stat.xpath(
+                    f".//img[contains(@class, '{img_class}')]/@src"
+                ).get()
+            )
+            v = stat.xpath(".//text()").get()
+            stats[k] = v
+
+        damage = stats["damage"]
+        base_attack_damage_min = None
+        base_attack_damage_max = None
+        attack_time = stats["attack_time"]
+        attack_range = stats["attack_range"]
+        projectile_speed = stats["projectile_speed"]
+        armor = stats["armor"]
+        magic_resist = stats["magic_resist"]
+        movement_speed = stats["movement_speed"]
+        turn_rate = stats["turn_rate"]
+        vision = stats["vision"]
+        base_mobility_vision_day = None
+        base_mobility_vision_night = None
+
+        if damage:
+            damage = damage.split('-')
+            (
+                base_attack_damage_min, base_attack_damage_max
+            ) = int(damage[0]), int(damage[1])
+
+        base_attack_time = float(attack_time) if attack_time else None
+        base_attack_range = int(attack_range) if attack_range else None
+        base_attack_projectile_speed = (
+            int(projectile_speed) if projectile_speed else None
+        )
+        base_defense_armor = float(armor) if armor else None
+        base_defense_magic_resist_perc = (
+            int(magic_resist.replace("%", "")) if magic_resist else None
+        )
+        base_mobility_movement_speed = (
+            int(movement_speed) if movement_speed else None
+        )
+        base_mobility_turn_rate = float(turn_rate) if turn_rate else None
+
+        if vision:
+            vision = vision.split(" / ")
+            (
+                base_mobility_vision_day, base_mobility_vision_night
+            ) = int(vision[0]), int(vision[1])
 
         return (
             base_attack_damage_min, base_attack_damage_max, base_attack_time,
