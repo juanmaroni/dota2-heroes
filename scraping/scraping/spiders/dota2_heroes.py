@@ -1,4 +1,3 @@
-import csv
 import time
 import scrapy
 from scrapy.selector import Selector
@@ -7,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from scraping.items import HeroInfoItem
 
 
 class Dota2HeroesSpider(scrapy.Spider):
@@ -35,130 +35,69 @@ class Dota2HeroesSpider(scrapy.Spider):
 
         for hero in sel.xpath(hero_uris_xpath):
             self.hero_uris.append(hero.xpath("./@href").get())
-
-        with open("dota2_heroes_7.38c.csv", "w", newline="") as f:
-            headers = [
-                "id", "name", "main_attribute", "subtitle", "lore",
-                "lore_extended", "attack_type", "complexity",
-                "lore_extended", "attack_type", "complexity",
-                "asset_portrait_url", "base_health", "health_regeneration",
-                "base_mana", "mana_regeneration", "base_strength",
-                "strength_gain", "base_agility", "agility_gain",
-                "base_intelligence", "intelligence_gain", "role_carry",
-                "role_support", "role_nuker", "role_disabler",
-                "role_jungler", "role_durable", "role_escape", "role_pusher",
-                "role_initiator", "base_attack_damage_min",
-                "base_attack_damage_max", "base_attack_time",
-                "base_attack_range", "base_attack_projectile_speed",
-                "base_defense_armor", "base_defense_magic_resist_perc",
-                "base_mobility_movement_speed", "base_mobility_turn_rate",
-                "base_mobility_vision_day", "base_mobility_vision_night",
-            ]
             
-            w = csv.DictWriter(f, fieldnames=headers, delimiter='|')
-            w.writeheader()
-            
-            for uri in self.hero_uris[:1]: # TODO: REMOVE LIMIT
-                url = f"https://www.dota2.com{uri}"
-                self.driver.get(url)
-                time.sleep(2) # Loading JS...
+        for uri in self.hero_uris: # TODO: REMOVE LIMIT
+            hero = HeroInfoItem()
+            url = f"https://www.dota2.com{uri}"
+            self.driver.get(url)
+            time.sleep(2) # Loading JS...
 
-                sel = Selector(text=self.driver.page_source)
-                id = uri.split('/')[2]
-                name = self._extract_html_text(sel, "_2IcIujaWiO5h68dVvpO_tQ")
-                main_attribute = self._extract_html_text(
-                    sel, "_3HGWJjSyOjmlUGJTIlMHc_"
-                )
-                subtitle = self._extract_html_text(
-                    sel, "_2r7tdOONJnLw_6bQuNZj5b"
-                )
-                lore = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
+            sel = Selector(text=self.driver.page_source)
+            hero["id"] = uri.split('/')[2]
+            hero["name"] = self._extract_html_text(
+                sel, "_2IcIujaWiO5h68dVvpO_tQ"
+            )
+            hero["main_attribute"] = self._extract_html_text(
+                sel, "_3HGWJjSyOjmlUGJTIlMHc_"
+            )
+            hero["subtitle"] = self._extract_html_text(
+                sel, "_2r7tdOONJnLw_6bQuNZj5b"
+            )
+            hero["lore"] = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
 
-                # Click to expand lore
-                self.driver.find_element(
-                    By.XPATH, "//div[text()='Read Full History']"
-                ).click()
+            # Click to expand lore
+            self.driver.find_element(
+                By.XPATH, "//div[text()='Read Full History']"
+            ).click()
                 
-                lore_extended = self._extract_lore_extended(
-                    sel, "_33H8icML8p8oZrGPMaWZ8o"
-                )
-                attack_type = self._extract_html_text(
-                    sel, "_3ce-DKDrVB7q5LsGbJdZ3X"
-                )
-                complexity = self._extract_complexity(
-                    sel, "_2VXnqvXh1TJPueaGkUNqja"
-                )
-                asset_portrait_url = self._extract_asset_portrait_url(
-                    sel, "CR-BbB851VmrcN5s9HpGZ"
-                )
-                (
-                    base_health, health_regen, base_mana, mana_regen
-                ) = self._extract_health_mana(sel)
-                (
-                    strength, agility, intelligence,
-                    strength_gain, agility_gain, intelligence_gain
-                ) = self._extract_attributes(sel)
-                (
-                    role_carry, role_support, role_nuker, role_disabler,
-                    role_jungler, role_durable, role_escape, role_pusher,
-                    role_initiator
-                ) = self._extract_roles(sel)
+            hero["lore_extended"] = self._extract_lore_extended(
+                sel, "_33H8icML8p8oZrGPMaWZ8o"
+            )
+            hero["attack_type"] = self._extract_html_text(
+                sel, "_3ce-DKDrVB7q5LsGbJdZ3X"
+            )
+            hero["complexity"] = self._extract_complexity(
+                sel, "_2VXnqvXh1TJPueaGkUNqja"
+            )
+            hero["asset_portrait_url"] = self._extract_asset_portrait_url(
+                sel, "CR-BbB851VmrcN5s9HpGZ"
+            )
+            (
+                hero["base_health"], hero["health_regeneration"],
+                hero["base_mana"], hero["mana_regeneration"]
+            ) = self._extract_health_mana(sel)
+            (
+                hero["base_strength"], hero["base_agility"],
+                hero["base_intelligence"], hero["strength_gain"],
+                hero["agility_gain"], hero["intelligence_gain"]
+            ) = self._extract_attributes(sel)
+            (
+                hero["role_carry"], hero["role_support"], hero["role_nuker"],
+                hero["role_disabler"], hero["role_jungler"],
+                hero["role_durable"], hero["role_escape"],
+                hero["role_pusher"], hero["role_initiator"]
+            ) = self._extract_roles(sel)
 
-                (
-                    base_attack_damage_min, base_attack_damage_max, base_attack_time,
-                    base_attack_range, base_attack_projectile_speed,
-                    base_defense_armor, base_defense_magic_resist_perc,
-                    base_mobility_movement_speed, base_mobility_turn_rate,
-                    base_mobility_vision_day, base_mobility_vision_night
-                ) = self._extract_stats(sel)
+            (
+                hero["damage"], hero["attack_time"], hero["attack_range"],
+                hero["projectile_speed"], hero["armor"], hero["magic_resist"],
+                hero["movement_speed"], hero["turn_rate"], hero["vision"]
+            ) = self._extract_stats(sel)
                 
-                hero_info = {
-                    "id": id,
-                    "name": name,
-                    "main_attribute": main_attribute,
-                    "subtitle": subtitle,
-                    "lore": lore,
-                    "lore_extended": lore_extended,
-                    "attack_type": attack_type,
-                    "complexity": complexity,
-                    "asset_portrait_url": asset_portrait_url,
-                    "base_health": base_health,
-                    "health_regeneration": health_regen,
-                    "base_mana": base_mana,
-                    "mana_regeneration": mana_regen,
-                    "base_strength": strength,
-                    "strength_gain": strength_gain,
-                    "base_agility": agility,
-                    "agility_gain": agility_gain,
-                    "base_intelligence": intelligence,
-                    "intelligence_gain": intelligence_gain,
-                    "role_carry": role_carry,
-                    "role_support": role_support,
-                    "role_nuker": role_nuker,
-                    "role_disabler": role_disabler,
-                    "role_jungler": role_jungler,
-                    "role_durable": role_durable,
-                    "role_escape": role_escape,
-                    "role_pusher": role_pusher,
-                    "role_initiator": role_initiator,
-                    "base_attack_damage_min": base_attack_damage_min,
-                    "base_attack_damage_max": base_attack_damage_max,
-                    "base_attack_time": base_attack_time,
-                    "base_attack_range": base_attack_range,
-                    "base_attack_projectile_speed": base_attack_projectile_speed,
-                    "base_defense_armor": base_defense_armor,
-                    "base_defense_magic_resist_perc": base_defense_magic_resist_perc,
-                    "base_mobility_movement_speed": base_mobility_movement_speed,
-                    "base_mobility_turn_rate": base_mobility_turn_rate,
-                    "base_mobility_vision_day": base_mobility_vision_day,
-                    "base_mobility_vision_night": base_mobility_vision_night,
-                }
-
-                w.writerow(hero_info)
-                time.sleep(1) # Wait before going next...
+            yield hero
+            time.sleep(1) # Wait before going next...
 
         self.driver.quit()
-
 
     @staticmethod
     def _extract_html_text(sel, container_class):
@@ -166,49 +105,46 @@ class Dota2HeroesSpider(scrapy.Spider):
             f"//div[contains(@class, '{container_class}')]/text()"
         ).get()
 
-
     @staticmethod
     def _extract_lore(sel, container_class):
         inner_class = "_1FdISYFSn4ZmiR_wS5YFOM"
 
-        base = f"//div[contains(@class, '{container_class}')]/div[contains(@class, '{inner_class}')]"
+        base = f"""
+            //div[contains(@class, '{container_class}')]
+            /div[contains(@class, '{inner_class}')]
+        """
         text_parts = sel.xpath(f"{base}/text() | {base}/span/text()").getall()
 
-        return process_text(text_parts)
+        return text_parts
     
-
     @staticmethod
     def _extract_lore_extended(sel, container_class):
         text_parts = sel.xpath(
             f"//div[contains(@class, '{container_class}')]/div[1]//text()"
         ).getall()
 
-        return process_text(text_parts)
-
+        return text_parts
 
     @staticmethod
     def _extract_complexity(sel, container_class):
         """
-        This info is showed as rombs (1, 2 or 3), return their count.
+        This info is showed as rombs (1, 2 or 3).
         """
-        return len(
-            sel.xpath(
-                f"//div[contains(@class, '{container_class}')]"
-            ).getall()
-        )
-    
+        return sel.xpath(
+            f"//div[contains(@class, '{container_class}')]"
+        ).getall()
 
     @staticmethod
     def _extract_asset_portrait_url(sel, container_class):
         return sel.xpath(
             f"//img[contains(@class, '{container_class}')]/@src"
         ).get()
-    
 
     @staticmethod
     def _extract_health_mana(sel):
         """
-        Health and Mana info got the same classes for the main divs where the numbers are contained.
+        Health and Mana info got the same classes for
+        the main divs where the numbers are contained.
         """
         def extract(container_class, target_class):
             path = f"""
@@ -225,27 +161,20 @@ class Dota2HeroesSpider(scrapy.Spider):
         container_class_base = "_1KbXKSmm_4JCzoVx_nG7HJ"
         container_class_regen = "_29Uub-BkYZWm7hCAL7QRx3"
 
-        base_health = int(
-            extract(health_container_class, container_class_base)
-        )
-        health_regen = float(
-            extract(health_container_class, container_class_regen)
-        )
-        base_mana = int(
-            extract(mana_container_class, container_class_base)
-        )
-        mana_regen = float(
-            extract(mana_container_class, container_class_regen)
-        )
+        base_health = extract(health_container_class, container_class_base)
+        health_regen = extract(health_container_class, container_class_regen)
+        base_mana = extract(mana_container_class, container_class_base)
+        mana_regen = extract(mana_container_class, container_class_regen)
 
         return base_health, health_regen, base_mana, mana_regen
         
-    
     @staticmethod
     def _extract_attributes(sel):
         """
-        Extracting the three main attributes, they share class. As do their gains.
+        Extracting the three main attributes and their gains.
         Main attributes are integers. Attribute gains are decimals.
+        Extracted in this order: "strength", "agility", "intelligence",
+        "strength_gain", "agility_gain", "intelligence_gain"
         """
         def extract(container_class):
             return sel.xpath(
@@ -258,25 +187,16 @@ class Dota2HeroesSpider(scrapy.Spider):
         attributes = extract(attributes_class)
         attributes_gain = extract(attributes_gain_class)
 
-        strength = int(attributes[0])
-        agility = int(attributes[1])
-        intelligence = int(attributes[2])
-        strength_gain = float(attributes_gain[0])
-        agility_gain = float(attributes_gain[1])
-        intelligence_gain = float(attributes_gain[2])
-
         return (
-            strength, agility, intelligence,
-            strength_gain, agility_gain, intelligence_gain
+            attributes[0], attributes[1], attributes[2],
+            attributes_gain[0], attributes_gain[1], attributes_gain[2]
         )
-    
 
     @staticmethod
     def _extract_roles(sel):
         """
         Extracting the nine roles.
         They are displayed as a bar, using widths: 0%, 33.3%, 66.6% and 99.9%.
-        Parsing as integers: 0, 1, 2 and 3.
         """
         container_class = "_3zWGygZT2aKUiOyokg4h1v"
         role_name_class = "_3Fbk3tlFp8wcznxtXIx19W"
@@ -284,12 +204,6 @@ class Dota2HeroesSpider(scrapy.Spider):
         role_bar_value_class = "f7kjDBQOuPqiwaCTUPzLJ"
 
         roles = {}
-        match_percentage_value = {
-            0.0: 0,
-            33.3: 1,
-            66.6: 2,
-            99.9: 3,
-        }
 
         containers = sel.xpath(
             f"//div[contains(@class, '{container_class}')]"
@@ -303,19 +217,17 @@ class Dota2HeroesSpider(scrapy.Spider):
                 /@style
                 """
             ).get()
-            percentage = float(style.replace("width: ", "").replace("%;", ""))
-            value = match_percentage_value[percentage]
+            percentage = style.replace("width: ", "").replace("%;", "")
             role_name = container.xpath(
                 f".//div[contains(@class, '{role_name_class}')]/text()"
             ).get()
-            roles[role_name] = value
+            roles[role_name] = percentage
 
         return (
             roles["Carry"], roles["Support"], roles["Nuker"],
             roles["Disabler"], roles["Jungler"], roles["Durable"],
             roles["Escape"], roles["Pusher"], roles["Initiator"]
         )
-
 
     @staticmethod
     def _extract_stats(sel):
@@ -324,7 +236,7 @@ class Dota2HeroesSpider(scrapy.Spider):
         Some heroes may not have all the stats, decided to use a dict.
         Keys are extracted from images src: damage, attack_time,
         attack_range, projectile_speed, armor, magic_resist,
-        movement_speed, turn_rate, vision.
+        movement_speed, turn_rate and vision.
         """
         def extract_key_from_img(img_src):
             r1 = "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_"
@@ -370,74 +282,11 @@ class Dota2HeroesSpider(scrapy.Spider):
             v = stat.xpath(".//text()").get()
             stats[k] = v
 
-        damage = stats["damage"]
-        base_attack_damage_min = None
-        base_attack_damage_max = None
-        attack_time = stats["attack_time"]
-        attack_range = stats["attack_range"]
-        projectile_speed = stats["projectile_speed"]
-        armor = stats["armor"]
         magic_resist = stats["magic_resist"]
-        movement_speed = stats["movement_speed"]
-        turn_rate = stats["turn_rate"]
-        vision = stats["vision"]
-        base_mobility_vision_day = None
-        base_mobility_vision_night = None
-
-        if damage:
-            damage = damage.split('-')
-            (
-                base_attack_damage_min, base_attack_damage_max
-            ) = int(damage[0]), int(damage[1])
-
-        base_attack_time = float(attack_time) if attack_time else None
-        base_attack_range = int(attack_range) if attack_range else None
-        base_attack_projectile_speed = (
-            int(projectile_speed) if projectile_speed else None
-        )
-        base_defense_armor = float(armor) if armor else None
-        base_defense_magic_resist_perc = (
-            int(magic_resist.replace("%", "")) if magic_resist else None
-        )
-        base_mobility_movement_speed = (
-            int(movement_speed) if movement_speed else None
-        )
-        base_mobility_turn_rate = float(turn_rate) if turn_rate else None
-
-        if vision:
-            vision = vision.split(" / ")
-            (
-                base_mobility_vision_day, base_mobility_vision_night
-            ) = int(vision[0]), int(vision[1])
+        magic_resist = magic_resist.replace("%", "") if magic_resist else None
 
         return (
-            base_attack_damage_min, base_attack_damage_max, base_attack_time,
-            base_attack_range, base_attack_projectile_speed,
-            base_defense_armor, base_defense_magic_resist_perc,
-            base_mobility_movement_speed, base_mobility_turn_rate,
-            base_mobility_vision_day, base_mobility_vision_night
+            stats["damage"], stats["attack_time"], stats["attack_range"],
+            stats["projectile_speed"], stats["armor"], magic_resist,
+            stats["movement_speed"], stats["turn_rate"], stats["vision"]
         )
-
-
-def process_text(text_parts):
-        """
-        Process extracted text divided in parts.
-        """
-        full_text = " ".join(text_parts)
-        
-        processed_text = (
-            full_text
-                .replace("\t", "")
-                .replace("\r", "<br>")
-                .replace("\n", "<br>")
-                .strip()
-                .replace(" ,", ",")
-                .replace(" .", ".")
-                .replace(" ;", ";")
-                .replace(" !", "!")
-                .replace(" ?", "?")
-                .replace("<br> ", "<br>")
-                .replace("  ", " ")
-        )
-
-        return processed_text

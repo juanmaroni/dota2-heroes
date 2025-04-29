@@ -1,13 +1,168 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+import csv
 
 
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
-
-
-class ScrapingPipeline:
+class CleanHeroInfoPipeline: # 100
     def process_item(self, item, spider):
+        item["lore"] = self._process_text(item["lore"])
+        item["lore_extended"] = self._process_text(item["lore_extended"])
+        item["complexity"] = len(item["complexity"])
+        item["base_health"] = int(item["base_health"])
+        item["health_regeneration"] = float(item["health_regeneration"])
+        item["base_mana"] = int(item["base_mana"])
+        item["mana_regeneration"] = float(item["mana_regeneration"])
+        item["base_strength"] = int(item["base_strength"])
+        item["base_agility"] = int(item["base_agility"])
+        item["base_intelligence"] = int(item["base_intelligence"])
+        item["strength_gain"] = float(item["strength_gain"])
+        item["agility_gain"] = float(item["agility_gain"])
+        item["intelligence_gain"] = float(item["intelligence_gain"])
+        item["role_carry"] = self._process_role(item["role_carry"])
+        item["role_support"] = self._process_role(item["role_support"])
+        item["role_nuker"] = self._process_role(item["role_nuker"])
+        item["role_disabler"] = self._process_role(item["role_disabler"])
+        item["role_jungler"] = self._process_role(item["role_jungler"])
+        item["role_durable"] = self._process_role(item["role_durable"])
+        item["role_escape"] = self._process_role(item["role_escape"])
+        item["role_pusher"] = self._process_role(item["role_pusher"])
+        item["role_initiator"] = self._process_role(item["role_initiator"])
+        self._process_stat_damage(item)
+        self._process_stat(item, "attack_time", "base_attack_time", float)
+        self._process_stat(item, "attack_range", "base_attack_range")
+        self._process_stat(
+            item, "projectile_speed", "base_attack_projectile_speed"
+        )
+        self._process_stat(item, "armor", "base_defense_armor", float)
+        self._process_stat(
+            item, "magic_resist", "base_defense_magic_resist_perc"
+        )
+        self._process_stat(
+            item, "movement_speed", "base_mobility_movement_speed"
+        )
+        self._process_stat(
+            item, "turn_rate", "base_mobility_turn_rate", float
+        )
+        self._process_stat_vision(item)
+
         return item
+    
+    @staticmethod
+    def _process_role(percentage):
+        if percentage == "33.3":
+            return 1
+        elif percentage == "66.6":
+            return 2
+        elif percentage == "99.9":
+            return 3
+        else:
+            return 0
+
+    @staticmethod
+    def _process_stat(item, old_item_stat, new_item_stat, type=int):
+        item_stat = item[old_item_stat]
+
+        if item_stat:
+            item[new_item_stat] = type(item_stat)
+        else:
+            item[new_item_stat] = None
+        
+        del item[old_item_stat]
+
+    @staticmethod
+    def _process_stat_damage(item):
+        damage = item["damage"]
+        damage_min_str = "base_attack_damage_min"
+        damage_max_str = "base_attack_damage_max"
+
+        if damage:
+            damage = damage.split('-')
+            (
+                item[damage_min_str], item[damage_max_str]
+            ) = int(damage[0]), int(damage[1])
+        else:
+            (
+                item[damage_min_str], item[damage_max_str]
+            ) = None, None
+            
+        del item["damage"]
+
+    @staticmethod
+    def _process_stat_vision(item):
+        vision = item["vision"]
+        vision_day_str = "base_mobility_vision_day"
+        vision_night_str = "base_mobility_vision_night"
+
+        if vision:
+            vision = vision.split(" / ")
+            (
+                item[vision_day_str], item[vision_night_str]
+            ) = int(vision[0]), int(vision[1])
+        else:
+            (
+                item[vision_day_str], item[vision_night_str]
+            ) = None, None
+            
+        del item["vision"]
+
+    @staticmethod
+    def _process_text(text_parts):
+        """
+        Process extracted text divided in parts.
+        """
+        full_text = " ".join(text_parts)
+        
+        processed_text = (
+            full_text
+                .replace("\t", "")
+                .replace("\r", "<br>")
+                .replace("\n", "<br>")
+                .strip()
+                .replace(" ,", ",")
+                .replace(" .", ".")
+                .replace(" ;", ";")
+                .replace(" !", "!")
+                .replace(" ?", "?")
+                .replace("<br> ", "<br>")
+                .replace("  ", " ")
+        )
+
+        return processed_text
+
+
+class CsvExportPipeline: # 400
+    def open_spider(self, spider):
+        headers = [
+            "id", "name", "main_attribute", "subtitle", "lore",
+            "lore_extended", "attack_type", "complexity",
+            "lore_extended", "attack_type", "complexity",
+            "asset_portrait_url", "base_health", "health_regeneration",
+            "base_mana", "mana_regeneration", "base_strength",
+            "strength_gain", "base_agility", "agility_gain",
+            "base_intelligence", "intelligence_gain", "role_carry",
+            "role_support", "role_nuker", "role_disabler",
+            "role_jungler", "role_durable", "role_escape", "role_pusher",
+            "role_initiator", "base_attack_damage_min",
+            "base_attack_damage_max", "base_attack_time",
+            "base_attack_range", "base_attack_projectile_speed",
+            "base_defense_armor", "base_defense_magic_resist_perc",
+            "base_mobility_movement_speed", "base_mobility_turn_rate",
+            "base_mobility_vision_day", "base_mobility_vision_night",
+        ]
+        self.file = open(
+            "dota2_heroes_7.38c.csv", # TODO: Automatize patch
+            'w',
+            newline='',
+            encoding="utf-8"
+        )
+        self.writer = csv.DictWriter(
+            self.file,
+            fieldnames=headers,
+            delimiter='|'
+        )
+        self.writer.writeheader()
+
+    def process_item(self, item, spider):
+        self.writer.writerow(item)
+        return item
+
+    def close_spider(self, spider):
+        self.file.close()
