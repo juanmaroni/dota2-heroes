@@ -31,12 +31,12 @@ class Dota2HeroesSpider(scrapy.Spider):
         time.sleep(2) # Loading JS...
             
         sel = Selector(text=self.driver.page_source)
-        hero_uris_xpath = "//a[contains(@class, '_7szOnSgHiQLEyU0_owKBB')]"
-
-        for hero in sel.xpath(hero_uris_xpath):
-            self.hero_uris.append(hero.xpath("./@href").get())
-            
-        for uri in self.hero_uris: # TODO: REMOVE LIMIT
+        hero_uris_class = "_7szOnSgHiQLEyU0_owKBB"
+        hero_uris_xpath = f"""
+            //a[contains(@class, '{hero_uris_class}')]/@href
+        """
+        
+        for uri in sel.xpath(hero_uris_xpath).getall():
             hero = HeroInfoItem()
             url = f"https://www.dota2.com{uri}"
             self.driver.get(url)
@@ -155,8 +155,8 @@ class Dota2HeroesSpider(scrapy.Spider):
             
             return sel.xpath(path).get(default="0").strip()
         
-        health_container_class="D6gmc38sczQBtacU66_b4"
-        mana_container_class="_1aQk6qbzk9zHJ78eUNwzw1"
+        health_container_class = "D6gmc38sczQBtacU66_b4"
+        mana_container_class = "_1aQk6qbzk9zHJ78eUNwzw1"
 
         container_class_base = "_1KbXKSmm_4JCzoVx_nG7HJ"
         container_class_regen = "_29Uub-BkYZWm7hCAL7QRx3"
@@ -171,10 +171,9 @@ class Dota2HeroesSpider(scrapy.Spider):
     @staticmethod
     def _extract_attributes(sel):
         """
-        Extracting the three main attributes and their gains.
         Main attributes are integers. Attribute gains are decimals.
         Extracted in this order: "strength", "agility", "intelligence",
-        "strength_gain", "agility_gain", "intelligence_gain"
+        "strength_gain", "agility_gain" and "intelligence_gain"
         """
         def extract(container_class):
             return sel.xpath(
@@ -195,7 +194,6 @@ class Dota2HeroesSpider(scrapy.Spider):
     @staticmethod
     def _extract_roles(sel):
         """
-        Extracting the nine roles.
         They are displayed as a bar, using widths: 0%, 33.3%, 66.6% and 99.9%.
         """
         container_class = "_3zWGygZT2aKUiOyokg4h1v"
@@ -234,9 +232,9 @@ class Dota2HeroesSpider(scrapy.Spider):
         """
         Extracting stats (grouped in Attack, Defense and Mobility).
         Some heroes may not have all the stats, decided to use a dict.
-        Keys are extracted from images src: damage, attack_time,
-        attack_range, projectile_speed, armor, magic_resist,
-        movement_speed, turn_rate and vision.
+        Keys are extracted from images src: "damage", "attack_time",
+        "attack_range", "projectile_speed", "armor", "magic_resist",
+        "movement_speed", "turn_rate" and "vision".
         """
         def extract_key_from_img(img_src):
             r1 = "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react//heroes/stats/icon_"
