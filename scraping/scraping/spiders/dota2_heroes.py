@@ -13,7 +13,6 @@ class Dota2HeroesSpider(scrapy.Spider):
     name = "dota2_heroes"
     allowed_domains = ["www.dota2.com"]
     start_urls = ["https://www.dota2.com/heroes"]
-    hero_uris = []
 
     def __init__(self):
         chrome_options = Options()
