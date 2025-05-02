@@ -5,8 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 from scraping.items import HeroInfoItem
+from utils import CHROMEDRIVER_PATH
 
 
 class Dota2HeroesSpider(scrapy.Spider):
@@ -21,7 +21,7 @@ class Dota2HeroesSpider(scrapy.Spider):
         chrome_options.add_argument("--disable-dev-shm-usage")
 
         self.driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()),
+            service=Service(CHROMEDRIVER_PATH),
             options=chrome_options
         )
 

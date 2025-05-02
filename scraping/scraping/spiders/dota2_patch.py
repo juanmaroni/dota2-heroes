@@ -4,9 +4,8 @@ from scrapy.selector import Selector
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from scraping.items import PatchItem
-from utils import change_filepath
+from utils import CHROMEDRIVER_PATH, change_filepath
 
 
 class Dota2PatchSpider(scrapy.Spider):
@@ -22,7 +21,7 @@ class Dota2PatchSpider(scrapy.Spider):
         chrome_options.add_argument("--disable-dev-shm-usage")
 
         self.driver = webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()),
+            service=Service(CHROMEDRIVER_PATH),
             options=chrome_options
         )
 

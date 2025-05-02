@@ -1,6 +1,7 @@
 from  os import makedirs, path, rename
 
 
+CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"
 TMP_FILENAME = "dota2_heroes_tmp.csv"
 OUTPUT_DIR_PATH = "../output/"
 
