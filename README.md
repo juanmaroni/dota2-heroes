@@ -3,8 +3,15 @@
 ![Scrapy](https://img.shields.io/badge/scrapy-%2360a839.svg?style=for-the-badge&logo=scrapy&logoColor=d1d2d3&style=flat-square)
 ![Selenium](https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white&style=flat-square)
 
+## Requirements
+Google ChromeDriver local installation.
+
+Python dependencies in "requirements.txt".
+
 ## Scraping
-Extracting data from Dota 2 Heroes webpage with Scrapy and Selenium, and saving it as a CSV file.
+Running spiders sequentially:
+1. "`dota2_heroes`" spider extracts data from Dota 2 Heroes webpage and saves it as a temporary CSV file.
+2. "`dota2_patch`" spider extracts data from Dota 2 Patches and uses it to change temporary CSV file name and path.
 
 Notes about parsing:
 * "`lore`" and "`lore_extended`": paragraphs separated with "`<br>`" to allow better parsing in the future.
