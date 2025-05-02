@@ -6,15 +6,16 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from scraping.items import PatchItem
+from utils import change_filepath
 
 
 class Dota2PatchSpider(scrapy.Spider):
     name = "dota2_patch"
     allowed_domains = ["www.dota2.com"]
     start_urls = ["https://www.dota2.com/patches"]
-    version = ""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
@@ -40,5 +41,10 @@ class Dota2PatchSpider(scrapy.Spider):
             """
         ).get()
 
-        self.version = patch_version
+        patch["version"] = patch_version
+
+        # Change temporary CSV file name and path
+        new_filename = f"dota2_heroes_{patch_version}.csv"
+        change_filepath(new_filename=new_filename)
+        
         yield patch
