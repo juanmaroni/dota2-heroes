@@ -1,47 +1,49 @@
 import csv
+from utils import TMP_FILENAME
 
 
 class CleanHeroInfoPipeline: # 100
     def process_item(self, item, spider):
-        item["lore"] = self._process_text(item["lore"])
-        item["lore_extended"] = self._process_text(item["lore_extended"])
-        item["complexity"] = len(item["complexity"])
-        item["base_health"] = int(item["base_health"])
-        item["health_regeneration"] = float(item["health_regeneration"])
-        item["base_mana"] = int(item["base_mana"])
-        item["mana_regeneration"] = float(item["mana_regeneration"])
-        item["base_strength"] = int(item["base_strength"])
-        item["base_agility"] = int(item["base_agility"])
-        item["base_intelligence"] = int(item["base_intelligence"])
-        item["strength_gain"] = float(item["strength_gain"])
-        item["agility_gain"] = float(item["agility_gain"])
-        item["intelligence_gain"] = float(item["intelligence_gain"])
-        item["role_carry"] = self._process_role(item["role_carry"])
-        item["role_support"] = self._process_role(item["role_support"])
-        item["role_nuker"] = self._process_role(item["role_nuker"])
-        item["role_disabler"] = self._process_role(item["role_disabler"])
-        item["role_jungler"] = self._process_role(item["role_jungler"])
-        item["role_durable"] = self._process_role(item["role_durable"])
-        item["role_escape"] = self._process_role(item["role_escape"])
-        item["role_pusher"] = self._process_role(item["role_pusher"])
-        item["role_initiator"] = self._process_role(item["role_initiator"])
-        self._process_stat_damage(item)
-        self._process_stat(item, "attack_time", "base_attack_time", float)
-        self._process_stat(item, "attack_range", "base_attack_range")
-        self._process_stat(
-            item, "projectile_speed", "base_attack_projectile_speed"
-        )
-        self._process_stat(item, "armor", "base_defense_armor", float)
-        self._process_stat(
-            item, "magic_resist", "base_defense_magic_resist_perc"
-        )
-        self._process_stat(
-            item, "movement_speed", "base_mobility_movement_speed"
-        )
-        self._process_stat(
-            item, "turn_rate", "base_mobility_turn_rate", float
-        )
-        self._process_stat_vision(item)
+        if spider.name == "dota2_heroes":
+            item["lore"] = self._process_text(item["lore"])
+            item["lore_extended"] = self._process_text(item["lore_extended"])
+            item["complexity"] = len(item["complexity"])
+            item["base_health"] = int(item["base_health"])
+            item["health_regeneration"] = float(item["health_regeneration"])
+            item["base_mana"] = int(item["base_mana"])
+            item["mana_regeneration"] = float(item["mana_regeneration"])
+            item["base_strength"] = int(item["base_strength"])
+            item["base_agility"] = int(item["base_agility"])
+            item["base_intelligence"] = int(item["base_intelligence"])
+            item["strength_gain"] = float(item["strength_gain"])
+            item["agility_gain"] = float(item["agility_gain"])
+            item["intelligence_gain"] = float(item["intelligence_gain"])
+            item["role_carry"] = self._process_role(item["role_carry"])
+            item["role_support"] = self._process_role(item["role_support"])
+            item["role_nuker"] = self._process_role(item["role_nuker"])
+            item["role_disabler"] = self._process_role(item["role_disabler"])
+            item["role_jungler"] = self._process_role(item["role_jungler"])
+            item["role_durable"] = self._process_role(item["role_durable"])
+            item["role_escape"] = self._process_role(item["role_escape"])
+            item["role_pusher"] = self._process_role(item["role_pusher"])
+            item["role_initiator"] = self._process_role(item["role_initiator"])
+            self._process_stat_damage(item)
+            self._process_stat(item, "attack_time", "base_attack_time", float)
+            self._process_stat(item, "attack_range", "base_attack_range")
+            self._process_stat(
+                item, "projectile_speed", "base_attack_projectile_speed"
+            )
+            self._process_stat(item, "armor", "base_defense_armor", float)
+            self._process_stat(
+                item, "magic_resist", "base_defense_magic_resist_perc"
+            )
+            self._process_stat(
+                item, "movement_speed", "base_mobility_movement_speed"
+            )
+            self._process_stat(
+                item, "turn_rate", "base_mobility_turn_rate", float
+            )
+            self._process_stat_vision(item)
 
         return item
     
@@ -129,40 +131,45 @@ class CleanHeroInfoPipeline: # 100
 
 
 class CsvExportPipeline: # 400
-    def open_spider(self, spider):
-        headers = [
-            "id", "name", "main_attribute", "subtitle", "lore",
-            "lore_extended", "attack_type", "complexity",
-            "lore_extended", "attack_type", "complexity",
-            "asset_portrait_url", "base_health", "health_regeneration",
-            "base_mana", "mana_regeneration", "base_strength",
-            "strength_gain", "base_agility", "agility_gain",
-            "base_intelligence", "intelligence_gain", "role_carry",
-            "role_support", "role_nuker", "role_disabler",
-            "role_jungler", "role_durable", "role_escape", "role_pusher",
-            "role_initiator", "base_attack_damage_min",
-            "base_attack_damage_max", "base_attack_time",
-            "base_attack_range", "base_attack_projectile_speed",
-            "base_defense_armor", "base_defense_magic_resist_perc",
-            "base_mobility_movement_speed", "base_mobility_turn_rate",
-            "base_mobility_vision_day", "base_mobility_vision_night",
-        ]
-        self.file = open(
-            "dota2_heroes_7.38c.csv", # TODO: Automatize patch
-            'w',
-            newline='',
-            encoding="utf-8"
-        )
-        self.writer = csv.DictWriter(
-            self.file,
-            fieldnames=headers,
-            delimiter='|'
-        )
-        self.writer.writeheader()
+    def open_spider(self, spider):       
+        if spider.name == "dota2_heroes":
+            self.filename = TMP_FILENAME
+            headers = [
+                "id", "name", "main_attribute", "subtitle", "lore",
+                "lore_extended", "attack_type", "complexity",
+                "lore_extended", "attack_type", "complexity",
+                "asset_portrait_url", "base_health", "health_regeneration",
+                "base_mana", "mana_regeneration", "base_strength",
+                "strength_gain", "base_agility", "agility_gain",
+                "base_intelligence", "intelligence_gain", "role_carry",
+                "role_support", "role_nuker", "role_disabler",
+                "role_jungler", "role_durable", "role_escape", "role_pusher",
+                "role_initiator", "base_attack_damage_min",
+                "base_attack_damage_max", "base_attack_time",
+                "base_attack_range", "base_attack_projectile_speed",
+                "base_defense_armor", "base_defense_magic_resist_perc",
+                "base_mobility_movement_speed", "base_mobility_turn_rate",
+                "base_mobility_vision_day", "base_mobility_vision_night",
+            ]
+            self.file = open(
+                self.filename,
+                "w",
+                newline='',
+                encoding="utf-8"
+            )
+            self.writer = csv.DictWriter(
+                self.file,
+                fieldnames=headers,
+                delimiter='|'
+            )
+            self.writer.writeheader()
 
     def process_item(self, item, spider):
-        self.writer.writerow(item)
+        if spider.name == "dota2_heroes":
+            self.writer.writerow(item)
+
         return item
 
     def close_spider(self, spider):
-        self.file.close()
+        if spider.name == "dota2_heroes":
+            self.file.close()
