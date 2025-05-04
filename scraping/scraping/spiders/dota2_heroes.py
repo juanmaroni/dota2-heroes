@@ -35,7 +35,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             //a[contains(@class, '{hero_uris_class}')]/@href
         """
         
-        for uri in sel.xpath(hero_uris_xpath).getall()[:3]:
+        for uri in sel.xpath(hero_uris_xpath).getall():
             url = f"https://www.dota2.com{uri}"
             self.driver.get(url)
             time.sleep(2) # Loading JS...
