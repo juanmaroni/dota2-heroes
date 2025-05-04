@@ -35,7 +35,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             //a[contains(@class, '{hero_uris_class}')]/@href
         """
         
-        for uri in sel.xpath(hero_uris_xpath).getall():
+        for uri in sel.xpath(hero_uris_xpath).getall()[:3]:
             url = f"https://www.dota2.com{uri}"
             self.driver.get(url)
             time.sleep(2) # Loading JS...
@@ -44,70 +44,72 @@ class Dota2HeroesSpider(scrapy.Spider):
             sel = Selector(text=self.driver.page_source)
 
             # Hero basic info
-            hero = HeroInfoItem()
-            hero["id"] = hero_id
-            hero["name"] = self._extract_html_text(
-                sel, "_2IcIujaWiO5h68dVvpO_tQ"
-            )
-            hero["main_attribute"] = self._extract_html_text(
-                sel, "_3HGWJjSyOjmlUGJTIlMHc_"
-            )
-            hero["subtitle"] = self._extract_html_text(
-                sel, "_2r7tdOONJnLw_6bQuNZj5b"
-            )
-            hero["lore"] = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
-
-            # Click to expand lore
-            self.driver.find_element(
-                By.XPATH, "//div[text()='Read Full History']"
-            ).click()
-                
-            hero["lore_extended"] = self._extract_lore_extended(
-                sel, "_33H8icML8p8oZrGPMaWZ8o"
-            )
-            hero["attack_type"] = self._extract_html_text(
-                sel, "_3ce-DKDrVB7q5LsGbJdZ3X"
-            )
-            hero["complexity"] = self._extract_complexity(
-                sel, "_2VXnqvXh1TJPueaGkUNqja"
-            )
-            hero["asset_portrait_url"] = self._extract_asset_portrait_url(
-                sel, "CR-BbB851VmrcN5s9HpGZ"
-            )
-            (
-                hero["base_health"], hero["health_regeneration"],
-                hero["base_mana"], hero["mana_regeneration"]
-            ) = self._extract_health_mana(sel)
-            (
-                hero["base_strength"], hero["base_agility"],
-                hero["base_intelligence"], hero["strength_gain"],
-                hero["agility_gain"], hero["intelligence_gain"]
-            ) = self._extract_attributes(sel)
-            (
-                hero["role_carry"], hero["role_support"], hero["role_nuker"],
-                hero["role_disabler"], hero["role_jungler"],
-                hero["role_durable"], hero["role_escape"],
-                hero["role_pusher"], hero["role_initiator"]
-            ) = self._extract_roles(sel)
-
-            (
-                hero["damage"], hero["attack_time"], hero["attack_range"],
-                hero["projectile_speed"], hero["armor"], hero["magic_resist"],
-                hero["movement_speed"], hero["turn_rate"], hero["vision"]
-            ) = self._extract_stats(sel)
+            yield self._extract_hero_info(sel, hero_id)
 
             # Hero Talent Tree
-            self._extract_and_yield_talent_tree(sel, hero_id)
-
-                
-            yield hero
+            for talent in self._extract_talents(sel, hero_id):
+                yield talent
+            
             time.sleep(1) # Wait before going next...
 
         self.driver.quit()
 
-    @staticmethod
-    def _extract_and_yield_hero_info(sel, hero_info):
-        pass
+    def _extract_hero_info(self, sel, hero_id):
+        hero_info = HeroInfoItem()
+        hero_info["id"] = hero_id
+        hero_info["name"] = self._extract_html_text(
+            sel, "_2IcIujaWiO5h68dVvpO_tQ"
+        )
+        hero_info["main_attribute"] = self._extract_html_text(
+            sel, "_3HGWJjSyOjmlUGJTIlMHc_"
+        )
+        hero_info["subtitle"] = self._extract_html_text(
+            sel, "_2r7tdOONJnLw_6bQuNZj5b"
+        )
+        hero_info["lore"] = self._extract_lore(sel, "_2z0_hli1W7iUgFJB5fu5m4")
+
+        # Click to expand lore
+        self.driver.find_element(
+            By.XPATH, "//div[text()='Read Full History']"
+        ).click()
+                
+        hero_info["lore_extended"] = self._extract_lore_extended(
+            sel, "_33H8icML8p8oZrGPMaWZ8o"
+        )
+        hero_info["attack_type"] = self._extract_html_text(
+            sel, "_3ce-DKDrVB7q5LsGbJdZ3X"
+        )
+        hero_info["complexity"] = self._extract_complexity(
+            sel, "_2VXnqvXh1TJPueaGkUNqja"
+        )
+        hero_info["asset_portrait_url"] = self._extract_asset_portrait_url(
+            sel, "CR-BbB851VmrcN5s9HpGZ"
+        )
+        (
+            hero_info["base_health"], hero_info["health_regeneration"],
+            hero_info["base_mana"], hero_info["mana_regeneration"]
+        ) = self._extract_health_mana(sel)
+        (
+            hero_info["base_strength"], hero_info["base_agility"],
+            hero_info["base_intelligence"], hero_info["strength_gain"],
+            hero_info["agility_gain"], hero_info["intelligence_gain"]
+        ) = self._extract_attributes(sel)
+        (
+            hero_info["role_carry"], hero_info["role_support"],
+            hero_info["role_nuker"], hero_info["role_disabler"],
+            hero_info["role_jungler"], hero_info["role_durable"],
+            hero_info["role_escape"], hero_info["role_pusher"],
+            hero_info["role_initiator"]
+        ) = self._extract_roles(sel)
+        (
+            hero_info["damage"], hero_info["attack_time"],
+            hero_info["attack_range"], hero_info["projectile_speed"],
+            hero_info["armor"], hero_info["magic_resist"],
+            hero_info["movement_speed"], hero_info["turn_rate"],
+            hero_info["vision"]
+        ) = self._extract_stats(sel)
+
+        return hero_info
 
     @staticmethod
     def _extract_html_text(sel, container_class):
@@ -300,7 +302,7 @@ class Dota2HeroesSpider(scrapy.Spider):
         )
 
     @staticmethod
-    def _extract_and_yield_talent_tree(sel, hero_id):
+    def _extract_talents(sel, hero_id):
         """
         Extract and yield talents from Talent Tree.
         Talents are extracted from highest level left to lowest level right.
@@ -311,6 +313,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             f"//div[contains(@class, '{talent_container_class}')]/text()"
         ).getall()
         
+        talents = []
         side = "L" # Left or Right
         level = 25 # 25, 20, 15 or 10
 
@@ -328,4 +331,6 @@ class Dota2HeroesSpider(scrapy.Spider):
             else:
                 side = "R"
 
-            yield talent_tree_item
+            talents.append(talent_tree_item)
+        
+        return talents
