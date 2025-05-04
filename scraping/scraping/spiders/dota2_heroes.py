@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from scraping.items import HeroInfoItem
+from scraping.items import HeroInfoItem, HeroTalentItem
 from utils import CHROMEDRIVER_PATH
 
 
@@ -36,13 +36,16 @@ class Dota2HeroesSpider(scrapy.Spider):
         """
         
         for uri in sel.xpath(hero_uris_xpath).getall():
-            hero = HeroInfoItem()
             url = f"https://www.dota2.com{uri}"
             self.driver.get(url)
             time.sleep(2) # Loading JS...
 
+            hero_id = uri.split('/')[2]
             sel = Selector(text=self.driver.page_source)
-            hero["id"] = uri.split('/')[2]
+
+            # Hero basic info
+            hero = HeroInfoItem()
+            hero["id"] = hero_id
             hero["name"] = self._extract_html_text(
                 sel, "_2IcIujaWiO5h68dVvpO_tQ"
             )
@@ -92,11 +95,19 @@ class Dota2HeroesSpider(scrapy.Spider):
                 hero["projectile_speed"], hero["armor"], hero["magic_resist"],
                 hero["movement_speed"], hero["turn_rate"], hero["vision"]
             ) = self._extract_stats(sel)
+
+            # Hero Talent Tree
+            self._extract_and_yield_talent_tree(sel, hero_id)
+
                 
             yield hero
             time.sleep(1) # Wait before going next...
 
         self.driver.quit()
+
+    @staticmethod
+    def _extract_and_yield_hero_info(sel, hero_info):
+        pass
 
     @staticmethod
     def _extract_html_text(sel, container_class):
@@ -287,3 +298,34 @@ class Dota2HeroesSpider(scrapy.Spider):
             stats["projectile_speed"], stats["armor"], magic_resist,
             stats["movement_speed"], stats["turn_rate"], stats["vision"]
         )
+
+    @staticmethod
+    def _extract_and_yield_talent_tree(sel, hero_id):
+        """
+        Extract and yield talents from Talent Tree.
+        Talents are extracted from highest level left to lowest level right.
+        """
+        talent_container_class = "_1SJ4JZrp7rwc6FG-vINkFn"
+
+        containers = sel.xpath(
+            f"//div[contains(@class, '{talent_container_class}')]/text()"
+        ).getall()
+        
+        side = "L" # Left or Right
+        level = 25 # 25, 20, 15 or 10
+
+        # They are extracted dupped, only first 8 results are needed
+        for talent in containers[:8]:
+            talent_tree_item = HeroTalentItem()
+            talent_tree_item["hero_id"] = hero_id
+            talent_tree_item["side"] = side
+            talent_tree_item["level"] = level
+            talent_tree_item["talent"] = talent
+
+            if side == "R":
+                level -= 5
+                side = "L"
+            else:
+                side = "R"
+
+            yield talent_tree_item

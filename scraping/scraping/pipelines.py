@@ -1,10 +1,11 @@
 import csv
+from scraping.items import HeroInfoItem, HeroTalentItem
 from utils import TMP_FILENAME
 
 
 class CleanHeroInfoPipeline: # 100
     def process_item(self, item, spider):
-        if spider.name == "dota2_heroes":
+        if isinstance(item, HeroInfoItem):
             item["lore"] = self._process_text(item["lore"])
             item["lore_extended"] = self._process_text(item["lore_extended"])
             item["complexity"] = len(item["complexity"])
@@ -26,7 +27,9 @@ class CleanHeroInfoPipeline: # 100
             item["role_durable"] = self._process_role(item["role_durable"])
             item["role_escape"] = self._process_role(item["role_escape"])
             item["role_pusher"] = self._process_role(item["role_pusher"])
-            item["role_initiator"] = self._process_role(item["role_initiator"])
+            item["role_initiator"] = self._process_role(
+                item["role_initiator"]
+            )
             self._process_stat_damage(item)
             self._process_stat(item, "attack_time", "base_attack_time", float)
             self._process_stat(item, "attack_range", "base_attack_range")
@@ -44,6 +47,9 @@ class CleanHeroInfoPipeline: # 100
                 item, "turn_rate", "base_mobility_turn_rate", float
             )
             self._process_stat_vision(item)
+
+        elif isinstance(item, HeroTalentItem):
+            item["level"] = int(item["level"])
 
         return item
     
@@ -165,7 +171,7 @@ class CsvExportPipeline: # 400
             self.writer.writeheader()
 
     def process_item(self, item, spider):
-        if spider.name == "dota2_heroes":
+        if isinstance(item, HeroInfoItem):
             self.writer.writerow(item)
 
         return item
