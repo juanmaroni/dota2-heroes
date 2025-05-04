@@ -1,6 +1,6 @@
 import csv
 from scraping.items import HeroInfoItem, HeroTalentItem
-from utils import TMP_FILENAME
+from utils import TMP_HEROES_INFO_FILENAME, TMP_HEROES_TALENTS_FILENAME
 
 
 class CleanHeroInfoPipeline: # 100
@@ -139,8 +139,8 @@ class CleanHeroInfoPipeline: # 100
 class CsvExportPipeline: # 400
     def open_spider(self, spider):       
         if spider.name == "dota2_heroes":
-            self.filename = TMP_FILENAME
-            headers = [
+            self.heroes_info_filename = TMP_HEROES_INFO_FILENAME
+            heroes_info_headers = [
                 "id", "name", "main_attribute", "subtitle", "lore",
                 "lore_extended", "attack_type", "complexity",
                 "lore_extended", "attack_type", "complexity",
@@ -157,25 +157,43 @@ class CsvExportPipeline: # 400
                 "base_mobility_movement_speed", "base_mobility_turn_rate",
                 "base_mobility_vision_day", "base_mobility_vision_night",
             ]
-            self.file = open(
-                self.filename,
+            self.heroes_info_file = open(
+                self.heroes_info_filename,
                 "w",
                 newline='',
                 encoding="utf-8"
             )
-            self.writer = csv.DictWriter(
-                self.file,
-                fieldnames=headers,
+            self.heroes_info_writer = csv.DictWriter(
+                self.heroes_info_file,
+                fieldnames=heroes_info_headers,
                 delimiter='|'
             )
-            self.writer.writeheader()
+            self.heroes_info_writer.writeheader()
+
+            self.heroes_talents_filename = TMP_HEROES_TALENTS_FILENAME
+            heroes_talents_headers = ["talent", "side", "level", "hero_id"]
+            self.heroes_talents_file = open(
+                self.heroes_talents_filename,
+                "w",
+                newline='',
+                encoding="utf-8"
+            )
+            self.heroes_talents_writer = csv.DictWriter(
+                self.heroes_talents_file,
+                fieldnames=heroes_talents_headers,
+                delimiter='|'
+            )
+            self.heroes_talents_writer.writeheader()
 
     def process_item(self, item, spider):
         if isinstance(item, HeroInfoItem):
-            self.writer.writerow(item)
+            self.heroes_info_writer.writerow(item)
+        elif isinstance(item, HeroTalentItem):
+            self.heroes_talents_writer.writerow(item)
 
         return item
 
     def close_spider(self, spider):
         if spider.name == "dota2_heroes":
-            self.file.close()
+            self.heroes_info_file.close()
+            self.heroes_talents_file.close()

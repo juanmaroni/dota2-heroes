@@ -5,7 +5,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from scraping.items import PatchItem
-from utils import CHROMEDRIVER_PATH, change_filepath
+from utils import (
+    CHROMEDRIVER_PATH, TMP_HEROES_INFO_FILENAME,
+    TMP_HEROES_TALENTS_FILENAME, change_filepath
+)
 
 
 class Dota2PatchSpider(scrapy.Spider):
@@ -42,8 +45,17 @@ class Dota2PatchSpider(scrapy.Spider):
 
         patch["version"] = patch_version
 
-        # Change temporary CSV file name and path
-        new_filename = f"dota2_heroes_{patch_version}.csv"
-        change_filepath(new_filename=new_filename)
+        # Change every temporary CSV file name and path
+        new_filename = f"dota2_heroes_info_{patch_version}.csv"
+        change_filepath(
+            filename=TMP_HEROES_INFO_FILENAME,
+            new_filename=new_filename
+        )
+
+        new_filename = f"dota2_heroes_talents_{patch_version}.csv"
+        change_filepath(
+            filename=TMP_HEROES_TALENTS_FILENAME,
+            new_filename=new_filename
+        )
         
         yield patch
