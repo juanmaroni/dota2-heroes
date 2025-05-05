@@ -27,7 +27,7 @@ class Dota2HeroesSpider(scrapy.Spider):
 
     def parse(self, response):
         self.driver.get(self.start_urls[0])
-        time.sleep(2) # Loading JS...
+        time.sleep(2)  # Loading JS...
             
         sel = Selector(text=self.driver.page_source)
         hero_uris_class = "_7szOnSgHiQLEyU0_owKBB"
@@ -38,7 +38,7 @@ class Dota2HeroesSpider(scrapy.Spider):
         for uri in sel.xpath(hero_uris_xpath).getall():
             url = f"https://www.dota2.com{uri}"
             self.driver.get(url)
-            time.sleep(2) # Loading JS...
+            time.sleep(2)  # Loading JS...
 
             hero_id = uri.split('/')[2]
             sel = Selector(text=self.driver.page_source)
@@ -50,7 +50,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             for talent in self._extract_talents(sel, hero_id):
                 yield talent
             
-            time.sleep(1) # Wait before going next...
+            time.sleep(1)  # Wait before going next...
 
         self.driver.quit()
 
@@ -304,8 +304,8 @@ class Dota2HeroesSpider(scrapy.Spider):
     @staticmethod
     def _extract_talents(sel, hero_id):
         """
-        Extract and yield talents from Talent Tree.
-        Talents are extracted from highest level left to lowest level right.
+        Extract talents from Talent Tree.
+        From highest level left to lowest level right.
         """
         talent_container_class = "_1SJ4JZrp7rwc6FG-vINkFn"
 
@@ -314,8 +314,8 @@ class Dota2HeroesSpider(scrapy.Spider):
         ).getall()
         
         talents = []
-        side = "L" # Left or Right
-        level = 25 # 25, 20, 15 or 10
+        side = "L"  # Left or Right
+        level = 25  # 25, 20, 15 or 10
 
         # They are extracted dupped, only first 8 results are needed
         for talent in containers[:8]:

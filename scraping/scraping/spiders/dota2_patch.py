@@ -30,7 +30,7 @@ class Dota2PatchSpider(scrapy.Spider):
 
     def parse(self, response):
         self.driver.get(self.start_urls[0])
-        time.sleep(2) # Loading JS...
+        time.sleep(2)  # Loading JS...
         
         sel = Selector(text=self.driver.page_source)
         patch = PatchItem()
