@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from scraping.items import HeroInfoItem, HeroTalentItem
+from scraping.items import HeroInfoItem, HeroTalentItem, HeroInnateItem
 from utils import CHROMEDRIVER_PATH
 
 
@@ -49,6 +49,9 @@ class Dota2HeroesSpider(scrapy.Spider):
             # Hero Talent Tree
             for talent in self._extract_talents(sel, hero_id):
                 yield talent
+
+            # Hero Innate Ability
+            yield self._extract_innate_ability(sel, hero_id)
             
             time.sleep(1)  # Wait before going next...
 
@@ -334,3 +337,60 @@ class Dota2HeroesSpider(scrapy.Spider):
             talents.append(talent_tree_item)
         
         return talents
+
+    @staticmethod
+    def _extract_innate_ability(sel, hero_id):
+        """
+        Some heroes Innate Ability is part of their set of Abilities.
+        Stated as: "This hero's innate ability is <ABILITY>."
+        In this case, that referenced <ABILITY> will be saved as the Innate.
+        If referenced this way, it's not considered as pasive (boolean field).
+        'innate_description' is returned as a list for further processing.
+        """
+        innate = HeroInnateItem()
+        innate["hero_id"] = hero_id
+
+        str_no_pasive = "This hero's innate ability is "
+
+        innate_container_class = "_10lc5aoHOP5BafKhDC_AuD"
+        innate_name_class = "oRzqVIPO5vD9aPxv582G9"
+        innate_description_class = "_1GUxaKU8ts0aIJaMfIfMS_"
+
+        innate_container = sel.xpath(
+            f"//div[contains(@class, '{innate_container_class}')][1]"
+        )
+
+        innate_name = None
+        innate_description = innate_container.xpath(
+            f"./div[contains(@class, '{innate_description_class}')]/text()"
+        ).get()
+
+        if innate_description.find(str_no_pasive) != -1:
+            innate["is_pasive"] = False
+
+            # Extract Ability name
+            ability_name = (
+                innate_description.replace(str_no_pasive, "").replace(".", "")
+            )
+
+            # Find Ability by name and extract description ('div' sibling)
+            innate_description = sel.xpath(
+                f"""
+                //div[contains(@class, '{innate_container_class}')]
+                /div[contains(text(), '{ability_name}')]
+                /following-sibling::div[1]
+                /text()"""
+            ).getall()
+
+            innate_name = ability_name
+        else:
+            innate["is_pasive"] = True
+            innate_name = innate_container.xpath(
+                f"./div[contains(@class, '{innate_name_class}')]/text()"
+            ).get()
+            innate_description = [innate_description]
+
+        innate["name"] = innate_name
+        innate["description"] = innate_description
+
+        return innate

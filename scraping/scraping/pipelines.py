@@ -1,5 +1,5 @@
 import csv
-from scraping.items import HeroInfoItem, HeroTalentItem
+from scraping.items import HeroInfoItem, HeroTalentItem, HeroInnateItem
 from utils import TMP_HEROES_INFO_FILENAME, TMP_HEROES_TALENTS_FILENAME
 
 
@@ -47,9 +47,10 @@ class CleanHeroInfoPipeline: # 100
                 item, "turn_rate", "base_mobility_turn_rate", float
             )
             self._process_stat_vision(item)
-
         elif isinstance(item, HeroTalentItem):
             item["level"] = int(item["level"])
+        elif isinstance(item, HeroInnateItem):
+            item["description"] = self._process_text(item["description"])
 
         return item
     
