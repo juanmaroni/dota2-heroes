@@ -1,6 +1,9 @@
 import csv
 from scraping.items import HeroInfoItem, HeroTalentItem, HeroInnateItem
-from utils import TMP_HEROES_INFO_FILENAME, TMP_HEROES_TALENTS_FILENAME
+from utils import (
+    TMP_HEROES_INFO_FILENAME, TMP_HEROES_TALENTS_FILENAME,
+    TMP_HEROES_INNATE_FILENAME
+)
 
 
 class CleanHeroInfoPipeline: # 100
@@ -50,6 +53,7 @@ class CleanHeroInfoPipeline: # 100
         elif isinstance(item, HeroTalentItem):
             item["level"] = int(item["level"])
         elif isinstance(item, HeroInnateItem):
+            item["name"] = item["name"].strip()
             item["description"] = self._process_text(item["description"])
 
         return item
@@ -186,11 +190,30 @@ class CsvExportPipeline: # 400
             )
             self.heroes_talents_writer.writeheader()
 
+            self.heroes_innate_filename = TMP_HEROES_INNATE_FILENAME
+            heroes_innate_headers = [
+                "name", "description", "is_pasive", "hero_id"
+            ]
+            self.heroes_innate_file = open(
+                self.heroes_innate_filename,
+                "w",
+                newline='',
+                encoding="utf-8"
+            )
+            self.heroes_innate_writer = csv.DictWriter(
+                self.heroes_innate_file,
+                fieldnames=heroes_innate_headers,
+                delimiter='|'
+            )
+            self.heroes_innate_writer.writeheader()
+
     def process_item(self, item, spider):
         if isinstance(item, HeroInfoItem):
             self.heroes_info_writer.writerow(item)
         elif isinstance(item, HeroTalentItem):
             self.heroes_talents_writer.writerow(item)
+        elif isinstance(item, HeroInnateItem):
+            self.heroes_innate_writer.writerow(item)
 
         return item
 
@@ -198,3 +221,4 @@ class CsvExportPipeline: # 400
         if spider.name == "dota2_heroes":
             self.heroes_info_file.close()
             self.heroes_talents_file.close()
+            self.heroes_innate_file.close()
