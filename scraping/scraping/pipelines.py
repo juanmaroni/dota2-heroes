@@ -164,7 +164,7 @@ class CsvExportPipeline: # 400
             ]
             self.heroes_info_file = open(
                 self.heroes_info_filename,
-                "w",
+                'w',
                 newline='',
                 encoding="utf-8"
             )
@@ -179,7 +179,7 @@ class CsvExportPipeline: # 400
             heroes_talents_headers = ["talent", "side", "level", "hero_id"]
             self.heroes_talents_file = open(
                 self.heroes_talents_filename,
-                "w",
+                'w',
                 newline='',
                 encoding="utf-8"
             )
@@ -196,7 +196,7 @@ class CsvExportPipeline: # 400
             ]
             self.heroes_innate_file = open(
                 self.heroes_innate_filename,
-                "w",
+                'w',
                 newline='',
                 encoding="utf-8"
             )
