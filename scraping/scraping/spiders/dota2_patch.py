@@ -65,4 +65,4 @@ class Dota2PatchSpider(scrapy.Spider):
             new_filename=new_filename
         )
         
-        yield patch
+        # yield patch
