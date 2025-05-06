@@ -27,4 +27,4 @@ Running spiders sequentially:
 * "`side`": "L" (left) or "R" (right), based on the side of the tree where the talent is found.
 
 ### Hero Innate Ability
-* "`is_pasive`": boolean field to distinguish if the ability is not pasive, referenced in the Innate as "This hero's innate ability is <ABILITY>.".
+* "`is_pasive`": boolean field to distinguish if the ability is not pasive, referenced in the Innate as "This hero's innate ability is `<ABILITY>`.".
