@@ -9,17 +9,18 @@ Google ChromeDriver local installation.
 Python dependencies in "requirements.txt".
 
 ## Scraping
-Running spiders sequentially:
-1. "`dota2_heroes`" spider extracts data from Dota 2 Heroes webpage and saves it as a temporary CSV file.
+Running spiders sequentially with "`run_spiders.py`" script:
+1. "`dota2_heroes`" spider extracts data from Dota 2 Heroes webpage and saves it as temporary CSV files.
 2. "`dota2_patch`" spider extracts data from Dota 2 Patches webpage and uses it to change every temporary CSV file name and path.
 
 ## Parsing
 ### General
 * Texts: paragraphs separated with "`<br>`" to allow better parsing in the future.
+* "`hero_id`": extracted from their respective URI.
 
 ### Hero Basic Info
 * "`complexity`": integer numbers 1 (low), 2 (medium) and 3 (high), representing the number of rombs.
-* Roles: integer numbers 0, 1, 2 and 3, representing bar percentages 0%, 33.3%, 66.6% and 99.9%, respectively.
+* Roles: integer numbers 0, 1, 2 and 3, representing bar width percentages 0%, 33.3%, 66.6% and 99.9%, respectively.
 * "`base_attack_damage_min`" and "`base_attack_damage_max`" are extracted from "`damage`".
 * "`base_mobility_vision_day`" and "`base_mobility_vision_night`" are extracted from "`vision`".
 
