@@ -50,19 +50,22 @@ class Dota2PatchSpider(scrapy.Spider):
         new_filename = f"dota2_heroes_info_{patch_version}.csv"
         change_filepath(
             filename=TMP_HEROES_INFO_FILENAME,
-            new_filename=new_filename
+            new_filename=new_filename,
+            patch=patch_version
         )
 
         new_filename = f"dota2_heroes_talents_{patch_version}.csv"
         change_filepath(
             filename=TMP_HEROES_TALENTS_FILENAME,
-            new_filename=new_filename
+            new_filename=new_filename,
+            patch=patch_version
         )
 
         new_filename = f"dota2_heroes_innate_{patch_version}.csv"
         change_filepath(
             filename=TMP_HEROES_INNATE_FILENAME,
-            new_filename=new_filename
+            new_filename=new_filename,
+            patch=patch_version
         )
         
         # yield patch
