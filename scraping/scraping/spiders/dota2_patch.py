@@ -8,7 +8,7 @@ from scraping.items import PatchItem
 from utils import (
     CHROMEDRIVER_PATH, TMP_HEROES_INFO_FILENAME,
     TMP_HEROES_TALENTS_FILENAME, TMP_HEROES_INNATE_FILENAME,
-    change_filepath
+    TMP_HEROES_FACETS_FILENAME, change_filepath
 )
 
 
@@ -64,6 +64,13 @@ class Dota2PatchSpider(scrapy.Spider):
         new_filename = f"dota2_heroes_innate_{patch_version}.csv"
         change_filepath(
             filename=TMP_HEROES_INNATE_FILENAME,
+            new_filename=new_filename,
+            patch=patch_version
+        )
+
+        new_filename = f"dota2_heroes_facets_{patch_version}.csv"
+        change_filepath(
+            filename=TMP_HEROES_FACETS_FILENAME,
             new_filename=new_filename,
             patch=patch_version
         )

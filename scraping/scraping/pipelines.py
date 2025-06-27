@@ -1,8 +1,10 @@
 import csv
-from scraping.items import HeroInfoItem, HeroTalentItem, HeroInnateItem
+from scraping.items import (
+    HeroInfoItem, HeroTalentItem, HeroInnateItem, HeroFacetItem
+)
 from utils import (
     TMP_HEROES_INFO_FILENAME, TMP_HEROES_TALENTS_FILENAME,
-    TMP_HEROES_INNATE_FILENAME
+    TMP_HEROES_INNATE_FILENAME, TMP_HEROES_FACETS_FILENAME
 )
 
 
@@ -55,7 +57,32 @@ class CleanHeroInfoPipeline: # 100
         elif isinstance(item, HeroInnateItem):
             item["name"] = item["name"].strip()
             item["description"] = self._process_text(item["description"])
+        elif isinstance(item, HeroFacetItem):
+            item["description"] = self._process_text(item["description"])
+            
+            # Iterate list of dicts, process data and return as string
+            abilities_mod_str = ""
 
+            for ability in item["abilities_mod"]:
+                description = self._process_text(ability["description"])
+                abilities_mod_str += (
+                    f"name,{ability["name"]}))description,{description}))"
+                )
+
+                modifiers = ability["modifiers"]
+                mod_values = ability["modifiers_values"]
+                len_modifiers = len(modifiers)
+
+                for i in range(0, len_modifiers):
+                    modifier_values = mod_values[i].replace(" ", "")
+                    abilities_mod_str += (
+                        f"modifier,{modifiers[i]}{modifier_values}))"
+                    )
+
+                abilities_mod_str += ";"
+
+            item["abilities_mod"] = abilities_mod_str
+            
         return item
     
     @staticmethod
@@ -207,6 +234,24 @@ class CsvExportPipeline: # 400
             )
             self.heroes_innate_writer.writeheader()
 
+            self.heroes_facets_filename = TMP_HEROES_FACETS_FILENAME
+            heroes_facets_headers = [
+                "asset_icon", "name", "description", "extra_info",
+                "abilities_mod", "hero_id"
+            ]
+            self.heroes_facets_file = open(
+                self.heroes_facets_filename,
+                'w',
+                newline='',
+                encoding="utf-8"
+            )
+            self.heroes_facets_writer = csv.DictWriter(
+                self.heroes_facets_file,
+                fieldnames=heroes_facets_headers,
+                delimiter='|'
+            )
+            self.heroes_facets_writer.writeheader()
+
     def process_item(self, item, spider):
         if isinstance(item, HeroInfoItem):
             self.heroes_info_writer.writerow(item)
@@ -214,6 +259,8 @@ class CsvExportPipeline: # 400
             self.heroes_talents_writer.writerow(item)
         elif isinstance(item, HeroInnateItem):
             self.heroes_innate_writer.writerow(item)
+        elif isinstance(item, HeroFacetItem):
+            self.heroes_facets_writer.writerow(item)
 
         return item
 
@@ -222,3 +269,4 @@ class CsvExportPipeline: # 400
             self.heroes_info_file.close()
             self.heroes_talents_file.close()
             self.heroes_innate_file.close()
+            self.heroes_facets_file.close()

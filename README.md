@@ -29,3 +29,9 @@ Running spiders sequentially with "`run_spiders.py`" script:
 
 ### Hero Innate Ability
 * "`is_pasive`": boolean field to distinguish if the ability is not pasive, referenced in the Innate as "This hero's innate ability is `<ABILITY>`.".
+
+### Hero Facets
+* "`abilities_mod`": a list of the abilities modified by the facet, formed as a string of list of tuples. For (I hope) easy future parsing: attribute name and attribute value are separated by comma, each attribute is separated from the next by double closing parenthesis and each ability is separated by semicolon.
+```
+"name,value)),description,value))extra_info,value))modifier,joined_modifier_value))modifier,joined_modifier2_value2));name,value))[...];"
+```
