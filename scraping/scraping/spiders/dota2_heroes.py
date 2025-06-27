@@ -5,7 +5,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from scraping.items import HeroInfoItem, HeroTalentItem, HeroInnateItem
+from scraping.items import (
+    HeroInfoItem, HeroTalentItem, HeroInnateItem, HeroFacetItem
+)
 from utils import CHROMEDRIVER_PATH
 
 
@@ -52,6 +54,10 @@ class Dota2HeroesSpider(scrapy.Spider):
 
             # Hero Innate Ability
             yield self._extract_innate_ability(sel, hero_id)
+
+            # Hero Facets
+            for facet in self._extract_facets(sel, hero_id):
+                yield facet
             
             time.sleep(1)  # Wait before going next...
 
@@ -128,7 +134,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             //div[contains(@class, '{container_class}')]
             /div[contains(@class, '{inner_class}')]
         """
-        text_parts = sel.xpath(f"{base}/text() | {base}/span/text()").getall()
+        text_parts = sel.xpath(f"{base}/text() | {base}/span/text()").getall()  # TODO: Refactor, /text => //text
 
         return text_parts
     
@@ -379,7 +385,8 @@ class Dota2HeroesSpider(scrapy.Spider):
                 //div[contains(@class, '{innate_container_class}')]
                 /div[contains(text(), '{ability_name}')]
                 /following-sibling::div[1]
-                /text()"""
+                /text()
+                """
             ).getall()
 
             innate_name = ability_name
@@ -394,3 +401,87 @@ class Dota2HeroesSpider(scrapy.Spider):
         innate["description"] = innate_description
 
         return innate
+
+    @staticmethod
+    def _extract_facets(sel, hero_id):
+        """
+        Tricky one, it needs a lot of structure.
+        Leaving processing operations for pipeline.
+        """
+        def extract_text(container, text_class): #TODO: Rename?
+            return container.xpath(
+                f".//div[contains(@class, '{text_class}')]/text()"
+            ).get()
+        
+        facet_container_class = "swTQdhtrGo5VPAWX79ypS"
+        facet_icon_class = "_2TU3iaSQNM_bkJ0Q6b1k--"
+        facet_name_class = "_2xP5NA5_6wvIi3RMr55wKs"
+        facet_description_class = "_10lc5aoHOP5BafKhDC_AuD"
+        facet_extra_info_class = "_2tOvRyMjowK6qLedqmX1Hg"
+        ability_mod_container_class = "a_RaGMuwR0xmpXfOqqxtT"
+        ability_mod_name_class = "_1rBGHCdy0eU5X2K5p3xSVY"
+        ability_mod_description_class = "_3Dysl5QeWoPG896gAaaneB"
+        ability_mod_modifiers_class = "-imZKoGzT42UnYw7DuttJ"
+        ability_mod_values_class = "_2QMshVtQuTsk_ZU7iBaUE2"
+
+        facet_containers = sel.xpath(
+            f"//div[contains(@class, '{facet_container_class}')]"
+        )
+
+        facets = []
+
+        for container in facet_containers:
+            facet = HeroFacetItem()
+            facet["asset_icon"] = container.xpath(
+                f".//img[contains(@class, '{facet_icon_class}')]/@src"
+            ).get()
+            facet["name"] = extract_text(container, facet_name_class)
+            facet["description"] = Dota2HeroesSpider.extract_every_text(
+                container, facet_description_class
+            )
+            facet["extra_info"] = extract_text(
+                container, facet_extra_info_class
+            )
+            facet["hero_id"] = hero_id
+
+            abilities_mod_list = []
+            abilities_mod = container.xpath(
+                f".//div[contains(@class, '{ability_mod_container_class}')]"
+            )
+
+            # Abilities modifiers
+            for a in abilities_mod:
+                ability = {}
+                ability["name"] = extract_text(a, ability_mod_name_class)
+                ability["description"] = Dota2HeroesSpider.extract_every_text(
+                    a, ability_mod_description_class
+                )
+                
+                # Modifiers will be paired correctly in pipeline
+                ability["modifiers"] = a.xpath(
+                    f"""
+                    .//div[contains(@class, '{ability_mod_modifiers_class}')]
+                    /text()
+                    """
+                ).getall()
+                ability["modifiers_values"] = a.xpath(
+                    f"""
+                    .//div[contains(@class, '{ability_mod_values_class}')]
+                    /text()
+                    """
+                ).getall()
+
+                abilities_mod_list.append(ability)
+
+            facet["abilities_mod"] = abilities_mod_list
+            facets.append(facet)
+
+        return facets
+    
+    @staticmethod
+    def extract_every_text(selector, container):
+        return selector.xpath(
+            f"""
+            .//div[contains(@class, '{container}')]//text()
+            """
+        ).getall()
