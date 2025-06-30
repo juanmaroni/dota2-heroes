@@ -1,0 +1,1009 @@
+talent|side|level|hero_id
+350 AoE Mist Coil|L|25|abaddon
++65 Curse of Avernus Attack Speed Bonus|R|25|abaddon
+100 Borrowed Time Immolation DPS|L|20|abaddon
++80 Aphotic Shield Barrier Amount|R|20|abaddon
++35 Mist Coil Heal/Damage|L|15|abaddon
++40 Curse of Avernus DPS|R|15|abaddon
+Aphotic Shield provides +12 HP Regen|L|10|abaddon
++10% Withering Mist Health Restoration Reduction|R|10|abaddon
++50 Chemical Rage Regeneration|L|25|alchemist
++50 Chemical Rage Movement Speed|R|25|alchemist
++400 Unstable Concoction Max Damage|L|20|alchemist
+-0.1s Chemical Rage Base Attack Time|R|20|alchemist
++2 Damage per Greevil's Greed stack|L|15|alchemist
+Acid Spray grants armor to allies|R|15|alchemist
++125 Unstable Concoction Radius|L|10|alchemist
++1 Acid Spray Armor Reduction|R|10|alchemist
++4% Ice Blast Kill Threshold|L|25|ancientapparition
++50% Death Rime Slow/Damage|R|25|ancientapparition
++80 Chilling Touch Damage|L|20|ancientapparition
++4s Ice Blast Frostbitten Duration|R|20|ancientapparition
++300 Cold Feet Breaking distance|L|15|ancientapparition
+-2s Ice Vortex Cooldown|R|15|ancientapparition
++2 Cold Feet Death Rime Stacks|L|10|ancientapparition
++300 Chilling Touch Attack Range|R|10|ancientapparition
+-50s Mana Void Cooldown|L|25|anti-mage
++200 Blink Cast Range|R|25|anti-mage
++0.8s Mana Void Stun|L|20|anti-mage
++0.2 Mana Void Damage Multiplier|R|20|anti-mage
++7.5%/15% Persecutor Min/Max Movement Slow|L|15|anti-mage
++1% Max Mana Mana Burn|R|15|anti-mage
++200 Mana Void Radius|L|10|anti-mage
++3 Health Regen|R|10|anti-mage
+-1.1s Spark Wraith Activation Delay|L|25|arcwarden
+Tempest Double Has No Penalties|R|25|arcwarden
+-5s Magnetic Field Cooldown|L|20|arcwarden
++50% Spark Wraith Damage|R|20|arcwarden
++25 Magnetic Field Attack Speed|L|15|arcwarden
++20% Flux Slow|R|15|arcwarden
++200 Health|L|10|arcwarden
++200 Flux Cast Range|R|10|arcwarden
+2x Battle Hunger Armor Multiplier|L|25|axe
++85 Berserker's Call AoE|R|25|axe
++30 Counter Helix Damage|L|20|axe
++100 Culling Blade Damage|R|20|axe
++10 Berserker's Call Armor|L|15|axe
++10% Battle Hunger Slow|R|15|axe
++8% Movement Speed per active Battle Hunger|L|10|axe
++3s Culling Blade Kill Buff Bonus Duration|R|10|axe
++3s Fiend's Grip Duration|L|25|bane
++275 Brain Sap Damage/Heal|R|25|bane
++30 Movement Speed|L|20|bane
+-3s Nightmare Cooldown|R|20|bane
++5% Fiend's Grip Max Mana Drain|L|15|bane
++13 Enfeeble Damage Per Second|R|15|bane
++20% Enfeeble Cast Range Reduction|L|10|bane
++125 Brain Sap Cast Range|R|10|bane
+Flamebreak applies 4 Sticky Napalm Stacks|L|25|batrider
++10 Sticky Napalm Damage|R|25|batrider
+-6s Flamebreak Cooldown|L|20|batrider
++4s Smoldering Resin Duration|R|20|batrider
+-7s Flaming Lasso Cooldown|L|15|batrider
++20 Movement Speed|R|15|batrider
++50 Flamebreak Knockback Distance|L|10|batrider
++50 Sticky Napalm Radius|R|10|batrider
+-30s Primal Roar Cooldown|L|25|beastmaster
+No Wild Axes Cooldown|R|25|beastmaster
++250 Max Health Aura to Beastmaster and his units|L|20|beastmaster
++30 Damage to Beastmaster and his units|R|20|beastmaster
++15 Inner Beast Attack Speed|L|15|beastmaster
++20 Movespeed Aura to Beastmaster and his units|R|15|beastmaster
++2% Wild Axes Damage Amp Per Stack|L|10|beastmaster
+-5s Call Of The Wild Cooldown|R|10|beastmaster
++18% Max Thirst MS|L|25|bloodseeker
+2 Rupture Charges|R|25|bloodseeker
+-0.7% Bloodrage Max Health DPS For Allies|L|20|bloodseeker
++425 Rupture Cast Range|R|20|bloodseeker
++100 Blood Rite Damage|L|15|bloodseeker
++8% Rupture Initial Damage|R|15|bloodseeker
++15% Bloodrage Spell Amplification|L|10|bloodseeker
++175 Health|R|10|bloodseeker
+No Cooldown on Jinada|L|25|bountyhunter
++250 Shuriken Toss Damage|R|25|bountyhunter
++50 Jinada Gold Steal|L|20|bountyhunter
+Track Grants Shared Vision|R|20|bountyhunter
++50 Track Gold|L|15|bountyhunter
+-30% Damage Taken in Shadow Walk|R|15|bountyhunter
++25 Damage|L|10|bountyhunter
++0.6s Shuriken Toss Slow|R|10|bountyhunter
+Cinder Brew applies Fear when ignited|L|25|brewmaster
+Brewlings Gain Drunken Brawler Passive|R|25|brewmaster
++110 Attack Speed|L|20|brewmaster
++1200 Brewlings Health|R|20|brewmaster
++1x Brewed Up multiplier for Drunken Brawler|L|15|brewmaster
++30% Cinder Brew Damage/Duration|R|15|brewmaster
++1.5s Thunder Clap Duration|L|10|brewmaster
++10 Brewlings Damage|R|10|brewmaster
++18 Warpath Damage Per Stack|L|25|bristleback
++12% Spell Lifesteal|R|25|bristleback
++20 Quill Stack Damage|L|20|bristleback
++25 Health Regen|R|20|bristleback
++8%/4% Bristleback Back/Side Damage Reduction|L|15|bristleback
++250 Goo Cast Range|R|15|bristleback
++1.5 Mana Regen|L|10|bristleback
++25 Attack Speed|R|10|bristleback
++30% Incapacitating Bite Slow/Miss Chance|L|25|broodmother
+-0.25s BAT during Insatiable Hunger|R|25|broodmother
++35 Attack Speed|L|20|broodmother
+-6s Spin Web Charge Restore Time|R|20|broodmother
++125 Spiderlings Health|L|15|broodmother
++12 Incapacitating Bite Attack Bonus|R|15|broodmother
++1.5% Spider's Milk Hero Health as heal|L|10|broodmother
++80 Spawn Spiderlings Damage|R|10|broodmother
++0.8s Hoof Stomp Duration|L|25|centaurwarrunner
+Gains Retaliate Aura|R|25|centaurwarrunner
+-25s Stampede Cooldown|L|20|centaurwarrunner
++45 Retaliate Damage|R|20|centaurwarrunner
++30% Double Edge Strength Damage|L|15|centaurwarrunner
++12 Strength|R|15|centaurwarrunner
++15 Movement Speed|L|10|centaurwarrunner
++4 Health Regen|R|10|centaurwarrunner
++10s Phantasm Duration|L|25|chaosknight
++10% Chaos Strike Chance|R|25|chaosknight
+Reality Rift Pierces Spell Immunity|L|20|chaosknight
++0.6 Min/Max Chaos Bolt Duration|R|20|chaosknight
++10 Strength|L|15|chaosknight
+-3s Chaos Bolt Cooldown|R|15|chaosknight
++225 Reality Rift Pull Distance|L|10|chaosknight
++30% Chaos Strike Lifesteal|R|10|chaosknight
+Hand of God Fully Heals Chen and His Creeps|L|25|chen
+Hand of God applies a Strong Dispel|R|25|chen
++1300 Holy Persuasion Minimum Health|L|20|chen
++20% Divine Favor Heal Amplification|R|20|chen
+-14% Penitence Slow|L|15|chen
++14 Holy Persuasion Damage|R|15|chen
++150 Convert Attack Speed|L|10|chen
+Penitence Deals 175 Damage|R|10|chen
+Tar Bomb Multishot|L|25|clinkz
+-9s Strafe Cooldown|R|25|clinkz
++40 Strafe Attack Speed|L|20|clinkz
++350 Death Pact Bonus Health|R|20|clinkz
++1 Death Pact Charge|L|15|clinkz
++60 Attack Range|R|15|clinkz
+-4s Skeleton Walk Cooldown|L|10|clinkz
++0.75s Strafe Duration|R|10|clinkz
+-0.25s Battery Assault Interval|L|25|clockwerk
+Debuff Immunity Inside Power Cogs|R|25|clockwerk
++70 Power Cogs Mana Burn|L|20|clockwerk
+Rocket Flare True Sight|R|20|clockwerk
++24 Battery Assault Damage|L|15|clockwerk
++2 Power Cogs Hit To Kill|R|15|clockwerk
++75 Hookshot Damage|L|10|clockwerk
++0.4s Rocket Flare Slow Duration|R|10|clockwerk
++300 Crystal Nova Damage|L|25|crystalmaiden
++1s Frostbite Duration|R|25|crystalmaiden
++50 Freezing Field Damage|L|20|crystalmaiden
++225 Attack Speed|R|20|crystalmaiden
+-4.5s Crystal Nova Cooldown|L|15|crystalmaiden
++100 Frostbite Cast Range|R|15|crystalmaiden
++12 Intelligence|L|10|crystalmaiden
++200 Health|R|10|crystalmaiden
+350 AoE Surge|L|25|darkseer
+2 Ion Shell Charges |R|25|darkseer
++50 Ion Shell Damage|L|20|darkseer
+-40s Wall of Replica Cooldown|R|20|darkseer
+Ion Shell Provides +250 Max Health|L|15|darkseer
++75 Vacuum AoE|R|15|darkseer
++65 Ion Shell Radius|L|10|darkseer
++15% Wall of Replica Illusion Damage|R|10|darkseer
++2 Bedlam Attack Targets|L|25|darkwillow
+500 Terrorize Impact Damage|R|25|darkwillow
+-7s Bramble Maze CD|L|20|darkwillow
++1.5s Shadow Realm Duration|R|20|darkwillow
++150 Cursed Crown AoE|L|15|darkwillow
++30 Bedlam Damage|R|15|darkwillow
++10 Intelligence|L|10|darkwillow
++1s Bedlam Duration|R|10|darkwillow
++80% Celestial Hammer Cast Range/Speed|L|25|dawnbreaker
+-4s Starbreaker Cooldown|R|25|dawnbreaker
+-1 Luminosity Attacks Required|L|20|dawnbreaker
++150 Solar Guardian Radius|R|20|dawnbreaker
+-20s Solar Guardian Cooldown|L|15|dawnbreaker
++40% Luminosity Critical Strike Damage|R|15|dawnbreaker
++15% Celestial Hammer Slow|L|10|dawnbreaker
++12 Damage|R|10|dawnbreaker
++1 Weave Armor Reduction/Increase|L|25|dazzle
++40% Poison Touch Slow|R|25|dazzle
++75 Poison Touch DPS|L|20|dazzle
+-4s Shallow Grave Cooldown|R|20|dazzle
++5s Nothl Projection Duration|L|15|dazzle
++45 Shadow Wave Heal / Damage|R|15|dazzle
++1.75 Mana Regen|L|10|dazzle
++200 Poison Touch Attack Range|R|10|dazzle
++8 Exorcism Spirits|L|25|deathprophet
+-22s Spirit Siphon Replenish Time|R|25|deathprophet
++25 Spirit Siphon Damage/Heal|L|20|deathprophet
++400 Health|R|20|deathprophet
+-2.5s Crypt Swarm Cooldown|L|15|deathprophet
++100 Silence AoE|R|15|deathprophet
++12% Magic Resistance|L|10|deathprophet
++30 Attack Speed|R|10|deathprophet
++150 Static Storm Radius|L|25|disruptor
+-12s Glimpse Cooldown|R|25|disruptor
++150 Electromagnetic Repulsion Radius/Knockback|L|20|disruptor
++1s Kinetic Field Duration|R|20|disruptor
++60 Static Storm Max DPS|L|15|disruptor
++10%/300 Glimpse Distance To Damage/Max|R|15|disruptor
++15 Thunder Strike Damage per Strike|L|10|disruptor
++20 Movement Speed|R|10|disruptor
+Doom applies Break|L|25|doom
+Doom applies Mute|R|25|doom
++2.5% Infernal Blade Max HP As Damage|L|20|doom
+-10s Scorched Earth Cooldown|R|20|doom
+Devour Can Target Ancients|L|15|doom
++5% Scorched Earth Movement Speed|R|15|doom
++0.2s Infernal Blade Stun Duration|L|10|doom
+Devour grants 15% Magic Resistance|R|10|doom
++{s:bonus_frost_breath_effect_bonus}% Wyrm's Wrath effect during Elder Dragon Form|L|25|dragonknight
++12 Dragon Blood HP Regen/Armor|R|25|dragonknight
++85% Breathe Fire Damage/Cast Range in Dragon Form|L|20|dragonknight
++150 Elder Dragon Form Attack Range|R|20|dragonknight
++300 Health|L|15|dragonknight
++0.4s Dragon Tail Stun|R|15|dragonknight
+30% Breathe Fire Damage Reduction|L|10|dragonknight
++15 Damage|R|10|dragonknight
++1 Multishot Wave|L|25|drowranger
++10% Marksmanship Chance|R|25|drowranger
+50% Gust Self Movement Speed|L|20|drowranger
++25% Multishot Damage|R|20|drowranger
+-6s Multishot Cooldown|L|15|drowranger
++75 Attack Range|R|15|drowranger
++1 Multishot Arrow Per Wave|L|10|drowranger
+Gust Costs No Mana|R|10|drowranger
+-3s Boulder Smash Cooldown|L|25|earthspirit
+Magnetize Undispellable|R|25|earthspirit
++180 Rolling Boulder Damage|L|20|earthspirit
++30% Magnetize Damage & Duration|R|20|earthspirit
++80 Boulder Smash Damage|L|15|earthspirit
++0.3s Rolling Boulder Stun Duration|R|15|earthspirit
++150 Rolling Boulder Distance|L|10|earthspirit
+-3s Geomagnetic Grip Cooldown|R|10|earthspirit
+-1.5s Enchant Totem Cooldown|L|25|earthshaker
+-50% Echo Slam Cooldown|R|25|earthshaker
++50% Enchant Totem Damage|L|20|earthshaker
++50 Echo Damage|R|20|earthshaker
++50 Aftershock Damage|L|15|earthshaker
++200 Fissure Range|R|15|earthshaker
++90 Fissure Damage|L|10|earthshaker
++25 Base Damage|R|10|earthshaker
++100% Cleave|L|25|eldertitan
+-60s Earth Splitter Cooldown|R|25|eldertitan
++100 Natural Order Radius|L|20|eldertitan
++350 Echo Stomp Wake Damage|R|20|eldertitan
++25 Astral Spirit Hero Attack|L|15|eldertitan
++75 Echo Stomp Damage|R|15|eldertitan
++25 Attack Speed|L|10|eldertitan
++2% Astral Spirit Move Speed Per Hero|R|10|eldertitan
+-12s Remnant Charge Restore Time|L|25|emberspirit
+2 Sleight of Fist Charges|R|25|emberspirit
++50 Sleight of Fist Hero Damage|L|20|emberspirit
++60 Searing Chains Damage|R|20|emberspirit
++1s Searing Chains Duration|L|15|emberspirit
++100% Flame Guard DPS|R|15|emberspirit
++165 Flame Guard Barrier Amount|L|10|emberspirit
++12 Damage|R|10|emberspirit
++12 Nature's Attendants Wisps|L|25|enchantress
++6.5% Impetus Damage|R|25|enchantress
++150 Health / +25 Damage  for Enchantress and her units|L|20|enchantress
++60 Untouchable Attack Slow|R|20|enchantress
++8 Nature's Attendants Heal|L|15|enchantress
++30 Attack Speed for Enchantress and her units|R|15|enchantress
++30 Movespeed during Nature's Attendants|L|10|enchantress
++10 Enchanted Creep Armor|R|10|enchantress
++4 Demonic Summoning Eidolons|L|25|enigma
++4 Malefice Instances|R|25|enigma
++40 Eidolon Damage|L|20|enigma
++200 Midnight Pulse Radius|R|20|enigma
++50 Malefice Instance Damage|L|15|enigma
++250 Health|R|15|enigma
++50 Black Hole Damage Per Second|L|10|enigma
++10 Eidolon Attack Speed|R|10|enigma
++140 Chronosphere AoE|L|25|facelessvoid
++20% Backtrack Chance|R|25|facelessvoid
+-1.25s Time Walk Cooldown|L|20|facelessvoid
++100 Attack Speed during Chronosphere|R|20|facelessvoid
++12% Time Dilation Slow per Cooldown|L|15|facelessvoid
++35 Time Lock Damage|R|15|facelessvoid
++0.5s Time Walk Backtrack Duration|L|10|facelessvoid
++9 Time Dilation DPS Per Cooldown|R|10|facelessvoid
++70% Stroke of Fate Speed and Travel Range|L|25|grimstroke
++150 Ink Swell Radius|R|25|grimstroke
++3 Hits to Kill Phantom|L|20|grimstroke
++80% Stroke of Fate Damage|R|20|grimstroke
++12% Ink Swell Movement Speed|L|15|grimstroke
++25% Soulbind Spell Damage|R|15|grimstroke
+-4s Ink Swell Cooldown|L|10|grimstroke
++65 Phantom's Embrace DPS|R|10|grimstroke
+-30s Call Down Cooldown|L|25|gyrocopter
+-4s Flak Cannon Cooldown|R|25|gyrocopter
++14 Rocket Barrage Damage|L|20|gyrocopter
++3 Flak Cannon Attacks|R|20|gyrocopter
++25 Flak Cannon Damage|L|15|gyrocopter
++0.3s Homing Missile Stun Duration|R|15|gyrocopter
++150 Health|L|10|gyrocopter
++25% Homing Missile Damage|R|10|gyrocopter
++400 Sharpshooter Max Damage|L|25|hoodwink
+2 Acorn Shot Charges|R|25|hoodwink
+-3 Armor Corruption|L|20|hoodwink
+Sharpshooter Provides Vision While Charging|R|20|hoodwink
++1 Acorn Shot Bounce|L|15|hoodwink
++60 Bushwhack Damage|R|15|hoodwink
++1.5 Mana Regen|L|10|hoodwink
++1 Scurry Ability Charge|R|10|hoodwink
++6s Burning Spear Duration|L|25|huskar
++25% Life Break Damage|R|25|huskar
+-5s Life Break Cooldown|L|20|huskar
++30% Berserker's Blood Regen|R|20|huskar
++15% Lifesteal|L|15|huskar
++5 Burning Spear Burn Damage|R|15|huskar
++2s Life Break Slow Duration|L|10|huskar
++0.75s Inner Fire Duration|R|10|huskar
+2x Quas/Wex/Exort Active Bonuses|L|25|invoker
+Radial Deafening Blast|R|25|invoker
++35 Alacrity Damage/Speed|L|20|invoker
++2 Chaos Meteors|R|20|invoker
+-5s Cold Snap Cooldown|L|15|invoker
++{s:bonus_facet_bonus_levels} Facet Orb Level|R|15|invoker
+-4s Tornado Cooldown|L|10|invoker
++50 Ice Wall DPS|R|10|invoker
+Attack Tethered Ally's Target (75% damage)|L|25|io
+Unslowable during Overcharge|R|25|io
+-30s Relocate Cooldown|L|20|io
++0.2% Overcharge Max HP Regen Bonus|R|20|io
++60 Spirits Hero Damage|L|15|io
++5% Tether Movement Speed|R|15|io
++12 Attack Damage to Tethered Units|L|10|io
++1.5s Overcharge Duration|R|10|io
++2.5% Liquid Frost and Fire Max Health Damage|L|25|jakiro
++100% Dual Breath Damage and Range|R|25|jakiro
++20 Macropyre Damage|L|20|jakiro
++0.4s Ice Path Stun Duration|R|20|jakiro
++60 Ice Path Base Damage|L|15|jakiro
++50 Liquid Fire Attack Speed Slow|R|15|jakiro
+-2s Dual Breath Cooldown|L|10|jakiro
++150 Attack Range|R|10|jakiro
++50% Blade Dance Lifesteal|L|25|juggernaut
++1s Omnislash Duration|R|25|juggernaut
++90 Blade Fury DPS|L|20|juggernaut
++2 Healing Ward Hits to Kill|R|20|juggernaut
++40 Movement Speed During Blade Fury|L|15|juggernaut
++1% Healing Ward Heal|R|15|juggernaut
++4% Duelist Damage|L|10|juggernaut
+-12s Healing Ward Cooldown|R|10|juggernaut
++200 Illuminate Damage|L|25|keeperofthelight
+Chakra Magic Strong Dispels|R|25|keeperofthelight
++200 Chakra Magic Mana|L|20|keeperofthelight
++10% Spirit Form Movement Speed Bonus|R|20|keeperofthelight
+-5s Blinding Light Cooldown|L|15|keeperofthelight
+-2s Chakra Magic Cooldown|R|15|keeperofthelight
+-2s Illuminate Cooldown|L|10|keeperofthelight
++40% Blinding Light Miss|R|10|keeperofthelight
++1 Echo Slash Attack|L|25|kez
++100% Shodo Sai Mark Critical Strike|R|25|kez
+Add 50% of Attack Damage to Talon Toss|L|20|kez
++4% Kazurai Katana Damage Per Second|R|20|kez
++1 Raptor Dance Strike|L|15|kez
++2s Falcon Rush Duration|R|15|kez
++50 Raptor Dance Radius|L|10|kez
++12% Magic Resistance|R|10|kez
++120% Tidebringer Cleave Damage|L|25|kunkka
++100 Spell AoE|R|25|kunkka
++15% Rum Damage Delay|L|20|kunkka
+-4s Torrent Cooldown|R|20|kunkka
++70 Tidebringer Damage|L|15|kunkka
++25% Torrent Damage/Knock Up Duration|R|15|kunkka
+-15s Admiral's Rum Cooldown|L|10|kunkka
+Tidebringer applies 60% slow for 1s|R|10|kunkka
+Press the Attack grants 1.5s Debuff Immunity|L|25|legioncommander
++75% Moment of Courage Lifesteal|R|25|legioncommander
++8% Moment of Courage Proc Chance|L|20|legioncommander
+300 AoE Press The Attack|R|20|legioncommander
++35 Overwhelming Odds Damage per Hero|L|15|legioncommander
++40 Press The Attack HP Regen|R|15|legioncommander
++12% Press The Attack Movement Speed|L|10|legioncommander
+-2s Overwhelming Odds Cooldown|R|10|legioncommander
++20 Diabolic Edict Explosions|L|25|leshrac
+Pulse Nova triggers Lightning Storm|R|25|leshrac
++30 Pulse Nova Damage|L|20|leshrac
+Diabolic Edict Hits An Additional Target|R|20|leshrac
++10% Damage Reduction during Pulse Nova|L|15|leshrac
++80 Lightning Storm Damage|R|15|leshrac
++4 Armor|L|10|leshrac
++1.5 Mana Regen|R|10|leshrac
++100 Chain Frost Incremental Damage|L|25|lich
+Frost Shield Provides +50 HP Regen|R|25|lich
++4s Frost Shield Duration|L|20|lich
+Chain Frost on Death|R|20|lich
+-3.5s Frost Blast Cooldown|L|15|lich
++0.3s Sinister Gaze Duration|R|15|lich
++125 Frost Blast Radius and Area Damage|L|10|lich
++10% Frost Shield Damage Reduction|R|10|lich
++1s Rage Duration|L|25|lifestealer
++1% Feast Heal and Damage|R|25|lifestealer
++25% Open Wounds Lifesteal|L|20|lifestealer
++15% Infest Target Movespeed/Health|R|20|lifestealer
++15% Open Wounds Slow|L|15|lifestealer
++50 Ghoul Frenzy Attack Speed|R|15|lifestealer
++3% Ghoul Frenzy Movement Speed|L|10|lifestealer
++4 All Attributes|R|10|lifestealer
++150% Crit On Targets Affected By Spells|L|25|lina
++60% Combustion Overheat Damage|R|25|lina
++10/1% Fiery Soul Per Stack|L|20|lina
+-20s Laguna Blade Cooldown|R|20|lina
++150 Light Strike Array Damage|L|15|lina
+5% Fiery Soul Magic Resist Per Stack|R|15|lina
+-3s Dragon Slave Cooldown|L|10|lina
++25 Damage|R|10|lina
++250 AoE Hex|L|25|lion
++600 Earth Spike cast range/travel distance|R|25|lion
+Earth Spike affects a 30 degree cone|L|20|lion
++20 Finger of Death Damage Per Kill|R|20|lion
++15% To Hell And Back Debuff/Spell Amp|L|15|lion
+-2.5s Hex Cooldown|R|15|lion
++20 Movement Speed|L|10|lion
++10% Mana Drain Slow|R|10|lion
++45 Spirit Link Attack Speed|L|25|lonedruid
+-50s True Form Cooldown|R|25|lonedruid
++{s:bonus_damage} Entangling Claws DPS|L|20|lonedruid
++150 Savage Roar Radius|R|20|lonedruid
++7 Spirit Bear Armor|L|15|lonedruid
+-5s Savage Roar Cooldown|R|15|lonedruid
++30 Spirit Bear Movement Speed|L|10|lonedruid
++200 Health|R|10|lonedruid
+Lucent Beam Hits An Additional Target|L|25|luna
++1 Lunar Blessing Damage Per Level|R|25|luna
+-2s Lucent Beam Cooldown|L|20|luna
++110 Lucent Beam Damage|R|20|luna
+-40s Eclipse Cooldown|L|15|luna
++1 Lunar Orbit Glaive|R|15|luna
++0.4s Lucent Beam Ministun|L|10|luna
+-5% Moon Glaives Damage Reduction|R|10|luna
++2 Wolves Summoned|L|25|lycan
+Howl Reduces Total Attack Damage|R|25|lycan
++25% Feral Impulse Damage|L|20|lycan
++7s Shapeshift Duration|R|20|lycan
+-15s Shapeshift Cooldown|L|15|lycan
++350 Summon Wolves Health|R|15|lycan
++10 Wolves Damage|L|10|lycan
++3 Howl Armor Reduction|R|10|lycan
++0.8s Reverse Polarity Stun Duration|L|25|magnus
++10% Empower Damage/Cleave|R|25|magnus
++15% Skewer Damage Per Distance Travelled|L|20|magnus
++125 Shockwave Damage|R|20|magnus
+-5s Skewer Cooldown|L|15|magnus
++12 All Attributes per hero hit with Reverse Polarity|R|15|magnus
++1.25s Skewer Slow Duration|L|10|magnus
++1.5 Mana Regen|R|10|magnus
++20% Bodyguard Damage|L|25|marci
+Unleash Duration Extended By 6s On Kill|R|25|marci
++10% Unleash Movement Speed|L|20|marci
++0.75s Rebound Stun Duration|R|20|marci
++10% Rebound Movement Speed Bonus|L|15|marci
++100 Dispose Damage|R|15|marci
++75 Rebound Landing Radius|L|10|marci
++1.5s Dispose Slow Duration|R|10|marci
+Arena Of Blood Grants Team +180 HP Regen|L|25|mars
+God's Rebuke +65% Crit|R|25|mars
++0.4s Spear of Mars Stun|L|20|mars
+-20s Arena Of Blood Cooldown|R|20|mars
++100 Spear Of Mars Damage|L|15|mars
+-2s God's Rebuke Cooldown|R|15|mars
++20% Dauntless Regen Per Enemy|L|10|mars
++100 God's Rebuke Distance|R|10|mars
++40 Intelligence|L|25|medusa
++1 Gorgon's Grasp Volley|R|25|medusa
++1.5s Stone Gaze Duration|L|20|medusa
++3 Mystic Snake Bounces|R|20|medusa
+-3s Mystic Snake Cooldown|L|15|medusa
+-8% Split Shot Damage Penalty|R|15|medusa
++10% Stone Gaze Bonus Physical Damage|L|10|medusa
++20% Gorgon's Grasp Radius|R|10|medusa
+-1s Poof Cast Duration|L|25|meepo
++350 Health|R|25|meepo
++8 Ransack Health Steal|L|20|meepo
+Earthbind grants True Strike on Targets|R|20|meepo
+-2.5s Earthbind Cooldown|L|15|meepo
++15% Evasion|R|15|meepo
++50 Poof Damage|L|10|meepo
++7 Strength|R|10|meepo
++250 Starstorm Damage|L|25|mirana
++2 Multishot Sacred Arrows|R|25|mirana
++35 Base Damage|L|20|mirana
+-20s Moonlight Shadow Cooldown|R|20|mirana
++90 Leap Attack Speed|L|15|mirana
+Moonlight Shadow gives +20% Evasion|R|15|mirana
++150 Leap Distance|L|10|mirana
+-2s Starstorm Cooldown|R|10|mirana
+Additional Wukong's Command Ring|L|25|monkeyking
+-1 Jingu Mastery Required Hits|R|25|monkeyking
++60% Boundless Strike Critical Damage|L|20|monkeyking
+0 Cooldown Primal Spring|R|20|monkeyking
++110 Jingu Mastery Damage|L|15|monkeyking
++450 Tree Dance Cast Range|R|15|monkeyking
++0.2s Boundless Strike Stun Duration|L|10|monkeyking
++{s:bonus_impact_damage} Primal Spring Max Damage|R|10|monkeyking
++35 Strength|L|25|morphling
+-40% Waveform Cooldown|R|25|morphling
++15 Agility|L|20|morphling
+-3s Adaptive Strike Cooldown|R|20|morphling
++75 Attack Range|L|15|morphling
++250 Waveform Range|R|15|morphling
++12s Morph Duration|L|10|morphling
++15% Magic Resistance|R|10|morphling
+2 Dead Shot Charges|L|25|muerta
++20% Gunslinger chance|R|25|muerta
+The Calling summons 2 additional revenants|L|20|muerta
++2s Pierce the Veil Duration|R|20|muerta
++55 Gunslinger Damage|L|15|muerta
++3% Max HP Regen while inside The Calling|R|15|muerta
++150 Health|L|10|muerta
++300 Dead Shot Cast Range|R|10|muerta
++25 Agility|L|25|nagasiren
+-10s Mirror Image Cooldown|R|25|nagasiren
++1 Mirror Image Illusion|L|20|nagasiren
+-20s Song of the Siren Cooldown|R|20|nagasiren
+-50% Mirror Image Illusion Damage Taken|L|15|nagasiren
++10% Mirror Image Damage|R|15|nagasiren
++30% Rip Tide Damage|L|10|nagasiren
++{s:bonus_pull_strength} Reel In Pull Speed|R|10|nagasiren
+3x Treant HP/Damage|L|25|nature'sprophet
+Removed Teleportation Cooldown|R|25|nature'sprophet
++170 Sprout Damage|L|20|nature'sprophet
+-15s Wrath of Nature Cooldown|R|20|nature'sprophet
++50 Treant Movement Speed|L|15|nature'sprophet
++25 Wrath of Nature Base Damage|R|15|nature'sprophet
+-10s Nature's Call Cooldown|L|10|nature'sprophet
+3x Treant HP/Damage|R|10|nature'sprophet
+-2.5s Death Pulse Cooldown|L|25|necrophos
++0.5% Heartstopper Aura Damage|R|25|necrophos
++25% Heartstopper Regen Reduction|L|20|necrophos
++15% Ghost Shroud Self Restoration Amp|R|20|necrophos
++50 Death Pulse Heal|L|15|necrophos
++20% Ghost Shroud Movement Slow|R|15|necrophos
++2s Sadist Stack Duration|L|10|necrophos
+-2.5s Ghost Shroud Cooldown|R|10|necrophos
+-40s Dark Ascension Cooldown|L|25|nightstalker
++100 Hunter In The Night Attack Speed|R|25|nightstalker
++15 Strength|L|20|nightstalker
++20 Crippling Fear DPS|R|20|nightstalker
++20% Hunter in the Night Status Resistance|L|15|nightstalker
++25 Dark Ascension Damage|R|15|nightstalker
++5s Dark Ascension Duration|L|10|nightstalker
+-1s Void Cooldown|R|10|nightstalker
++80 Agility|L|25|nyxassassin
+600 Mind Flare Radius|R|25|nyxassassin
++100 Impale Damage|L|20|nyxassassin
++0.5s Spiked Carapace Stun Duration|R|20|nyxassassin
+-3s Mind Flare Cooldown|L|15|nyxassassin
++50 Vendetta Damage|R|15|nyxassassin
++0.2s Impale Stun Duration|L|10|nyxassassin
++25% Spiked Carapace Damage Reflect|R|10|nyxassassin
++220 Fireblast Damage|L|25|ogremagi
+17% Fireblast chance on attack|R|25|ogremagi
++30 Bloodlust Attack Speed|L|20|ogremagi
++30 Strength|R|20|ogremagi
++2/0.01 Dumb Luck Mana/Mana Regen Per Strength|L|15|ogremagi
++80 Damage|R|15|ogremagi
+-1s Fireblast Cooldown|L|10|ogremagi
++12 Ignite DPS|R|10|ogremagi
++75% Hammer of Purity Bonus Base Damage|L|25|omniknight
++160 Purification Damage/Heal|R|25|omniknight
+-3s Purification Cooldown|L|20|omniknight
++2s Guardian Angel Duration|R|20|omniknight
+-20s Guardian Angel Cooldown|L|15|omniknight
++5 Repel Strength/HP Regen per Debuff|R|15|omniknight
++35 Base Damage|L|10|omniknight
++1s Repel Duration|R|10|omniknight
++1.5s False Promise Duration|L|25|oracle
+Fortune's End constantly Dispels|R|25|oracle
+-1s Purifying Flames Cooldown|L|20|oracle
+-20s False Promise Cooldown|R|20|oracle
++25% Purifying Flames Enemy Damage|L|15|oracle
+Fortune's End Heals/Damages for 80 Per Effect Dispelled|R|15|oracle
++8 Armor False Promise|L|10|oracle
++0.5s Fortune's End Duration|R|10|oracle
+-60s Sanity's Eclipse Cooldown|L|25|outworlddestroyer
++1.5% Arcane Orb Damage|R|25|outworlddestroyer
++0.15 Sanity's Eclipse Mana Difference Multiplier|L|20|outworlddestroyer
++450 Health|R|20|outworlddestroyer
++0.8% of Current Mana as Movement Speed|L|15|outworlddestroyer
++8% Astral Imprisonment Mana Capacity Steal|R|15|outworlddestroyer
++200 Mana|L|10|outworlddestroyer
++100 Astral Imprisonment Cast Range|R|10|outworlddestroyer
+-15s Rolling Thunder Cooldown|L|25|pangolier
+-4s Swashbuckle Cooldown|R|25|pangolier
++125 Shield Crash Radius and Damage|L|20|pangolier
++2s Rolling Thunder Duration|R|20|pangolier
++90 Shield Crash Barrier Per Hero|L|15|pangolier
++15% Attack Damage as Swashbuckle Damage|R|15|pangolier
++200 Swashbuckle Slash Range|L|10|pangolier
++4 Lucky Shot Armor Reduction|R|10|pangolier
+Triple Strike Stifling Dagger|L|25|phantomassassin
++10% Coup de Grace chance|R|25|phantomassassin
++60 Phantom Strike Attack Speed|L|20|phantomassassin
++200 Phantom Strike Cast Range|R|20|phantomassassin
++15% Stifling Dagger Damage|L|15|phantomassassin
++15% Immaterial Evasion|R|15|phantomassassin
+-1.5s Stifling Dagger Cooldown|L|10|phantomassassin
++0.5s Phantom Strike Duration|R|10|phantomassassin
++20% Illusory Armaments Damage|L|25|phantomlancer
+-4s Doppelganger CD|R|25|phantomlancer
++6% Juxtapose Damage|L|20|phantomlancer
++15% Spirit Lance Illusion Damage|R|20|phantomlancer
+-1s Spirit Lance Cooldown|L|15|phantomlancer
++2.5s Phantom Rush Bonus Agility Duration|R|15|phantomlancer
++10 Phantom Rush Agility|L|10|phantomlancer
++1.25s Spirit Lance Slow Duration|R|10|phantomlancer
++1000 Icarus Dive Cast Range|L|25|phoenix
++2 Supernova Hit Count|R|25|phoenix
++0.6s Supernova Stun Duration|L|20|phoenix
++1.5% Max Health Sun Ray Damage|R|20|phoenix
++20 Health Regen|L|15|phoenix
++20 Fire Spirits Damage Per Second|R|15|phoenix
++0.5% Blinding Sun Miss Chance|L|10|phoenix
++25% Icarus Dive Slow|R|10|phoenix
++67% Pulverize Duration|L|25|primalbeast
+Cannot be slowed or rooted during Trample|R|25|primalbeast
++7 Uproar Armor Per Stack|L|20|primalbeast
++20% Trample Attack Multiplier|R|20|primalbeast
+Beast dispels himself when activating Uproar|L|15|primalbeast
+-5s Trample Cooldown|R|15|primalbeast
++25% Magic Resistance During Trample|L|10|primalbeast
++30 Damage|R|10|primalbeast
++350 Waning Rift Radius/Max Distance|L|25|puck
+Dream Coil Pierces Debuff Immunity|R|25|puck
++200 Initial/Break Dream Coil Damage|L|20|puck
+-3s Waning Rift Cooldown|R|20|puck
++60 Waning Rift Damage|L|15|puck
+-15s Dream Coil Cooldown|R|15|puck
++1.25s Waning Rift Silence Duration|L|10|puck
++40 Illusory Orb Damage|R|10|puck
+1.5x Flesh Heap and Meat Shield bonuses|L|25|pudge
+1.5x Dismember Damage/Heal|R|25|pudge
+-4s Meat Hook Cooldown|L|20|pudge
++0.75s Dismember Duration|R|20|pudge
++150 Meat Hook Damage|L|15|pudge
++8% Spell Lifesteal|R|15|pudge
++10% Rot Slow|L|10|pudge
++5 Armor|R|10|pudge
++1.9 Nether Ward Damage Per Mana|L|25|pugna
++180 Nether Blast Damage|R|25|pugna
++1.5s Decrepify Duration|L|20|pugna
++20% Life Drain Heal|R|20|pugna
++350 Health|L|15|pugna
++30% Decrepify Movement Speed To Allies|R|15|pugna
++2 Nether Ward Health|L|10|pugna
+-1s Nether Blast Cooldown|R|10|pugna
++250 Sonic Wave Damage|L|25|queenofpain
+-2s Blink Cooldown|R|25|queenofpain
+-45s Sonic Wave Cooldown|L|20|queenofpain
++100 Scream of Pain Damage|R|20|queenofpain
++30 Damage|L|15|queenofpain
+-1s Shadow Strike Damage Interval|R|15|queenofpain
++7 Strength|L|10|queenofpain
++35 Attack Speed against Shadow Striked units|R|10|queenofpain
+Static Link Steals Attack Speed|L|25|razor
+Creates A Second Plasma Field Delayed By 0.8s|R|25|razor
+-0.1s Eye of the Storm Strike Interval|L|20|razor
++25% Storm Surge Slow and Damage|R|20|razor
++12 Strength|L|15|razor
++5 Static Link Damage Steal|R|15|razor
++10% Spell Lifesteal|L|10|razor
++0.75s Plasma Field Slow Duration|R|10|razor
+Tricks of the Trade Applies a Basic Dispel|L|25|riki
+-1.25s Cloak and Dagger Fade Delay|R|25|riki
+-4s Blink Strike Replenish Time|L|20|riki
++0.3 Backstab Multiplier|R|20|riki
+-3s Smoke Screen Cooldown|L|15|riki
++50 Tricks of the Trade Agility Increase|R|15|riki
++10% Cloak and Dagger Movement Speed|L|10|riki
++50 Smoke Screen Radius|R|10|riki
+Escape Act Grants Strong Dispel and Flying|L|25|ringmaster
++100 Wheel Radius and Range|R|25|ringmaster
++75/+300 Tame the Beasts Min/Max Damage|L|20|ringmaster
++1s Impalement Arts Bleed and Slow Duration|R|20|ringmaster
+Debuff Immunity While Channeling Tame the Beasts|L|15|ringmaster
+Impalement Arts Penetrates One Target|R|15|ringmaster
++75 Impalement Arts Impact Damage|L|10|ringmaster
++75 Tame the Beasts Radius|R|10|ringmaster
++40% Spell Amp For Stolen Spells|L|25|rubick
++400 Telekinesis Land Distance|R|25|rubick
+-5s Telekinesis Cooldown|L|20|rubick
+-5s Fade Bolt Cooldown|R|20|rubick
++0.5s Telekinesis Lift/Stun Duration|L|15|rubick
+-25% Stolen Spells Cooldown|R|15|rubick
++0.25% Might And Magus Damage/Resistance|L|10|rubick
++150 Telekinesis Landing Damage|R|10|rubick
+50% Sand Storm Slow|L|25|sandking
++10 Epicenter Pulses|R|25|sandking
++75/7 Base/Incremental Radius of Epicenter|L|20|sandking
+-2s Burrowstrike Cooldown|R|20|sandking
++200 Burrowstrike Cast Range|L|15|sandking
++25 Sand Storm Damage Per Second|R|15|sandking
++100 Caustic Finale Radius|L|10|sandking
++12% Stinger Slow|R|10|sandking
+2 Charges of Disruption|L|25|shadowdemon
+-30s Demonic Purge Cooldown|R|25|shadowdemon
++150 Demonic Purge Damage|L|20|shadowdemon
++15% Disseminate Shared Damage|R|20|shadowdemon
+-1s Shadow Poison Cooldown|L|15|shadowdemon
++25 Movement Speed|R|15|shadowdemon
++10 Strength|L|10|shadowdemon
++15% Shadow Poison Damage|R|10|shadowdemon
+Shadowraze Applies Attack Damage|L|25|shadowfiend
+Feast of Souls Grants +30% Cast Speed|R|25|shadowfiend
++0.2s Requiem Fear per line|L|20|shadowfiend
++2 Damage Per Soul|R|20|shadowfiend
++120 Shadowraze Damage|L|15|shadowfiend
++2 Presence Armor Reduction|R|15|shadowfiend
++30 Feast of Souls Attack Speed|L|10|shadowfiend
++30 Shadowraze Stack Damage|R|10|shadowfiend
++1 Ward Attack Targets|L|25|shadowshaman
++250 Ether Shock Damage|R|25|shadowshaman
++50% Serpent Wards Max HP|L|20|shadowshaman
++1.5s Shackles Duration|R|20|shadowshaman
+Hex Breaks|L|15|shadowshaman
++160 Serpent Wards Attack Range|R|15|shadowshaman
++1.75 Mana Regen|L|10|shadowshaman
++170 Shackles Total Damage|R|10|shadowshaman
+2 Arcane Curse charges|L|25|silencer
++25% Glaives of Wisdom Damage|R|25|silencer
+250 AoE Last Word|L|20|silencer
++40s Glaives of Wisdom Int Steal Duration|R|20|silencer
++2s/+1s Arcane Curse Base/Penalty Duration|L|15|silencer
+-20s Global Silence Cooldown|R|15|silencer
++20 Attack Speed|L|10|silencer
++0.5 Arcane Curse Penalty Multiplier|R|10|silencer
++400 Mystic Flare Damage|L|25|skywrathmage
++1.5x Arcane Bolt Int Multiplier|R|25|skywrathmage
++10% Ancient Seal Increased Magic Damage|L|20|skywrathmage
+Global Concussive Shot|R|20|skywrathmage
++15% Concussive Shot Slow|L|15|skywrathmage
+-7s Ancient Seal Cooldown|R|15|skywrathmage
++125 Arcane Bolt Cast Range|L|10|skywrathmage
++1.5 Mana Regen|R|10|skywrathmage
+Corrosive Haze Undispellable|L|25|slardar
+-3s Slithereen Crush Cooldown|R|25|slardar
+-4 Corrosive Haze Armor|L|20|slardar
++125 Slithereen Crush Damage|R|20|slardar
++40 Bash of the Deep Damage|L|15|slardar
++300 Health|R|15|slardar
++12 Seaborn Sentinel Bonus Damage|L|10|slardar
++2s Guardian Sprint Duration|R|10|slardar
++35s Essence Shift Duration|L|25|slark
++1.25s Shadow Dance Duration|R|25|slark
++100 Shadow Dance Attack Speed|L|20|slark
++1 Agility gain/stolen per Essence Shift Stack|R|20|slark
++50 Barracuda Regen|L|15|slark
++70 Dark Pact Damage|R|15|slark
++0.5s Pounce Leash|L|10|slark
+-0.5s Dark Pact Cooldown|R|10|slark
++8 Mortimer Kisses Launched|L|25|snapfire
++60% Lil' Shredder Attack Damage|R|25|snapfire
+2 Firesnap Cookie Charges|L|20|snapfire
++2 Lil' Shredder Targets|R|20|snapfire
+-4s Firesnap Cookie Cooldown|L|15|snapfire
++1 Lil' Shredder attacks|R|15|snapfire
++35 Mortimer Kisses Burn DPS|L|10|snapfire
++70 Scatterblast Damage|R|10|snapfire
++50 Max Headshot Knockback Distance|L|25|sniper
+-30s Shrapnel Charge Restore Time|R|25|sniper
++30% Shrapnel Damage|L|20|sniper
++2s Take Aim Duration|R|20|sniper
++150 Assassinate Damage|L|15|sniper
++45 Attack Speed During Take Aim|R|15|sniper
++30 Headshot Damage|L|10|sniper
++55 Take Aim Attack Range Bonus|R|10|sniper
++5% Dispersion|L|25|spectre
++25% All Spectre Illusion Damage|R|25|spectre
++12% Spectral Dagger Slow/Bonus|L|20|spectre
++350 Health|R|20|spectre
++80 Spectral Dagger Damage|L|15|spectre
++15 Desolate Damage|R|15|spectre
++5 Health Regen|L|10|spectre
+-4s Spectral Dagger Cooldown|R|10|spectre
+-4s Charge of Darkness Cooldown|L|25|spiritbreaker
++20% Greater Bash Damage|R|25|spiritbreaker
+Bulldoze 400 All Damage Barrier|L|20|spiritbreaker
+-0.3s Greater Bash Cooldown|R|20|spiritbreaker
++45 Damage|L|15|spiritbreaker
+-3s Bulldoze Cooldown|R|15|spiritbreaker
++4 Armor|L|10|spiritbreaker
++500 Night Vision|R|10|spiritbreaker
+450 Distance Auto Remnant in Ball Lightning|L|25|stormspirit
+2x Overload Attack Bounce|R|25|stormspirit
+-1.25s Static Remnant Cooldown|L|20|stormspirit
++0.2s Electric Vortex Duration|R|20|stormspirit
++60 Static Remnant Damage|L|15|stormspirit
++250 Health|R|15|stormspirit
++1.5 Mana Regen|L|10|stormspirit
+-20 Overload Attack/Movement Speed Slow|R|10|stormspirit
++1s Storm Hammer Stun Duration|L|25|sven
++50% God's Strength Damage|R|25|sven
++8 Warcry Armor|L|20|sven
++20% God's Strength Slow Resistance|R|20|sven
++25% Great Cleave Damage|L|15|sven
+-12s God's Strength Cooldown|R|15|sven
++10% Vanquisher Bonus Damage|L|10|sven
++5s Warcry Duration|R|10|sven
+-0.8s Proximity Mines Activation Delay|L|25|techies
++252 Damage|R|25|techies
+-15s Blast Off! Cooldown|L|20|techies
++125 Sticky Bomb Latch/Explosion Radius|R|20|techies
++3 Mana Regen|L|15|techies
++200 Blast Off! Damage|R|15|techies
+-3s Proximity Mines Cooldown|L|10|techies
++20% Magic Resistance|R|10|techies
++4 Refraction Instances|L|25|templarassassin
+1s Meld Hit Bash|R|25|templarassassin
++40 Refraction Damage|L|20|templarassassin
+Refraction Dispels|R|20|templarassassin
++3 Meld Armor Reduction|L|15|templarassassin
+Refraction Can Be Cast While Disabled|R|15|templarassassin
++5% Psionic Trap Slow|L|10|templarassassin
++2s Meld Debuff Duration|R|10|templarassassin
++30s Metamorphosis Duration|L|25|terrorblade
+-30s Sunder Cooldown|R|25|terrorblade
++10s Conjure Image Duration|L|20|terrorblade
++10 All Attributes|R|20|terrorblade
++10% Reflection Slow/Damage|L|15|terrorblade
+-20s Metamorphosis Cooldown|R|15|terrorblade
+-2s Conjure Image Cooldown|L|10|terrorblade
++1s Reflection Duration|R|10|terrorblade
+50% chance of Anchor Smash on attack|L|25|tidehunter
++0.8s Ravage Stun Duration|R|25|tidehunter
+-4 Gush Armor|L|20|tidehunter
+Anchor Smash affects buildings|R|20|tidehunter
++30% Anchor Smash Damage Reduction|L|15|tidehunter
++100 Gush Damage|R|15|tidehunter
++15% Gush Slow|L|10|tidehunter
++40 Anchor Smash Damage|R|10|tidehunter
++75% Timber Chain Range/Projectile Speed|L|25|timbersaw
++75 Whirling Death Tree Bonus Damage|R|25|timbersaw
++5% Chakram Slow|L|20|timbersaw
+Exposure Therapy Heals for 10 HP Per Tree Destroyed|R|20|timbersaw
++6 Max / +1 Hero Attack Reactive Armor Stacks|L|15|timbersaw
++2.5% Whirling Death Stat Loss|R|15|timbersaw
++1.5 Mana Regen|L|10|timbersaw
++0.25 Reactive Armor Regeneration Per Stack|R|10|timbersaw
++10s Defense Matrix Duration|L|25|tinker
+200 AoE Laser|R|25|tinker
+-{s:bonus_AbilityChannelTime}s Keen Conveyance Channel Time|L|20|tinker
++10% Defense Matrix Status Resistance|R|20|tinker
++50 Laser Damage|L|15|tinker
++60 Defense Matrix Damage Barrier|R|15|tinker
++8% Manacost/Manaloss Reduction|L|10|tinker
++1s March of the Machines Duration|R|10|tinker
+2 Toss Charges|L|25|tiny
+-8s Avalanche Cooldown|R|25|tiny
+Toss Requires No Target|L|20|tiny
++60 Tree Grab Base Damage|R|20|tiny
++100 Avalanche Damage|L|15|tiny
+-8% Grow Attack Speed Reduction|R|15|tiny
++8 Strength|L|10|tiny
++200 Avalanche Cast Range|R|10|tiny
+450 AoE Living Armor|L|25|treantprotector
+-35s Overgrowth Cooldown|R|25|treantprotector
++45 Leech Seed Damage/Heal|L|20|treantprotector
++8 Living Armor Bonus Armor|R|20|treantprotector
++25 Nature's Grasp Damage|L|15|treantprotector
++18% Leech Seed Movement Slow|R|15|treantprotector
++2.5% Nature's Guise Movement Speed|L|10|treantprotector
++2 Living Armor Heal Per Second|R|10|treantprotector
+Battle Trance Strong Dispels|L|25|trollwarlord
+Whirling Axes Pierce Magic Immunity|R|25|trollwarlord
++9 Berserker's Rage Armor|L|20|trollwarlord
++1.5s Battle Trance Duration|R|20|trollwarlord
++100 Whirling Axes Damage|L|15|trollwarlord
++5 Fervor Attack Speed|R|15|trollwarlord
++25 Berserker's Rage Movement Speed|L|10|trollwarlord
++2.5s Whirling Axes Debuff Duration|R|10|trollwarlord
+-8s Snowball Cooldown|L|25|tusk
+12% Chance Walrus Punch|R|25|tusk
++75% Walrus Punch Crit|L|20|tusk
+-6s Ice Shards Cooldown|R|20|tusk
++120 Snowball Damage|L|15|tusk
++325 Health|R|15|tusk
++0.75s Walrus Punch Stun Duration|L|10|tusk
++2s Tag Team Duration|R|10|tusk
+Fiend's Gates deals 100 DPS in a 700 radius|L|25|underlord
++0.4s Pit of Malice Root|R|25|underlord
++10% Atrophy Aura Attack Damage Reduction/Gain|L|20|underlord
++0.6% Firestorm Burn Damage|R|20|underlord
+-3s Firestorm Cooldown|L|15|underlord
+Pit of Malice Slows by 25%|R|15|underlord
++15s Atrophy Aura Duration|L|10|underlord
++5% Invading Force Movement Bonus/Damage Reduction|R|10|underlord
+Tombstone On Death|L|25|undying
++50% Flesh Golem Strength Bonus|R|25|undying
+-2s Decay Cooldown|L|20|undying
++4 Tombstone Attacks to Destroy|R|20|undying
++10 Soul Rip Damage/Heal|L|15|undying
++20 Zombie Damage|R|15|undying
+-15s Tombstone Cooldown|L|10|undying
++40 Decay Damage|R|10|undying
++3 Overpower Attacks|L|25|ursa
+Earthshock has 2 Charges|R|25|ursa
+Earthshock Applies 2 Fury Swipes|L|20|ursa
++400 Earthshock Radius|R|20|ursa
++25% Enrage Status Resistance|L|15|ursa
++5 Fury Swipes Damage|R|15|ursa
++1.75 Mana Regen|L|10|ursa
++12s Fury Swipes Reset Time|R|10|ursa
+-18s Nether Swap Cooldown|L|25|vengefulspirit
++16% Vengeance Aura Base Damage Bonus|R|25|vengefulspirit
+Wave Of Terror Steals 25% Of Reduced Damage And Armor|L|20|vengefulspirit
+-2s Magic Missile Cooldown|R|20|vengefulspirit
++0.3s Magic Missile Stun Duration|L|15|vengefulspirit
+-4 Wave of Terror Armor|R|15|vengefulspirit
++100 Magic Missile Cast Range|L|10|vengefulspirit
++150 Nether Swap Enemy Damage|R|10|vengefulspirit
+2.5x Plague Ward HP/Damage|L|25|venomancer
+Noxious Plague Aura reduces 200 Attack Speed|R|25|venomancer
++50 Base Damage|L|20|venomancer
++1% Noxious Plague Max HP Damage|R|20|venomancer
++5% Poison Sting Slow|L|15|venomancer
+-1s Plague Ward Cooldown|R|15|venomancer
+15% Poison Sting Health Regen Reduction|L|10|venomancer
+-5s Venomous Gale CD|R|10|venomancer
+-50% Viper Strike manacost/cooldown|L|25|viper
+Nethertoxin Radius increases by 25 every 0.5s|R|25|viper
++0.2 Predator Damage Per Missing Health|L|20|viper
++80 Viper Strike DPS|R|20|viper
++15% Poison Attack slow/damage|L|15|viper
++40 Nethertoxin Min/Max Damage|R|15|viper
++20 Corrosive Skin Damage Per Second|L|10|viper
++1s Viper Strike Duration|R|10|viper
++1 Familiar|L|25|visage
+Gravekeeper's Cloak  grants +15 Armor|R|25|visage
++1 Armor Corruption to Visage and Familiars|L|20|visage
++25 Soul Assumption Damage Per Charge|R|20|visage
+Soul Assumption Hits 3 Targets|L|15|visage
++2s Grave Chill Duration|R|15|visage
++6 Visage and Familiars Attack Damage|L|10|visage
++4 Lurker Max Stacks|R|10|visage
+Dissimilate Roots for 2s|L|25|voidspirit
+140% Astral Step Crit|R|25|voidspirit
+-3s Astral Step Charge Restore Time|L|20|voidspirit
+Outer Dissimilate Ring|R|20|voidspirit
++60 Aether Remnant Damage|L|15|voidspirit
++20% Resonant Pulse Barrier|R|15|voidspirit
++40 Resonant Pulse Damage|L|10|voidspirit
++1.5 Mana Regen|R|10|voidspirit
+80% Magic Resistance for Chaotic Offering Golems|L|25|warlock
++20 Chaotic Offering Golems Armor|R|25|warlock
++40 Upheaval Damage|L|20|warlock
+Summons a Golem on death|R|20|warlock
++150 Shadow Word AoE|L|15|warlock
++10 Upheaval Attack Speed per second on Allies|R|15|warlock
++50 Upheaval Radius|L|10|warlock
++4% Fatal Bonds Damage|R|10|warlock
++1 Geminate Attack|L|25|weaver
+-3s Shukuchi Cooldown|R|25|weaver
++0.5 Swarm Armor Reduction|L|20|weaver
++70 Bonus Damage On Geminate|R|20|weaver
++2 Swarm Attacks to Kill|L|15|weaver
++20 Mana Break|R|15|weaver
++7 Strength|L|10|weaver
++60 Shukuchi Damage|R|10|weaver
+Focus Fire Kills Advance Cooldown by 18s|L|25|windranger
+Windrun Cannot Be Dispelled|R|25|windranger
+-10% Focus Fire Damage Reduction|L|20|windranger
++0.75s Shackleshot Duration|R|20|windranger
+-15% Powershot Reduction|L|15|windranger
+-2s Windrun Cooldown|R|15|windranger
++4 All Attributes|L|10|windranger
++1s Powershot Slow Duration|R|10|windranger
+Splinter Blast 1.25s Stun|L|25|winterwyvern
++55 Winter's Curse Attack Speed |R|25|winterwyvern
++100 Splinter Blast Damage|L|20|winterwyvern
++17% Arctic Burn Slow|R|20|winterwyvern
++300 Splinter Blast Shatter Radius|L|15|winterwyvern
++3s Arctic Burn Debuff Duration|R|15|winterwyvern
++35 Damage|L|10|winterwyvern
++25 HP/s Cold Embrace Heal|R|10|winterwyvern
++45 Death Ward Damage|L|25|witchdoctor
++8s Maledict Duration|R|25|witchdoctor
++1% Target Max Health Voodoo Restoration Heal|L|20|witchdoctor
++75 Death Ward Attack Range|R|20|witchdoctor
++125 Maledict AoE|L|15|witchdoctor
++2 Cask Bounces|R|15|witchdoctor
++200 Health|L|10|witchdoctor
+-25% Voodoo Restoration Mana Per Second|R|10|witchdoctor
+Reincarnation Casts Wraithfire Blast|L|25|wraithking
+-2s Mortal Strike Cooldown|R|25|wraithking
++60 Attack Speed|L|20|wraithking
++400 Health|R|20|wraithking
++1s Wraithfire Blast Stun Duration|L|15|wraithking
++10% Vampiric Spirit Lifesteal|R|15|wraithking
+Reincarnation Casts Wraithfire Blast|L|10|wraithking
+-2s Mortal Strike Cooldown|R|10|wraithking
++1.5% Static Field Damage|L|25|zeus
+325 AoE Lightning Bolt|R|25|zeus
++0.5s Lightning Bolt Ministun|L|20|zeus
++60 Arc Lightning Damage|R|20|zeus
+-0.4s Arc Lightning Cooldown|L|15|zeus
++75 Thundergod's Wrath Damage|R|15|zeus
++200 Health|L|10|zeus
++1 Heavenly Jump Target|R|10|zeus

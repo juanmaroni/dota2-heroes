@@ -1,0 +1,127 @@
+name|description|is_pasive|hero_id
+Withering Mist|Damaging enemies applies the Withering Mist debuff for 5s. Affected enemies have their Health Restoration reduced by 35% if they are below 40% HP.|True|abaddon
+Greevil's Greed|Alchemist synthesizes additional gold from his enemies and bounty runes. With each kill, Alchemist earns base bonus gold and extra bonus gold. If Alchemist kills another unit which yields gold within the next 40 seconds, an additional instance of Extra Bonus Gold is added to the total. Additionally, causes bounty runes to yield more gold.|True|alchemist
+Death Rime|Ancient Apparition's abilities apply Death Rime Stacks on enemies. Death Rime slows enemies' movement speed and deals damage over time.|True|ancientapparition
+Persecutor|Attacks slow enemies based on how much mana they are missing. Min slow at 50% mana, up to max slow at %zero_tooltip%% mana. No effect if enemy is above 50% mana.|True|anti-mage
+Runic Infusion|Upon activating any rune, gain the Regeneration Rune buff for 4s.|True|arcwarden
+Coat of Blood|Axe permanently drenches his blade every time he kills an enemy Hero, gaining 0.2 bonus armor for each stack. Killing with Culling Blade gives 3x stacks.|True|axe
+Ichor of Nyctasha|Bane's attribute gains are always evenly distributed across all three attributes (items that grant +3 Strength will now grant +1 Str/Agi/Int).|True|bane
+Smoldering Resin|Batrider's attacks apply a debuff that deals 20% of the attack damage every 1s for 2s.|True|batrider
+Rugged|Beastmaster's melee hero Damage Block Chance is increased from 50% to 100% versus non-hero units and non-building units.|True|beastmaster
+Sanguivore|Bloodseeker restores some life when he kills a unit, equal to 1.5% of the units max health per Bloodseeker's Level plus a base of 25.|True|bloodseeker
+Big Game Hunter|When getting a kill or assist on an enemy that has a killing streak, Bounty Hunter receives 20% extra gold.|True|bountyhunter
+Belligerent|Brewmaster gains 25% bonus attack damage for 15s when he comes out of Primal Split and for 45s when he respawns.|True|brewmaster
+Prickly|Bristleback has 10% damage and debuff duration amp against enemy heroes that are behind him.|True|bristleback
+Spider's Milk|Whenever Broodmother kills a unit, she and all units under her control in a 600 radius receive a buff that heals them for a percentage of the victims health every 0.5 seconds. Healing from creeps is reduced by 40%.|True|broodmother
+Rawhide|Permanently gain 30 max health every 120s.|True|centaurwarrunner
+Reins of Chaos|Whenever illusions of Chaos Knight are created, there is a 50% chance that an additional 1 extra illusion will spawn.|True|chaosknight
+Summon Convert|Chen summons a convert to fight for him. The convert gains bonuses from Holy Persuasion and dies if Chen dies. Its maximum health is set to 220 + 80 per Chen Level. The spell stays on cooldown while the convert is alive, but refreshes whenever Chen respawns. The Convert counts towards Holy Persuasion max unit count. The Convert's ability level increases with Chen's level of Holy Persuasion. Chen summons a convert to fight for him. The convert gains bonuses from Holy Persuasion and dies if Chen dies. Its maximum health is set to 220 + 80 per Chen Level. The spell stays on cooldown while the convert is alive, but refreshes whenever Chen respawns. The Convert counts towards Holy Persuasion max unit count. The Convert's ability level increases with Chen's level of Holy Persuasion.|False|chen
+Bone and Arrow|Clinkz summons a Skeleton Archer when he dies. Skeleton Archers are immobile and die within multiple attacks from a hero or tower. Skeleton Archers deal a percentage of Clinkz' damage, and deal less damage to buildings. Attack range is equal to Clinkz' attack range.|True|clinkz
+Armor Power|Clockwerk's outgoing damage increases by 0.25% per point of armor.|True|clockwerk
+Blueheart Floe|Crystal Maiden has 25% Mana Regeneration Amplification.|True|crystalmaiden
+Aggrandize|When Dark Seer levels up, he restores a percentage of his max health and mana. Restore percentage is equal to 10% + 1.5% per hero level.|True|darkseer
+Pixie Dust|Whenever a skill makes Dark Willow become untargetable, she gains +150% HP Regen and +150% Mana Regen while in that state.|True|darkwillow
+Break of Dawn|Whenever the sun comes out, Dawnbreaker gains bonus base damage and vision that decreases throughout the course of the day.|True|dawnbreaker
+Weave|Dazzle's abilities apply Weave to both allies and enemies they affect, increasing allied armor and reducing enemy armor. Multiple instances of this effect stack.|True|dazzle
+Witchcraft|Death Prophet's occult knowledge deepens with experience, gaining 0.5% movement speed per level, and 0.75% spell cooldown reduction per level.|True|deathprophet
+Electromagnetic Repulsion|Whenever Disruptor takes more than 250 damage from any source within 400 radius, all nearby enemies within are pushed back up to a 400 unit distance. Whenever Disruptor takes more than 250 damage from any source within 400 radius, all nearby enemies within are pushed back up to a 400 unit distance.|False|disruptor
+Lvl ? Pain|Doom's attacks deal 25% bonus damage to heroes whose level is lower than Doom's level.|True|doom
+Dragon Blood|The life blood of the Dragon improves Dragon Knight's health regeneration and armor. Amount for both values is increased by 0.5 per level and is multiplied when in Dragon Form.|True|dragonknight
+Precision Aura|Grants Drow bonus agility based on Drow's current agility and level. Nearby ranged heroes received 50% of the bonus agility.|True|drowranger
+Stone Remnant|Call a Stone Remnant to the target location. Stone Remnants have no vision and are invulnerable, and can be used with Earth Spirit's abilities. Calling a Stone Remnant consumes a charge, which recharge over time. Gains additional charges every 5 hero levels. Call a Stone Remnant to the target location. Stone Remnants have no vision and are invulnerable, and can be used with Earth Spirit's abilities. Calling a Stone Remnant consumes a charge, which recharge over time. Gains additional charges every 5 hero levels.|False|earthspirit
+Slugger|Enemies killed with Enchant Totem or Earthshaker's other abilities are sent flying, dealing damage to enemies they hit.|True|earthshaker
+Tip the Scales|Allied creeps and buildings affected by Glyph of Fortification or Roshan's Banner deal 100% bonus damage.|True|eldertitan
+Immolation|Ember Spirit is continuously burning, dealing damage per second to all nearby enemies at all times.|True|emberspirit
+Rabble-Rouser|All neutral camps deal more damage to enemy heroes. Damage increase is 10% + 4% per Enchantress's hero level.|True|enchantress
+Gravity Well|Allies within 500 distance from Enigma have up to 9% Damage Reduction. Effect starts at 0% at max distance and increases to its maximum strength when the ally is at 200 distance. Does not affect Enigma itself.|True|enigma
+Distortion Field|Enemy Attack Projectiles within 600 radius are slowed by 35%.|True|facelessvoid
+Ink Trail|Adds an effect to Grimstroke's attacks that causes enemy heroes to leave a trail of ink behind them for 4s.|True|grimstroke
+Chop Shop|Gyrocopter can disassemble most items.|True|gyrocopter
+Mistwoods Wayfarer|Hoodwink has a chance to redirect enemy attacks to a nearby tree.|True|hoodwink
+Blood Magic|Huskar does not have mana. Mana costs of items are converted into health costs.|True|huskar
+Invoke|Combines the properties of the elements currently being manipulated to create a new spell for Invoker to use. Invoke cooldown is reduced by 0.3 seconds for each orb level.  Click the help button to see the list of possible spells. Combines the properties of the elements currently being manipulated to create a new spell for Invoker to use. Invoke cooldown is reduced by 0.3 seconds for each orb level.  Click the help button to see the list of possible spells.|False|invoker
+Wellspring|Io regenerates from consumables 2x faster.|True|io
+Double Trouble|Jakiro's attacks launch an attack from each head, but deal less damage each.|True|jakiro
+Duelist|Juggernaut deals 12% more damage to targets that are facing him. Damage bonus always applies during Omnislash.|True|juggernaut
+Special Reserve|Keeper of the Light cannot go below 75 mana.|True|keeperofthelight
+Switch Discipline|Kez switches between his Kazurai Katana and Shodo Sai. He gains different attack capabilities and abilities based on the weapon equipped. The abilities level up together, and when an ability is used, the associated alternate weapon ability also goes on cooldown. Switch Discipline cooldown decreases by 0.2s per Hero level. Kez switches between his Kazurai Katana and Shodo Sai. He gains different attack capabilities and abilities based on the weapon equipped. The abilities level up together, and when an ability is used, the associated alternate weapon ability also goes on cooldown. Switch Discipline cooldown decreases by 0.2s per Hero level.|False|kez
+Admiral's Rum|Damage from enemy heroes, buildings, or Roshan that would reduce Kunkka below a threshold causes him to douse himself with The Admiral's Rum, receiving bonus movement speed and a delayed reaction to incoming damage.|True|kunkka
+Outfight Them!|Attacking an enemy hero that is equal or higher level than you increases your Health Restoration by 30% for 4s.|True|legioncommander
+Defilement|Leshrac gains AoE per intelligence.|True|leshrac
+Death Charge|Lich cannot gain passive mana regeneration, but any unit dying within 1500 range of Lich restores 2.5% of his Max Mana (Dying heroes restore 25% of Lich's Max Mana). Instant mana restoration from items and abilities apply to Lich as normal.|True|lich
+Feast|Lifestealer's attacks deal damage and provide heal for a percentage of his target's max health. Allows Lifestealer to attack allied creeps at 75% health. Lifestealer gains permanent max HP whenever he kills a creep or hero.|True|lifestealer
+Combustion|Every 175 damage Lina does to an enemy hero causes them to overheat, doing damage to their nearby allies. This effect can trigger multiple times off a single instance of damage. Overheated illusions do less damage.|True|lina
+To Hell and Back|Lion gains 20% debuff duration and 20% spell amplification for 90s after respawning.|True|lion
+Gift Bearer|Lone Druid's Spirit Bear receives a copy of his Neutral Item that has an independent cooldown.|True|lonedruid
+Lunar Blessing|Grants 1 attack damage per level to Luna and nearby allied heroes, with Luna receiving double the attack damage bonuses. At night, Lunar Blessing is global, and Luna is blessed with 250 bonus night vision + 25 per level.|True|luna
+Apex Predator|Lycan and units he controls deal 2% extra damage to neutral creeps per hero level.|True|lycan
+Solid Core|Magnus has slow resistance and suffers less knockback from enemy's abilities and items.|True|magnus
+Special Delivery|Marci whistles to instantly summon her courier to her. Passively grants all allied couriers 3 bonus levels and 1 bonus health. Marci whistles to instantly summon her courier to her. Passively grants all allied couriers 3 bonus levels and 1 bonus health.|False|marci
+Dauntless|Mars gets more HP Regen the more he and his allies are outnumbered by enemy heroes in 700 radius.|True|mars
+Mana Shield|Creates a shield that absorbs 98% of incoming damage in exchange for Medusa's mana that increases with each level of Medusa. Illusions absorb 60% less damage per point of mana.|True|medusa
+Sticky Fingers|Has an extra choice of neutral item to select from.|True|meepo
+Selemene's Faithful|Healing Lotuses are 50% more effective on Mirana and her allies.|True|mirana
+Mischief|Changes Monkey King's shape to deceive opponents, using the environment nearby as inspiration for the disguise. Taking damage, attacking, or using any item or ability breaks Monkey King's disguise. Grants damage immunity for 0.1 seconds upon transforming. Changes Monkey King's shape to deceive opponents, using the environment nearby as inspiration for the disguise. Taking damage, attacking, or using any item or ability breaks Monkey King's disguise. Grants damage immunity for 0.1 seconds upon transforming.|False|monkeyking
+Accumulation|Morphling receives 50% of stat growth bonuses every half level instead of the full bonus at level up. All Attributes bonuses from skill points in the Talent Tree provide an additional +3 to Morphling's primary attribute.|True|morphling
+Supernatural|Muerta can always attack when she is ethereal. Muerta can always attack ethereal targets. When attacking ethereal targets, all of her attack damage is dealt as magical damage.|True|muerta
+Eelskin|Naga Siren gets 8% evasion per other Naga Siren within 900 radius.|True|nagasiren
+Spirit of the Forest|Nature's Prophet gains 3% bonus damage for each tree within 300 and a multiplier of that same bonus for each treant within 1200 distance of him.|True|nature'sprophet
+Sadist|Necrophos gains stacking regen for 8 seconds for each unit he kills. Hero kills multiply the effect.|True|necrophos
+Heart of Darkness|During the night, Night Stalker's health regeneration is increased by 20%, and during the day it is decreased by 20%.|True|nightstalker
+Nyxth Sense|Nyx Assassin can detect heroes within 400 units of himself.|True|nyxassassin
+Dumb Luck|Ogre Magi's max Intelligence is 0. He receives mana and mana regeneration from Strength.|True|ogremagi
+Degen Aura|Degenerates the movement capabilities of enemy units that stray too near.|True|omniknight
+Prognosticate|Oracle will predict and announce to allies, where the next power rune will spawn (top or bottom).|True|oracle
+Ominous Discernment|Outworld Destroyer gains an additional 2.5 mana per point of Intelligence.|True|outworlddestroyer
+Fortune Favors the Bold|Random item and ability effects of enemies near Pangolier have a reduced chance to affect him.|True|pangolier
+Blur|Phantom Assassin blurs her body, disjointing incoming projectiles, increasing her movement speed, causing her to be impossible to see until she comes near enemy heroes or towers. Phantom Assassin blurs her body, disjointing incoming projectiles, increasing her movement speed, causing her to be impossible to see until she comes near enemy heroes or towers.|False|phantomassassin
+Illusory Armaments|Items, abilities, and auras that grant bonus damage instead grant base damage.|True|phantomlancer
+Blinding Sun|Phoenix ability debuffs apply a stackable 2% Miss chance per second. Lasts 4 seconds.|True|phoenix
+Colossal|Primal Beast deals 40% more damage to buildings.|True|primalbeast
+Puckish|Whenever Puck disjoints an attack, it restores 10 + 2% of its max mana and 10 + 2% of its max health. Dodging a targeted spell projectile restores 3.5x that amount.|True|puck
+Flesh Heap|Pudge's skin thickens permanently every time he kills an enemy Hero, gaining 1.1 bonus Strength for each stack.|True|pudge
+Oblivion Savant|Pugna can cast spells and use items while channeling.|True|pugna
+Succubus|All sources of Spell Lifesteal also apply to Pure Damage. Queen of Pain gains Spell Lifesteal that increases with proximity to her enemies. Lifesteal is at its maximum when the enemy is 300 units or closer to her and at its minimum when the enemy is 800 units or further from her.|True|queenofpain
+Unstable Current|Passively increases Razor's movement speed by 1% per hero level.|True|razor
+Backstab|Every time Riki strikes his enemy from behind, he deals bonus damage based on his Agility.|True|riki
+Dark Carnival Barker|Ringmaster receives a random single-use Dark Carnival Souvenir whenever an enemy hero dies within 925 units of him. Additional Souvenirs are held as charges.|True|ringmaster
+Might and Magus|Each 1% Spell Amplification also increases Rubick's attack damage by 0.75% and Magic Resistance by 0.75%.|True|rubick
+Caustic Finale|Sand King's attacks inject a venom that causes enemy units to violently explode when they die.|True|sandking
+Menace|Shadow Demon's Attacks apply a stacking 2.5% Amplify Damage debuff to the enemy for 8 seconds.|True|shadowdemon
+Necromastery|Shadow Fiend steals the soul from units he kills, gaining bonus damage. Hero kills grant 3 souls. On death, he releases 30% of them from bondage.|True|shadowfiend
+Fowl Play|When taking lethal damage, Shadow Shaman receives a strong dispel and survives as a 1 HP chicken. Incoming damage is reduced to zero for 1s.|True|shadowshaman
+Brain Drain|If Silencer kills an enemy hero, he permanently steals Intelligence.|True|silencer
+Ruin and Restoration|Skywrath Mage has 25% Spell Lifesteal.|True|skywrathmage
+Seaborn Sentinel|Slardar gains bonus movement speed, health regeneration, attack damage, and armor while in a puddle, trail, or river.|True|slardar
+Barracuda|When not visible to the enemy team, Slark gains bonus movement speed and health regeneration.|True|slark
+Buckshot|Snapfire deals 30% more damage with her auto attacks, but has a 25% chance of a glancing shot, dealing 60% damage.|True|snapfire
+Keen Scope|Increases Sniper's attack range.|True|sniper
+Spectral|Spectre and her illusions are permanently phased.|True|spectre
+Herd Mentality|The hero on your team whose level is lower than anybody else's on your team gains 50% more experience.|True|spiritbreaker
+Galvanized|Storm Spirit gains a charge of 0.2 mana regeneration per kill. Loses 3 charges per death. Leveling Ball Lightning gives Storm Spirit 3 bonus charges. Additionally every time he gains a charge he also gains 0.1 Mana Regen permanently.|True|stormspirit
+Vanquisher|Sven's attacks deal 20% bonus damage to stunned enemies.|True|sven
+Minefield Sign|Plant a warning sign, causing Sticky Bombs and Proximity Mines within its radius to be invulnerable and deal 15% more damage. Only one sign can exist at a time. Lasts 60 seconds.  Plant a warning sign, causing Sticky Bombs and Proximity Mines within its radius to be invulnerable and deal 15% more damage. Only one sign can exist at a time. Lasts 60 seconds.|False|techies
+Third Eye|Templar Assassin and her teammates can see Roshan's respawn timer.|True|templarassassin
+Dark Unity|Illusions under Terrorblade's control that are within range receive a damage bonus. Illusions outside of the range receive a damage penalty.|True|terrorblade
+Blubber|Tidehunter's hide removes negative status effects if he takes more than 450 damage. Removes most debuffs, even if they are generally not purgable.|True|tidehunter
+Exposure Therapy|Whenever Timbersaw destroys a tree, he gains 4 mana.|True|timbersaw
+Eureka!|Tinker gains 1% item cooldown reduction per 3 Intelligence, up to a maximum of 60%.|True|tinker
+Craggy Exterior|Enemies that attack Tiny receive a stacking debuff that lowers their attack damage with each stack.|True|tiny
+Nature's Guise|Provides Treant with Tree Walking whenever he hasn't taken damage for 2.75 seconds. While nearby trees or affected by Nature's Grasp, Treant gains bonus movement speed.|True|treantprotector
+Battle Stance|Troll Warlord swaps from using ranged to melee attacks. Melee attacks have decreased base attack time. Troll Warlord swaps from using ranged to melee attacks. Melee attacks have decreased base attack time.|False|trollwarlord
+Bitter Chill|Passively slows the attack speed of all enemies within 350 radius.|True|tusk
+Invading Force|After an allied hero Teleports, they temporarily gain Damage Reduction and Movement Speed. Allies receive 2x bonuses if teleporting via Fiend's Gate.|True|underlord
+Ceaseless Dirge|When Undying dies he will instantly respawn in the fountain. Begins the game on cooldown. Cannot be refreshed.|True|undying
+Maul|Ursa gains bonus damage equal to a percentage of his Current HP.|True|ursa
+Retribution|Whenever an enemy hero kills Vengeful Spirit, they get a debuff until their next death, causing Vengeful Spirit to deal 20% bonus damage to them.|True|vengefulspirit
+Septic Shock|Venomancer's attacks deal extra damage based on how many debuffs the attack target has. Extra damage is dealt as magical damage. Only counts debuffs from Venomancer or his Plague Wards.|True|venomancer
+Predator|Viper's attacks deal an additional instance of physical damage per missing health percentage of the target hero, equal to 0.15 + 0.05 per Viper's level.|True|viper
+Lurker|Visage's ability cooldown durations are accelerated as long as he's not taking damage.|True|visage
+Intrinsic Edge|Void Spirit gains 25% more HP regen from Strength, armor from Agility, and mana regen and magic resistance from Intelligence.|True|voidspirit
+Eldritch Summoning|Whenever an enemy unit dies while afflicted by one or more of Warlock's abilities, a minor imp is summoned that lasts for 15 seconds and explodes on death. Imps will automatically seek out nearby units, favoring fatally bonded heroes, and will explode when reaching their prey.|True|warlock
+Rewoven|Every time Weaver casts an ability, he gains 50 attack range for 7s. This effect stacks independently.|True|weaver
+Easy Breezy|Windranger's movement speed cannot be lower than 240 and can reach 600.|True|windranger
+Eldwurm Scholar|When a Shrine of Wisdom grants experience to allies, Winter Wyvern shares the knowledge with her entire team, granting 20% of the experience to each of the 3 heroes that did not collect the initial bonus.|True|winterwyvern
+Gris-Gris|Witch Doctor gets a Gris-Gris, an item that cannot be dropped or placed in the backpack. When the owner dies, 100% of the gold lost from death is added to the item, and will be refunded when the item is consumed. The value of the Gris-Gris is increased by 1 every 3s.|True|witchdoctor
+Vampiric Spirit|Grants Wraith King Lifesteal. When slain Wraith King turns into a free pathing Wraith with Bonus Attack and Movement Speed for a short duration, delaying his death. Wraith King cannot reincarnate after being a Wraith.|True|wraithking
+Static Field|Zeus shocks any enemy that he attacks or is hit by his abilities, causing damage equal to a percentage of their current health.|True|zeus
