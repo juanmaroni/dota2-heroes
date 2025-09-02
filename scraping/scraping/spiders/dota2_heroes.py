@@ -6,7 +6,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from scraping.items import (
-    HeroInfoItem, HeroTalentItem, HeroInnateItem, HeroFacetItem
+    HeroInfoItem, HeroTalentItem, HeroInnateItem, HeroFacetItem,
+    HeroAbilityItem
 )
 from utils import CHROMEDRIVER_PATH
 
@@ -53,11 +54,15 @@ class Dota2HeroesSpider(scrapy.Spider):
                 yield talent
 
             # Hero Innate Ability
-            yield self._extract_innate_ability(sel, hero_id)
+            #yield self._extract_innate_ability(sel, hero_id)
 
             # Hero Facets
             for facet in self._extract_facets(sel, hero_id):
                 yield facet
+
+            # Hero Abilities
+            for ability in self._extract_abilities(sel, hero_id):
+                yield ability
             
             time.sleep(1)  # Wait before going next...
 
@@ -477,6 +482,140 @@ class Dota2HeroesSpider(scrapy.Spider):
             facets.append(facet)
 
         return facets
+    
+    def _extract_abilities(self, sel, hero_id):
+        """
+        Abilities are displayed hidden behind clicks.
+        """
+        icon_click_container_class = "_1vjw5Sik8Zewkj5_iOhCUb"
+        icon_click_class = "_3Chop4A9yz7Af_BwR1r_NW"
+
+        click_elements = self.driver.find_elements(
+            By.XPATH,
+            f"""
+            //div[contains(@class, '{icon_click_container_class}')]
+            /div[contains(@class, '{icon_click_class}')]
+            """
+        )
+
+        section_container_class = "_1yoiZcdOJEKeKgQjATrVPZ"
+        video_class = "_22nJ5nsfHDS2jEscPEne0-"
+        icon_img_class = "_171zqqZ6uSu-ZpGvphLmVH"
+        ability_info_container_class = "_3y3LGmwmRlDIBT6U-pzn9c"
+        ability_name_class = "_1rBGHCdy0eU5X2K5p3xSVY"
+        ability_scepter_shard_class = "_1RDBbyc4Z_-Rjv_xphicMA"
+        ability_description_class = "CjmI9ZAN4c9C4Rj-IPpzc"
+        ability_info_class = "_2dsmbR3Wyt5DkOJWLbMsRh"
+        ability_modifiers_class = "_1Sda402OKItT9369w-tDDA"
+        ability_cooldown_class = "_22XOopr4GL5s8PQoraB4__"
+        ability_mana_class = "Y2InYdEEoXxoTgGG2x3B4"
+        ability_lore_class = "_1FdISYFSn4ZmiR_wS5YFOM"
+
+        abilities = []
+
+        for e in click_elements:
+            e.click()
+            refreshed_driver = self.driver
+            ability = HeroAbilityItem()
+            
+            # Using "find_elements" because it returns a list
+            # and I don't like Exceptions.
+            asset_video = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{section_container_class}')]
+                //video[contains(@class, '{video_class}')]
+                """
+            )
+            ability["asset_video"] = (
+                asset_video[0].get_attribute("poster") if asset_video else None
+            )
+
+            asset_icon = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{section_container_class}')]
+                //img[contains(@class, '{icon_img_class}')]
+                """
+            )
+            ability["asset_icon"] = (
+                asset_icon[0].get_attribute("src") if asset_icon else None
+            )
+
+            name = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_info_container_class}')]
+                //div[contains(@class, '{ability_name_class}')]
+                """
+            )
+            ability["name"] = name[0].text if name else None
+
+            shard_scepter = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_scepter_shard_class}')]
+                """
+            )
+            ability["shard_scepter"] = (
+                shard_scepter[0].text if shard_scepter else None
+            )
+
+            description = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_info_container_class}')]
+                //div[contains(@class, '{ability_description_class}')]
+                """
+            )
+            ability["description"] = description[0].text if description else None
+
+            info = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_info_class}')]
+                """
+            )
+            ability["info"] = info[0].text if info else None
+
+            modifiers = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_modifiers_class}')]
+                """
+            )
+            ability["modifiers"] = modifiers[0].text if modifiers else None
+
+            cooldown = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_cooldown_class}')]
+                """
+            )
+            ability["cooldown"] = cooldown[0].text if cooldown else None
+
+            mana = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_mana_class}')]
+                """
+            )
+            ability["mana"] = mana[0].text if mana else None
+
+            lore = refreshed_driver.find_elements(
+                By.XPATH,
+                f"""
+                //div[contains(@class, '{ability_info_container_class}')]
+                //div[contains(@class, '{ability_lore_class}')]
+                """
+            )
+            ability["lore"] = lore[0].text if lore else None
+
+            ability["hero_id"] = hero_id
+
+            abilities.append(ability)
+
+        return abilities
     
     @staticmethod
     def extract_every_text(selector, container):
