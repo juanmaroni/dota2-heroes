@@ -54,7 +54,7 @@ class Dota2HeroesSpider(scrapy.Spider):
                 yield talent
 
             # Hero Innate Ability
-            #yield self._extract_innate_ability(sel, hero_id)
+            yield self._extract_innate_ability(sel, hero_id)
 
             # Hero Facets
             for facet in self._extract_facets(sel, hero_id):

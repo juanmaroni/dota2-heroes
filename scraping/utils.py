@@ -6,6 +6,7 @@ TMP_HEROES_INFO_FILENAME = "dota2_heroes_info_tmp.csv"
 TMP_HEROES_TALENTS_FILENAME = "dota2_heroes_talents_tmp.csv"
 TMP_HEROES_INNATE_FILENAME = "dota2_heroes_innate_tmp.csv"
 TMP_HEROES_FACETS_FILENAME = "dota2_heroes_facets_tmp.csv"
+TMP_HEROES_ABILITIES_FILENAME = "dota2_heroes_abilities_tmp.csv"
 OUTPUT_DIR_PATH = "../output"
 
 

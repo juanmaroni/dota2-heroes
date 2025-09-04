@@ -1,10 +1,12 @@
 import csv
 from scraping.items import (
-    HeroInfoItem, HeroTalentItem, HeroInnateItem, HeroFacetItem
+    HeroInfoItem, HeroTalentItem, HeroInnateItem, HeroFacetItem,
+    HeroAbilityItem
 )
 from utils import (
     TMP_HEROES_INFO_FILENAME, TMP_HEROES_TALENTS_FILENAME,
-    TMP_HEROES_INNATE_FILENAME, TMP_HEROES_FACETS_FILENAME
+    TMP_HEROES_INNATE_FILENAME, TMP_HEROES_FACETS_FILENAME,
+    TMP_HEROES_ABILITIES_FILENAME
 )
 
 
@@ -82,7 +84,20 @@ class CleanHeroInfoPipeline: # 100
                 abilities_mod_str += ";"
 
             item["abilities_mod"] = abilities_mod_str
-            
+        elif isinstance(item, HeroAbilityItem):
+            item["asset_video"] = item["asset_video"][:-4]
+            item["description"] = self._process_text([item["description"]])
+            info = item["info"]
+            item["info"] = (
+                self._process_ability_info(info) if info else None
+            )
+            modifiers = item["modifiers"]
+            item["modifiers"] = (
+                self._process_ability_info(modifiers) if modifiers else None
+            )
+            item["cooldown"] = item["cooldown"].replace(" / ", "/")
+            item["mana"] = item["mana"].replace(" / ", "/")
+
         return item
     
     @staticmethod
@@ -166,6 +181,23 @@ class CleanHeroInfoPipeline: # 100
         )
 
         return processed_text
+
+    @staticmethod
+    def _process_ability_info(text):
+        """
+        Process Ability basic information and modifiers.
+        """
+        text_parts = text.split('\n')
+        final_text = ""
+        i = 0
+        j = 1
+
+        for _ in range(0, len(text_parts) // 2):
+            final_text += text_parts[i] + text_parts[j].replace(" / ", "/") + ";"
+            i += 2
+            j += 2
+
+        return final_text
 
 
 class CsvExportPipeline: # 400
@@ -252,6 +284,25 @@ class CsvExportPipeline: # 400
             )
             self.heroes_facets_writer.writeheader()
 
+            self.heroes_abilities_filename = TMP_HEROES_ABILITIES_FILENAME
+            heroes_abilities_headers = [
+                "asset_video", "asset_icon", "name", "shard_scepter",
+                "description", "info", "modifiers", "cooldown", "mana",
+                "lore", "hero_id"
+            ]
+            self.heroes_abilities_file = open(
+                self.heroes_abilities_filename,
+                'w',
+                newline='',
+                encoding="utf-8"
+            )
+            self.heroes_abilities_writer = csv.DictWriter(
+                self.heroes_abilities_file,
+                fieldnames=heroes_abilities_headers,
+                delimiter='|'
+            )
+            self.heroes_abilities_writer.writeheader()
+
     def process_item(self, item, spider):
         if isinstance(item, HeroInfoItem):
             self.heroes_info_writer.writerow(item)
@@ -261,6 +312,8 @@ class CsvExportPipeline: # 400
             self.heroes_innate_writer.writerow(item)
         elif isinstance(item, HeroFacetItem):
             self.heroes_facets_writer.writerow(item)
+        elif isinstance(item, HeroAbilityItem):
+            self.heroes_abilities_writer.writerow(item)
 
         return item
 
@@ -270,3 +323,4 @@ class CsvExportPipeline: # 400
             self.heroes_talents_file.close()
             self.heroes_innate_file.close()
             self.heroes_facets_file.close()
+            self.heroes_abilities_file.close()
