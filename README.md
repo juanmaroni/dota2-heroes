@@ -38,7 +38,7 @@ Running spiders sequentially with "`run_spiders.py`" script:
 ```
 
 ### Hero Abilities
-* "`asset_video`": two video formats available ("webm" and "mp4") that share the same filename, just append the format (".mp4" or ".webm") to the end to form the full link.
+* "`asset_video`": two video formats available ("webm" and "mp4") that share the same filename, just append the format (".mp4" or ".webm") at the end to get the full link.
 * "`shard_scepter`": contains a text if the ability is affected by or is an effect from Shard or Scepter.
 * "`info`" and "`modifiers`": formed as a string, each pair name-value is separated by semicolon.
 ```
