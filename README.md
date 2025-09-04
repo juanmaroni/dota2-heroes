@@ -17,6 +17,7 @@ Running spiders sequentially with "`run_spiders.py`" script:
 ### General
 * Texts: paragraphs separated with "`<br>`" to allow better parsing in the future.
 * "`hero_id`": extracted from their respective URI.
+* Numbers separated by spaces and inclined bars (i.e. "1 / 2"): spaces are removed.
 
 ### Hero Basic Info
 * "`complexity`": integer numbers 1 (low), 2 (medium) and 3 (high), representing the number of rombs.
@@ -34,4 +35,12 @@ Running spiders sequentially with "`run_spiders.py`" script:
 * "`abilities_mod`": a list of the abilities modified by the facet, formed as a string of list of tuples. For (I hope) easy future parsing: attribute name and attribute value are separated by comma, each attribute is separated from the next by double closing parenthesis and each ability is separated by semicolon.
 ```
 "name,value)),description,value))extra_info,value))modifier,joined_modifier_value))modifier,joined_modifier2_value2));name,value))[...];"
+```
+
+### Hero Abilities
+* "`asset_video`": two video formats available ("webm" and "mp4") that share the same filename, just append the format (".mp4" or ".webm") to the end to form the full link.
+* "`shard_scepter`": contains a text if the ability is affected by or is an effect from Shard or Scepter.
+* "`info`" and "`modifiers`": formed as a string, each pair name-value is separated by semicolon.
+```
+"name_and_value;name_and_value;[...];"
 ```
