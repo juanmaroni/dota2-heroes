@@ -61,7 +61,7 @@ class Dota2HeroesSpider(scrapy.Spider):
                 yield facet
 
             # Hero Abilities
-            for ability in self._extract_abilities(sel, hero_id):
+            for ability in self._extract_abilities(hero_id):
                 yield ability
             
             time.sleep(1)  # Wait before going next...
@@ -139,7 +139,7 @@ class Dota2HeroesSpider(scrapy.Spider):
             //div[contains(@class, '{container_class}')]
             /div[contains(@class, '{inner_class}')]
         """
-        text_parts = sel.xpath(f"{base}/text() | {base}/span/text()").getall()  # TODO: Refactor, /text => //text
+        text_parts = sel.xpath(f"{base}/text() | {base}/span/text()").getall()
 
         return text_parts
     
@@ -413,7 +413,7 @@ class Dota2HeroesSpider(scrapy.Spider):
         Tricky one, it needs a lot of structure.
         Leaving processing operations for pipeline.
         """
-        def extract_text(container, text_class): #TODO: Rename?
+        def extract_text(container, text_class):
             return container.xpath(
                 f".//div[contains(@class, '{text_class}')]/text()"
             ).get()
@@ -483,7 +483,7 @@ class Dota2HeroesSpider(scrapy.Spider):
 
         return facets
     
-    def _extract_abilities(self, sel, hero_id):
+    def _extract_abilities(self, hero_id):
         """
         Abilities are displayed hidden behind clicks.
         """
